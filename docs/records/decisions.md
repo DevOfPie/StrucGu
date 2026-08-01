@@ -37,6 +37,7 @@ the file. Append a row when you append an entry.
 | [The commit gates and the sabotage rule are deliberately not extracted](#the-commit-gates-and-the-sabotage-rule-are-deliberately-not-extracted) | What v1 leaves out |
 | [A new check never ships in a minor version](#a-new-check-never-ships-in-a-minor-version) | Versioning |
 | [Objections are drafted by a tool and filed by a person](#objections-are-drafted-by-a-tool-and-filed-by-a-person) | The feedback loop |
+| [Six checks were cut for measuring presence rather than thought](#six-checks-were-cut-for-measuring-presence-rather-than-thought) | What did not ship, and why |
 
 ---
 
@@ -386,3 +387,37 @@ alternative serves the obligation's *stated purpose*, and what complying would
 cost. The last one is the filter — an objection with no cost is a preference,
 and the four outcomes all turn on whether the cost is real.
 
+---
+
+## 2026-07-31 — building the catalog
+
+### Six checks were cut for measuring presence rather than thought
+
+The work record for the fixtures unit asks for this list and says it is worth
+more than the list of checks that survived. It is, because each of these is a
+check that would have looked useful in a summary and would have been satisfied by
+a machine writing a word.
+
+1. **A risks section is non-empty.** Satisfied by writing "Low." The check
+   passes, the section then reads as considered, and the signal is destroyed
+   permanently. What ships instead is `WU-02` and `WU-03`, which check the
+   section exists at all, plus a judgment entry that looks at whether every
+   record in the directory says "Low" — the *pattern* is observable where the
+   individual instance is not.
+2. **Done bullets are falsifiable.** No pattern separates "every handler returns
+   a mapped error, asserted by the error-mapping test" from "error handling is
+   correct". Moved to judgment.
+3. **Evidence cells contain evidence.** Same shape. "This is broken" fills the
+   column. `FQ-02` checks the column exists; whether anything in it could be
+   checked by someone who does not trust you is judgment.
+4. **Decision headings are claims rather than topics.** A heading either can or
+   cannot be contradicted, and no regular expression sees the difference.
+5. **The triage boundary is drawn by claim rather than by subsystem.** The most
+   consequential rule in `triage-rule` and completely invisible to a check.
+6. **A passing test was sabotaged and restored.** Not observable in the shape of
+   any record, and the reason the whole verification family is deferred.
+
+The pattern across all six: what makes them valuable is a judgment someone made,
+and a record only ever carries the trace of a judgment, never the judgment.
+Every one is now a `judgment` entry, which is why a mechanical run emits those
+lines whether or not anyone is there to read them.
