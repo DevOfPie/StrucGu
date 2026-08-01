@@ -1,0 +1,196 @@
+# work-units — the machine-readable half.
+# module.md is normative. If the two disagree, that is a defect to report.
+schema: strucgu/module@1
+id: work-units
+version: 0.1.0
+title: Work units
+summary: >
+  Each unit of work gets a short record: what it depends on, which promise it
+  closes, a definition of done stated as claims a skeptic could check, and its
+  risks. Rules common to every unit are stated once, in the index.
+base: false
+requires: []
+
+applies_when:
+  - Work comes in units larger than a single change.
+  - More than a handful of units will exist, so shared rules would otherwise be
+    restated and drift.
+  - Someone will write the record before doing the work, not after.
+not_for:
+  - A continuous stream of small changes with no unit boundary.
+  - A project whose issue tracker plays this role and whose people use it.
+  - Anyone who will write the definition of done after finishing.
+
+roles:
+  - id: unit_dir
+    cardinality: dir
+    exclude: ['_*', 'README.md', 'index.md']
+    of: One record per unit of work.
+  - id: unit_template
+    cardinality: file
+    of: The skeleton new records start from.
+  - id: unit_index
+    cardinality: file
+    of: The index, and the one place rules common to all units are stated.
+
+obligations:
+  - id: unit-done-is-falsifiable
+    title: A record states done as claims that can be shown false
+    purpose: >
+      A definition of done written as an intention cannot be wrong, so the work
+      finishes when someone decides it feels finished.
+    required: true
+    roles: [unit_dir, unit_template]
+
+  - id: unit-risks-considered
+    title: A record has a risks section, and it is not empty
+    purpose: >
+      An empty risks section reads as "not considered" rather than "considered
+      and small", and the two are indistinguishable to a later reader.
+    required: true
+    roles: [unit_dir, unit_template]
+
+  - id: unit-states-dependencies-and-discharges
+    title: A record names what it needs and what promise it closes
+    purpose: >
+      Dependencies found halfway through are worth more before starting. And a
+      scope contract with no discharge field accumulates rows nothing retires.
+    required: true
+    roles: [unit_template]
+
+  - id: unit-rules-stated-once
+    title: Rules common to every unit live in the index
+    purpose: >
+      Restated per record, a shared rule is copied N times, the copies drift,
+      and no reader can tell which is current. Every individual record still
+      looks correct, which is why the failure is silent.
+    required: true
+    roles: [unit_index]
+
+checks:
+  - id: WU-01
+    obligation: unit-done-is-falsifiable
+    nature: behaviour
+    kind: path_exists
+    in: unit_template
+    finding: >
+      No record template. Every unit's record is invented fresh, and the
+      sections carrying the obligations appear in some records and not others.
+    false_positives: none
+
+  - id: WU-02
+    obligation: unit-done-is-falsifiable
+    nature: behaviour
+    kind: heading_present
+    in: unit_template
+    patterns:
+      - 'done means|definition of done|acceptance|complete when'
+      - 'risk'
+    finding: >
+      The record template has no definition-of-done section or no risks section.
+      Records made from it will be missing the obligation they exist to carry.
+    false_positives: none material
+
+  - id: WU-03
+    obligation: unit-risks-considered
+    nature: behaviour
+    kind: heading_present
+    in: unit_dir
+    patterns:
+      - 'done means|definition of done|acceptance|complete when'
+      - 'risk'
+    finding: A unit record is missing a section its own template requires.
+    false_positives: >
+      A record for a unit that was abandoned rather than completed is reported
+      like any other.
+
+  - id: WU-04
+    obligation: unit-done-is-falsifiable
+    nature: behaviour
+    kind: pattern_absent
+    in: unit_dir
+    patterns:
+      - '<[A-Za-z][A-Za-z ]*>'
+      - 'TODO|TBD|FIXME'
+    finding: >
+      A unit record still carries template placeholder text. A record
+      half-filled is read as a record fully filled, and the unwritten parts are
+      read as deliberate.
+    false_positives: >
+      Material. Any angle-bracketed literal matches the first pattern; a
+      deliberate TODO matches the second. The highest false-positive rate in the
+      catalog — an adopter who finds it noisy should turn it off rather than
+      reword records around it.
+
+  - id: WU-05
+    obligation: unit-rules-stated-once
+    nature: behaviour
+    kind: path_exists
+    in: unit_index
+    finding: >
+      No index of units of work. Rules common to all of them get restated per
+      record, and the copies drift.
+    false_positives: none
+
+  - id: WU-06
+    obligation: unit-states-dependencies-and-discharges
+    nature: behaviour
+    kind: pattern_present
+    in: unit_template
+    patterns:
+      - 'depends on|depends upon|requires'
+      - 'discharges|closes|retires|satisfies'
+    finding: >
+      The record template does not ask for dependencies or does not ask what
+      promise the unit closes.
+    false_positives: The words are common; a template using "requires" in another sense passes.
+
+  - id: WU-07
+    obligation: unit-rules-stated-once
+    nature: behaviour
+    kind: links_resolve
+    in: [unit_dir, unit_index, unit_template]
+    finding: >
+      A relative link or anchor does not resolve. Records link to each other for
+      dependencies, so a rotted link is a dependency graph that is wrong rather
+      than merely incomplete.
+    false_positives: none
+
+judgment:
+  - id: work-units.done-is-falsifiable
+    obligation: unit-done-is-falsifiable
+    question: Could a skeptical reader show each done bullet false?
+    read: [unit_dir]
+    evidence: >
+      Quote the bullet. "Improve error handling" cannot be shown false. "Every
+      handler returns a mapped error, asserted by the error-mapping test" can.
+      This is the obligation the module exists for and no check can see it.
+    do_not_report: Bullets that are falsifiable but that you would have written differently.
+
+  - id: work-units.rules-not-repeated
+    obligation: unit-rules-stated-once
+    question: Are rules common to every unit stated once in the index, or repeated per record?
+    read: [unit_index, unit_dir]
+    evidence: >
+      A rule appearing in more than one record, and whether the copies already
+      differ. Copies that have drifted are the finding; copies that agree are
+      the warning.
+    do_not_report: A rule repeated in one record because that record states an exception to it.
+
+  - id: work-units.discharges-is-real
+    obligation: unit-states-dependencies-and-discharges
+    question: Does the discharge field name a promise that exists elsewhere, or one invented to fill the field?
+    read: [unit_dir]
+    evidence: >
+      Follow the reference. A field filled with a restatement of the unit's own
+      title discharges nothing.
+    do_not_report: A unit that states it closes no promise. That is correct when it is true.
+
+  - id: work-units.risks-considered
+    obligation: unit-risks-considered
+    question: Do the risks sections contain considered judgments, or a word placed there to satisfy the section?
+    read: [unit_dir]
+    evidence: >
+      Quote it. "Low" alone across every record in the directory is a pattern,
+      and the pattern is the finding rather than any single instance.
+    do_not_report: A single record whose risk is genuinely low and says so.

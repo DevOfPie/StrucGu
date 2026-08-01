@@ -1,0 +1,156 @@
+# investigations — the machine-readable half.
+# module.md is normative. If the two disagree, that is a defect to report.
+schema: strucgu/module@1
+id: investigations
+version: 0.1.0
+title: Investigations
+summary: >
+  When something had to be tested before it could be decided, the record of what
+  was tested, what was observed, and what rules came out of it.
+base: false
+requires: []
+
+applies_when:
+  - The project makes decisions that have to be tested rather than reasoned to.
+  - At least one investigation has produced more evidence than a decision-log
+    entry can hold.
+  - The project already keeps a decision log; this is for the overflow.
+not_for:
+  - Projects where decisions are reasoned rather than tested.
+  - A project with no decision log. Overflow without the thing it overflows from
+    is a second decision log with a longer format.
+
+roles:
+  - id: investigations
+    cardinality: dir
+    exclude: ['_*', 'README.md', 'index.md']
+    of: One record per investigation.
+
+obligations:
+  - id: investigation-records-exist
+    title: An investigation that outgrew a decision entry has its own record
+    purpose: >
+      Evidence substantial enough that a log entry cannot hold it gets lost when
+      it is squeezed into one anyway. What survives is the conclusion, with
+      nothing a later reader can re-examine.
+    required: conditional
+    condition: >
+      Applies once the project has run at least one investigation whose findings
+      did not fit in a single decision-log entry. A project that has not is not
+      missing anything.
+    roles: [investigations]
+
+  - id: investigation-states-what-it-tested-against
+    title: The record says what was used, with versions
+    purpose: >
+      Findings true of one version of one thing, recorded without saying which,
+      become folklore. The underlying thing changes, the rule stays, and nobody
+      can detect that it is now wrong.
+    required: true
+    roles: [investigations]
+
+  - id: investigation-separates-evidence-from-rules
+    title: Observations and the rules drawn from them are distinct sections
+    purpose: >
+      They have different lifetimes. An observation stays true of what it was
+      observed against; a rule drawn from it can stop being right while the
+      observation stays correct.
+    required: true
+    roles: [investigations]
+
+  - id: investigation-is-reproducible
+    title: The record says how to run it again, or says the artifacts are gone
+    purpose: >
+      The findings are the durable part and the setup usually is not. Silence
+      reads as though reproduction is possible and leaves the reader to discover
+      it is not.
+    required: true
+    roles: [investigations]
+
+checks:
+  - id: IN-01
+    obligation: investigation-records-exist
+    nature: behaviour
+    kind: path_exists
+    in: investigations
+    finding: >
+      The module is adopted and marked applicable, but no investigation records
+      are present.
+    false_positives: none
+
+  - id: IN-02
+    obligation: investigation-separates-evidence-from-rules
+    nature: behaviour
+    kind: heading_present
+    in: investigations
+    patterns:
+      - 'context|background|question'
+      - 'finding|observ|result'
+      - 'decision|rule|conclusion'
+      - 'reproduc|redo|re-run|repeat'
+    finding: >
+      An investigation record is missing its context, its observations, the
+      rules drawn from them, or how to run it again. A record without separated
+      observations and rules states conclusions with no evidence a reader can
+      re-examine.
+    false_positives: >
+      A record with nothing to reproduce still needs the section, saying so.
+      That is the obligation, not a false positive.
+
+  - id: IN-03
+    obligation: investigation-states-what-it-tested-against
+    nature: behaviour
+    kind: pattern_present
+    in: investigations
+    patterns:
+      - '[0-9]{4}-[0-9]{2}-[0-9]{2}'
+      - 'verified against|tested against|observed against|measured against|status'
+    finding: >
+      An investigation record does not state when it was run or what it was run
+      against. Its findings cannot be aged.
+    false_positives: >
+      The word "status" matches a status line naming no version. Whether the
+      line names what was tested is the judgment entry
+      investigations.versions-are-named.
+
+  - id: IN-04
+    obligation: investigation-is-reproducible
+    nature: behaviour
+    kind: links_resolve
+    in: [investigations]
+    finding: >
+      A relative link or anchor in an investigation record does not resolve.
+      Records point at the decision entries they came from and the work that ran
+      them.
+    false_positives: none
+
+judgment:
+  - id: investigations.findings-are-observed
+    obligation: investigation-separates-evidence-from-rules
+    question: Are the findings things that were observed, or things that were expected?
+    read: [investigations]
+    evidence: >
+      Quote the finding. An observation reports what happened, with the output.
+      An expectation states what should be true in a confident tone. An
+      investigation of expectations is reasoning labelled as evidence, which is
+      worse than no record.
+    do_not_report: Observations recorded more briefly than you would have recorded them.
+
+  - id: investigations.versions-are-named
+    obligation: investigation-states-what-it-tested-against
+    question: Does the status line name specific versions, or only the things without versions?
+    read: [investigations]
+    evidence: >
+      Quote the line. "Verified against the database" ages invisibly. A line
+      naming exact versions can be checked against what is in use now.
+    do_not_report: A version named for the primary subject but not for incidental tooling.
+
+  - id: investigations.right-size
+    obligation: investigation-records-exist
+    question: Did this investigation need its own record, or would a decision entry have held it?
+    read: [investigations]
+    evidence: >
+      Whether the record carries evidence a log entry could not. A directory of
+      records for things that did not need one makes the ones that mattered
+      harder to find.
+    do_not_report: A record that is short because the investigation was short but its evidence is substantial.
