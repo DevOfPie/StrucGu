@@ -1,0 +1,9 @@
+# Everything here is text, and all of it is read by tools that split on lines.
+# Normalising to LF in the repository keeps a checkout on one platform from
+# producing different results than a checkout on another — which for a
+# repository whose entire content is line-oriented checks is not cosmetic.
+* text=auto eol=lf
+
+*.md   text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf

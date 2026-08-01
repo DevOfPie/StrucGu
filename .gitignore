@@ -1,0 +1,11 @@
+# This repository ships no code and produces no build output, so there is very
+# little to ignore. Anything appearing here that is not editor or OS noise is a
+# sign something is being built that should not be.
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
