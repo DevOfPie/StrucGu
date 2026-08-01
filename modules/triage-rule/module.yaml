@@ -1,0 +1,149 @@
+# triage-rule — the machine-readable half.
+# module.md is normative. If the two disagree, that is a defect to report.
+schema: strucgu/module@1
+id: triage-rule
+version: 0.1.0
+title: Triage rule
+summary: >
+  One document draws the line between what the work in flight requires and
+  everything else, says what happens on each side, and says what to do when two
+  documents that both govern the work disagree.
+base: true
+requires: []
+
+applies_when:
+  - The project has a unit of work smaller than the whole project.
+  - Someone will find a real defect while building something unrelated to it.
+  - More than one person or session touches the work, counting a model as one.
+not_for:
+  - Exploratory work where scope changing constantly is the point.
+  - A project where nobody will review what gets deferred; deferring to an
+    unread list is forgetting with a clear conscience.
+
+roles:
+  - id: triage_doc
+    cardinality: file
+    of: The document stating what the work in flight requires and what happens to everything else.
+
+obligations:
+  - id: triage-boundary
+    title: The document distinguishes work in flight from everything else
+    purpose: >
+      Without a written line the question is answered fresh every time, by
+      whoever is holding it, at the moment they are least able to answer it
+      well. The scope of a piece of work then becomes unknowable after the fact.
+    required: true
+    roles: [triage_doc]
+
+  - id: triage-destination
+    title: The document names where out-of-scope findings go
+    purpose: >
+      A boundary with no destination on the far side is an instruction to
+      forget. A rule naming a place that has moved reads as correct to everyone
+      who already knows where the place is.
+    required: conditional
+    condition: >
+      Applies when findings-queue is adopted. A repository routing findings to
+      an issue tracker serves the same purpose and should record a deviation.
+    roles: [triage_doc]
+
+  - id: triage-precedence
+    title: The document says what to do when two governing documents disagree
+    purpose: >
+      A reader with no instruction picks one silently, and the contradiction
+      survives. Reporting rather than picking is what turns a contradiction into
+      something that gets fixed.
+    required: true
+    roles: [triage_doc]
+
+checks:
+  - id: TR-01
+    obligation: triage-boundary
+    nature: behaviour
+    kind: path_exists
+    in: triage_doc
+    finding: >
+      No triage document is declared or present. Nothing states where the
+      boundary of the current work is, so nothing can be outside it.
+    false_positives: none
+
+  - id: TR-02
+    obligation: triage-boundary
+    nature: declaration
+    paired_with: TR-03
+    kind: pattern_present
+    in: triage_doc
+    patterns:
+      - 'in[ -](spec|scope)'
+      - 'out[ -]of[ -](spec|scope)'
+    finding: >
+      The triage document does not name both sides of the boundary. A document
+      describing only what is required, without naming the category of
+      everything else, gives a reader nothing to put a finding into.
+    false_positives: >
+      Matches inside code blocks, quotations and examples. A document quoting
+      the specification matches without stating a rule of its own.
+
+  - id: TR-03
+    obligation: triage-destination
+    nature: behaviour
+    kind: role_referenced
+    in: triage_doc
+    to: findings
+    finding: >
+      The triage document does not contain a link resolving to the findings
+      queue. The rule names a destination the reader cannot reach from it, or
+      names one that has moved.
+    false_positives: >
+      Resolves markdown links only. A document naming its destination in prose
+      reports a finding despite serving the purpose. See finding F2.
+
+  - id: TR-04
+    obligation: triage-precedence
+    nature: declaration
+    paired_with: none
+    kind: pattern_present
+    in: triage_doc
+    patterns:
+      - 'conflict|contradict|disagree|precedence|takes precedence|wins on'
+    finding: >
+      The triage document does not say what to do when two governing documents
+      disagree. Silence means the reader picks, and the contradiction is never
+      reported.
+    false_positives: >
+      Any prose using these words in another sense. A document discussing merge
+      conflicts matches.
+
+  - id: TR-05
+    obligation: triage-boundary
+    nature: behaviour
+    kind: links_resolve
+    in: [triage_doc]
+    finding: >
+      A relative link or anchor in the triage document does not resolve. A rule
+      pointing at something that moved costs a reader their trust in the rest.
+    false_positives: none
+
+judgment:
+  - id: triage.boundary-is-a-claim
+    obligation: triage-boundary
+    question: >
+      Is the boundary drawn by what the current work claims, or by which part of
+      the project a defect happens to live in?
+    read: [triage_doc]
+    evidence: >
+      Quote the rule. A boundary drawn by subsystem sends a defect that
+      falsifies the current work's own claim to the queue, where it sits while
+      the work is declared done on a claim that is not true.
+    do_not_report: A boundary drawn by claim but worded differently than you would word it.
+
+  - id: triage.destination-is-real
+    obligation: triage-destination
+    question: >
+      Is the named destination something anyone reviews, or a list that exists
+      so findings can be put somewhere?
+    read: [triage_doc, findings]
+    evidence: >
+      Whether the rule says who reviews the destination and when. A rule that
+      defers without naming a reviewer is a rule for forgetting.
+    do_not_report: A queue that is currently empty. Empty is not the same as unreviewed.

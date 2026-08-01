@@ -1,0 +1,176 @@
+# findings-queue — the machine-readable half.
+# module.md is normative. If the two disagree, that is a defect to report.
+schema: strucgu/module@1
+id: findings-queue
+version: 0.1.0
+title: Findings queue
+summary: >
+  Where a finding goes when it is real but is not what you are working on. One
+  row per finding, with the evidence it is real and a state saying whether
+  anyone has reviewed it.
+base: true
+requires: [triage-rule]
+
+applies_when:
+  - The project defers out-of-scope findings rather than fixing them on sight.
+  - Someone will review what is deferred and decide what becomes work.
+not_for:
+  - A project with nobody to review the queue; it becomes a way of never fixing
+    anything while feeling organised.
+  - A project whose issue tracker already plays this role and whose people use
+    it. Two queues is worse than one.
+
+roles:
+  - id: findings
+    cardinality: file
+    of: The queue. One row per finding.
+
+obligations:
+  - id: findings-destination-exists
+    title: Deferred findings have a destination
+    purpose: >
+      "Do not fix it" with nowhere to put it is "forget it", and everyone
+      reading it knows that, so nobody obeys it.
+    required: true
+    roles: [findings]
+
+  - id: findings-carry-evidence
+    title: A row records what was observed
+    purpose: >
+      A row saying something is broken, written a month ago by someone no longer
+      sure, cannot be acted on and cannot be dismissed. It sits there forever.
+    required: true
+    roles: [findings]
+
+  - id: findings-have-review-state
+    title: A row records whether anyone has reviewed it
+    purpose: >
+      This is what separates noticing something from committing to fix it, and
+      it is what makes per-item approval possible.
+    required: true
+    roles: [findings]
+
+  - id: findings-are-unscheduled
+    title: The queue states that its rows are not commitments
+    purpose: >
+      A list of defects, unexplained, reads as a backlog — and a backlog gets
+      cleared in bulk, which turns every passing observation into committed
+      scope.
+    required: true
+    roles: [findings]
+
+checks:
+  - id: FQ-01
+    obligation: findings-destination-exists
+    nature: behaviour
+    kind: path_exists
+    in: findings
+    finding: >
+      No findings queue is declared or present. The triage rule's instruction
+      not to fix out-of-scope issues has no destination, which makes it an
+      instruction to forget them.
+    false_positives: none
+
+  - id: FQ-02
+    obligation: findings-carry-evidence
+    nature: behaviour
+    kind: pattern_present
+    in: findings
+    patterns:
+      - '\|[^|]*evidence[^|]*\|'
+    finding: >
+      The findings queue has no evidence column. A row without an observation is
+      a rumour with a row number.
+    false_positives: >
+      Matches any table with a column whose header contains the word, including
+      an example in prose. Whether anything in the column is evidence is the
+      judgment entry findings.evidence-is-observed.
+
+  - id: FQ-03
+    obligation: findings-have-review-state
+    nature: behaviour
+    kind: pattern_present
+    in: findings
+    patterns:
+      - '\|[^|]*(reviewed|review|approved|status|state)[^|]*\|'
+    finding: >
+      The findings queue has no review-state column. There is nothing between
+      noticing something and committing to fix it.
+    false_positives: >
+      The word "status" is common in table headers for unrelated reasons. A
+      queue with a Status column meaning something else passes.
+
+  - id: FQ-04
+    obligation: findings-are-unscheduled
+    nature: declaration
+    paired_with: FQ-03
+    kind: pattern_present
+    in: findings
+    patterns:
+      - 'not scheduled|nothing here is scheduled|not a commitment|report, not a|per item|individually'
+    finding: >
+      The queue does not state that its rows are unscheduled and approved
+      individually. Read without that, a list of defects is a backlog.
+    false_positives: Matches inside code blocks and quotations.
+
+  - id: FQ-05
+    obligation: findings-destination-exists
+    nature: behaviour
+    kind: role_referenced
+    in: findings
+    to: triage_doc
+    finding: >
+      The findings queue does not link to the rule that decides what belongs in
+      it. A reader deciding whether to add a row has nothing to check against.
+    false_positives: Resolves markdown links only. See finding F2.
+
+  - id: FQ-06
+    obligation: findings-carry-evidence
+    nature: behaviour
+    kind: links_resolve
+    in: [findings]
+    finding: >
+      A relative link or anchor in the findings queue does not resolve. Rows
+      point at the code they were observed in, and a row whose location has
+      rotted is a row nobody can verify.
+    false_positives: none
+
+judgment:
+  - id: findings.evidence-is-observed
+    obligation: findings-carry-evidence
+    question: Does each evidence cell contain something observed, or a restatement of the finding?
+    read: [findings]
+    evidence: >
+      Quote the cell. "This is broken" restates the finding. A file:line, a
+      quoted output, a confirmed live behaviour is evidence. The distinction is
+      whether someone else could check it without trusting you.
+    do_not_report: Evidence that is real but thinner than you would have written.
+
+  - id: findings.severity-argues
+    obligation: findings-carry-evidence
+    question: Does the severity say what the impact is, or does it name a tier?
+    read: [findings]
+    evidence: >
+      Quote it. "High" conveys nothing a reader can act on. "Recurs on every
+      release, and the artefact is invisible in rendered output" lets someone
+      decide.
+    do_not_report: A severity that argues its impact but reaches a conclusion you disagree with.
+
+  - id: findings.rows-are-findings
+    obligation: findings-destination-exists
+    question: Are the rows observations of defects, or complaints and feature requests?
+    read: [findings]
+    evidence: >
+      A row that could not be shown false by anyone. A queue that accumulates
+      opinions stops being reviewed.
+    do_not_report: Rows about documentation or process defects. Those are findings.
+
+  - id: findings.queue-is-reviewed
+    obligation: findings-have-review-state
+    question: Is anything ever reviewed, or does every row sit unreviewed indefinitely?
+    read: [findings]
+    evidence: >
+      The proportion of rows never reviewed, and whether any have been closed.
+      An unreviewed queue is the module's failure mode and looks identical to a
+      healthy one from the outside.
+    do_not_report: A queue that is short or currently empty.
