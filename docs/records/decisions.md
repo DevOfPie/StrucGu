@@ -38,6 +38,10 @@ the file. Append a row when you append an entry.
 | [A new check never ships in a minor version](#a-new-check-never-ships-in-a-minor-version) | Versioning |
 | [Objections are drafted by a tool and filed by a person](#objections-are-drafted-by-a-tool-and-filed-by-a-person) | The feedback loop |
 | [Six checks were cut for measuring presence rather than thought](#six-checks-were-cut-for-measuring-presence-rather-than-thought) | What did not ship, and why |
+| [The first check to fire, fired on this repository](#the-first-check-to-fire-fired-on-this-repository) | Evidence `TR-03` works |
+| [Three specification gaps were found by use, not by review](#three-specification-gaps-were-found-by-use-not-by-review) | Spec changes during the build |
+| [This repository records no deviation of its own](#this-repository-records-no-deviation-of-its-own) | Corrects part of the M7 work record |
+| [The code-fence rule was wrong the first time](#the-code-fence-rule-was-wrong-the-first-time) | Corrects the entry above |
 
 ---
 
@@ -421,3 +425,101 @@ The pattern across all six: what makes them valuable is a judgment someone made,
 and a record only ever carries the trace of a judgment, never the judgment.
 Every one is now a `judgment` entry, which is why a mechanical run emits those
 lines whether or not anyone is there to read them.
+
+### The first check to fire, fired on this repository
+
+While walking the checks against StrucGu before writing its adoption record,
+`TR-03` reported a finding: [triage.md](triage.md) named the findings queue
+inside a fenced code block —
+
+```
+out of spec  → DO NOT FIX
+               append one row to findings.md → "Open"
+```
+
+— rather than as a link. The word is there, so `TR-02` passes and every
+word-matching check passes. Nothing resolves to the queue.
+
+This is the LinkCtrl defect that motivated the entire repository, reproduced
+independently, in the repository built to catch it, by the person who wrote the
+check. That is worth recording precisely because it is embarrassing: the failure
+mode is not carelessness, it is that a document naming its destination in prose
+reads as correct to everyone who already knows where the destination is —
+including its author, ten minutes after writing it.
+
+Fixed by naming the queue as a link in the line beneath the block. The block
+keeps the terse form; the link carries the reference.
+
+It also sharpens [F2](findings.md): `role_referenced` catching this depended
+entirely on the fix being a link. Had the sentence been reworded in prose, the
+check would have gone quiet while the defect remained. The narrowness of that
+coverage is now evidenced rather than theorised.
+
+### Three specification gaps were found by use, not by review
+
+Each was found by writing a module or running a check against real files, and
+none by re-reading the specification. Recorded together because the pattern is
+the point: the contract was designed in the abstract and was wrong in three
+places on contact.
+
+1. **A role's shape can depend on the form.** `decision_log` is a file under
+   `single-log` and a directory under `per-decision-files`. The specification
+   allowed one cardinality per role. Fixed with `cardinality: by_form`.
+2. **`path_exists` on a directory must require contents.** An empty directory
+   satisfies a filesystem existence test while satisfying nothing the obligation
+   wanted. Found writing the `violates-IN-01` fixture, which was intended to
+   demonstrate a missing record and instead demonstrated a passing check.
+3. **`links_resolve` must skip fenced code blocks.** A module's own check
+   patterns are written in fences, and `in[ -](spec|scope)` contains the exact
+   byte sequence a naive link extractor matches on. Found by running the link
+   check over this repository, which reported two findings against regular
+   expressions.
+
+The third is the one worth generalising: a check run only against fixtures its
+author wrote will not find this class of defect, because the author does not
+write the pathological input. The fixtures prove a check detects what it was
+built to detect. Only a real corpus finds what it detects by accident.
+
+### This repository records no deviation of its own
+
+This corrects the work record for M7, which required one so that the deviation
+shape would be tested by use rather than only specified. The requirement was
+wrong and has been rewritten there.
+
+No genuine deviation exists. Every check StrucGu adopts, it passes. The options
+were to invent one, or to state the absence.
+
+Inventing one would put a false claim in the single file whose entire purpose is
+to be a truthful claim the repository makes about itself — to exercise a
+mechanism, in a catalog whose posture is that records are for readers who do not
+trust you. The mechanism stays untested by use until a real deviation arrives,
+and that is the honest state.
+
+Worth noting what this says about self-application generally, which is already
+argued above: a repository that passes every check it publishes is not evidence
+the checks work. It is the expected result of an author writing rules they
+already satisfy. The fixtures are the evidence, and `TR-03` firing on this
+repository is the only accidental evidence in the whole build.
+
+### The code-fence rule was wrong the first time
+
+This corrects item 3 of [Three specification gaps were found by use, not by
+review](#three-specification-gaps-were-found-by-use-not-by-review) above. That
+text stays as it is.
+
+The rule as first written said `links_resolve` must skip **fenced code blocks**.
+Implementing it and re-running the link check over this repository dropped the
+false positives from four to two. The survivors were the same pattern written as
+an *inline* code span — in the specification's own prose, and in the entry being
+corrected. The rule now reads: code is not scanned, neither fences nor inline
+spans.
+
+The specification and the decision log both described the defect, and both were
+instances of it. That is the sharpest available demonstration of the point the
+original entry was making — a check run only against fixtures its author wrote
+will not find this class of defect, because the author does not write the
+pathological input — and it is why the entry it corrects is worth leaving in
+place rather than quietly widening.
+
+Final state: 0 broken of 185 relative links and anchors, repository-wide,
+excluding the fixture trees, which contain broken links as test data.

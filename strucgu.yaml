@@ -1,0 +1,68 @@
+# StrucGu's own adoption record — the catalog applied to itself.
+#
+# This is dogfooding, not evidence. An author unconsciously writes rules they
+# already satisfy, so a clean run here proves very little; the fixtures under
+# modules/*/fixtures/ are what shows the checks detect anything. See
+# docs/records/decisions.md, "Self-application is dogfooding, not evidence".
+#
+# Hand-edited. No tool writes this file.
+
+schema: strucgu/adoption@1
+
+modules:
+  triage-rule:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      triage_doc: docs/records/triage.md
+
+  decision-log:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    form: single-log
+    # The repository's first commit. DL-03 must not read history before this,
+    # and there is none.
+    effective_from: 2026-07-31
+    roles:
+      decision_log: docs/records/decisions.md
+      # Same file. Under single-log the index is a section, which is why DL-05
+      # passes here whenever DL-01 does — a documented weakness of that check,
+      # covered by the judgment entry decision-log.index-exists-in-substance.
+      decision_index: docs/records/decisions.md
+
+  findings-queue:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      # Deliberately not under a directory a static site generator would sweep
+      # up. This repository publishes nothing today, and the queue is where a
+      # future decision to publish would leak first.
+      findings: docs/records/findings.md
+
+  work-units:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      unit_dir: docs/records/work/
+      unit_template: docs/records/work/_template.md
+      unit_index: docs/records/work/README.md
+
+  investigations:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      # Deliberately unmapped. No investigation here has outgrown a decision
+      # entry, so the obligation's condition is unmet and every IN-* check
+      # reports skip rather than ok. This is the only place in the repository
+      # where the conditional path and the skip path are exercised, and it is
+      # why the role is declared rather than the module left unadopted.
+      investigations: ~
+
+# No exclusions. Every path this repository owns is intended to be read, and the
+# fixture trees under modules/*/fixtures/ are not inside any mapped role, so
+# their deliberately broken links are never scanned by a check.
+
+# No deviations. Every check adopted above passes, and writing a false one to
+# exercise the mechanism would put an untrue claim in the one file whose whole
+# purpose is to be a truthful claim. See docs/records/decisions.md, "This
+# repository records no deviation of its own".
