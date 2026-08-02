@@ -42,6 +42,10 @@ the file. Append a row when you append an entry.
 | [Three specification gaps were found by use, not by review](#three-specification-gaps-were-found-by-use-not-by-review) | Spec changes during the build |
 | [This repository records no deviation of its own](#this-repository-records-no-deviation-of-its-own) | Corrects part of the M7 work record |
 | [The code-fence rule was wrong the first time](#the-code-fence-rule-was-wrong-the-first-time) | Corrects the entry above |
+| [Fixture expectations become data, and the wording of a finding stays out of them](#fixture-expectations-become-data-and-the-wording-of-a-finding-stays-out-of-them) | `expected.yaml`, and the no-runner line |
+| [The conformance criterion waits until an implementer has asked for it](#the-conformance-criterion-waits-until-an-implementer-has-asked-for-it) | Why M9 is deferred rather than cut |
+| [The first checker is Whippy's, and its independence is partial](#the-first-checker-is-whippys-and-its-independence-is-partial) | What M10's evidence is worth |
+| [IdeaWarehouse is the second repository, and it tests re-application rather than generality](#ideawarehouse-is-the-second-repository-and-it-tests-re-application-rather-than-generality) | What M11 does and does not answer |
 
 ---
 
@@ -523,3 +527,110 @@ place rather than quietly widening.
 
 Final state: 0 broken of 185 relative links and anchors, repository-wide,
 excluding the fixture trees, which contain broken links as test data.
+
+---
+
+## 2026-08-02 — planning the second phase
+
+Four scope questions, put to the owner before any of [M8](work/m8.md) through
+[M13](work/m13.md) began, because [triage.md](triage.md) requires stopping and
+asking on scope rather than deciding it inside a unit. What came back, and what
+it costs.
+
+### Fixture expectations become data, and the wording of a finding stays out of them
+
+Each module gains a `fixtures/expected.yaml` beside its `expected.md`, giving one
+of the five audit states per tree per check id. The prose file stays and stays
+normative on intent; the data file answers the only question an implementer
+actually has, which is whether their run matched.
+
+**Finding text is deliberately excluded.** An expectation file that pinned the
+wording would make one implementation's phrasing normative — the thing [There is
+no runner](#there-is-no-runner-and-that-is-the-largest-single-decision-here)
+refused, arriving as a data format instead of as a program. What a finding must
+carry, a location and evidence, is already specified; how it reads is the
+implementer's.
+
+Two costs, both accepted. The neutrality rule — nothing under `modules/` names a
+language, package manager, build tool, or file extension — is under strain, and
+the defence is that `module.yaml` already established that a data file naming
+nothing is not an implementation. And this is the closest thing to shipping
+software the no-runner decision permits: the next request after it will be for a
+harness that reads it. Where that line falls is now discovered rather than
+declared, which is the next entry.
+
+### The conformance criterion waits until an implementer has asked for it
+
+A document stating what passing the fixtures means was proposed for before the
+first implementation and is deferred until after it. Not cut — deferred, so the
+choice gets made against evidence.
+
+The reasoning: a criterion drafted now answers questions nobody has asked. There
+are zero implementations, so every clause would be anticipation, and anticipated
+clauses are where a conformance document quietly becomes a certification
+document. Drafted after [M10](work/m10.md), every clause can be traced to a
+question an implementer actually hit.
+
+The cost is real and is recorded in [M8](work/m8.md) rather than in the deferred
+unit: between shipping a machine-readable expectation file and having a stated
+criterion, nothing written down guards the line against a harness. Holding it is
+the owner's judgment in that window. The second cost is that the first
+implementation now defines the criterion by example, which is a reference
+implementation arriving through the back door — the clause-origin rule in
+[M9](work/m9.md) is the counter-pressure and may not be enough.
+
+### The first checker is Whippy's, and its independence is partial
+
+Phase one was written by the owner with an Opus 5 instance co-authoring. The
+first checker is written by a different Opus 5 instance, in a fresh session,
+from the published repository only, under a rule that the author does not answer
+questions about what a check means.
+
+That is a different session and a different reader. **It is not a different
+lineage,** and the failure mode has no signature in the output: a reader from the
+same model family may reconstruct the co-author's reading of an ambiguous check
+without noticing there was a fork, and the result looks exactly like a
+specification that was simply clear.
+
+The only instrument against it is recording each ambiguity *before* resolving it,
+with the readings available and how confident the choice was. An ambiguity
+resolved correctly at low confidence is a coin-flip that landed, and counting
+those separately is the difference between "the spec was precise" and "two
+instances of one model guessed alike". [M6](work/m6.md) named the first
+independent checker as the real test; this is a weaker instrument than that, it
+is what is available, and calling it what it is costs nothing.
+
+The alternative considered and rejected was the owner writing it — fastest, and
+producing close to no evidence, since an author implementing their own
+specification tests it against the understanding already encoded in it.
+
+### IdeaWarehouse is the second repository, and it tests re-application rather than generality
+
+`DevOfPie/IdeaWarehouse` adopts. It is not the repository this catalog was
+extracted from, and its own decision log already names StrucGu as the intended
+canonical home for its process rules, recording those rules as provisional and
+written to be lifted out later. The audit is therefore the first step of a
+migration that repository has already chosen, rather than an exercise staged to
+produce a result.
+
+**It shares a convention lineage with LinkCtrl, and that caps what it can
+prove.** IdeaWarehouse imported LinkCtrl's three-file split, its terse process
+file, and its deferred-findings discipline, deliberately and on the record.
+LinkCtrl is where these modules came from. So a clean map is the *expected*
+outcome and is not evidence that these conventions generalise — it is evidence
+that an extraction survives re-application within the lineage it was extracted
+from. That is worth knowing and it is a different claim, and
+[M13](work/m13.md) is forbidden from reporting the one as the other.
+
+The generality question needs a repository built by someone who has never read
+LinkCtrl. Nothing in this phase answers it, and the alternative — deferring the
+second adoption until an outside adopter appears — was rejected because it has no
+done condition the owner controls and would defer the whole phase's conclusion
+indefinitely.
+
+The more valuable half of that unit's output is therefore not findings against
+IdeaWarehouse but the shapes IdeaWarehouse has that this catalog has no role
+for: an intake inbox, a graveyard, a graduation bar, a sweep cadence. Each is
+either out of scope for a catalog about records of work, or a module this
+catalog is missing. Both answers go in [findings.md](findings.md) as rows, and
+neither becomes a module in this phase.
