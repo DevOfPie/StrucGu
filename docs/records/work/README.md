@@ -19,43 +19,43 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M6](m6.md) | Fixtures, and every check observed failing | M3 M4 | done |
 | [M7](m7.md) | StrucGu adopts, and 0.1.0 is tagged | M5 M6 | done |
 | [M8](m8.md) | Fixture expectations become machine-comparable | M6 | planned |
-| [M9](m9.md) | Conformance is defined narrowly, and stays self-asserted | M8 | planned |
-| [M10](m10.md) | The first independent checker, written from the specification alone | M8 | planned |
-| [M11](m11.md) | A second repository adopts, and the objection channel is used in anger | M10 | planned |
+| [M9](m9.md) | Conformance is defined narrowly, and stays self-asserted | M10 | deferred |
+| [M10](m10.md) | The first checker, written from the specification alone | M8 | planned |
+| [M11](m11.md) | IdeaWarehouse adopts, and the objection channel is used in anger | M10 | planned |
 | [M12](m12.md) | F1 and F2 are closed by use rather than by review | M10 M11 | planned |
 | [M13](m13.md) | The catalog says what a year of one repository could not | M10 M11 M12 | planned |
 
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
 
-M8–M13 are **planned, not agreed.** They are written here rather than in a plan
+M8–M13 are **scoped and unstarted.** They are written here rather than in a plan
 document because this file is where scope lives, and a phase described anywhere
-else is a second home for status. Nothing in them is started until the owner has
-taken the four decisions below; `planned` means proposed and unstarted, and no
-other status word in this table has ever meant that.
+else is a second home for status. `planned` means agreed and not begun;
+`deferred` means agreed to happen later than its number suggests. Neither has
+appeared in this table before, and neither means `done`.
 
-M9's edge to M8 is an *ordering preference* — a conformance criterion is easier
-to write once expectations are mechanical, and could be written first. M10's edge
-to M8 is hard: an independent implementer with nothing mechanical to compare
-against produces a reading of the spec rather than a test of it.
+M10's edge to M8 is hard: an implementer with nothing mechanical to compare
+against produces a reading of the spec rather than a test of it. M9's edge to M10
+is the deferral, not a dependency of substance.
 
-### Decisions this phase needs before M8 starts
+### Decisions this phase needed, and what came back
 
-Each is a scope question, and [triage.md](../triage.md) requires stopping and
-asking on those rather than deciding them inside a unit.
+Each was a scope question, and [triage.md](../triage.md) requires stopping and
+asking on those rather than deciding them inside a unit. All four were put to the
+owner on 2026-08-02 and answered. The reasoning is in
+[decisions.md](../decisions.md); the answers are here because they change what
+the units say.
 
-1. **Does a machine-readable expectation file belong under `modules/` at all?**
-   It is the closest thing to shipping software the no-runner decision permits.
-   See [M8](m8.md) risks.
-2. **Is a conformance document a step toward the certification this repository
-   refuses?** If yes, [M9](m9.md) is cut and [M10](m10.md) compares against
-   [M8](m8.md)'s files alone.
-3. **Who writes the independent checker, and is the no-questions rule
-   acceptable?** It is slow, it is the entire value of [M10](m10.md), and it
-   cannot be added back afterwards.
-4. **Which second repository.** It must not be the one the catalog was extracted
-   from. See [M11](m11.md) risks for what the available candidates do and do not
-   prove.
+1. **A machine-readable expectation file ships under `modules/`,** beside the
+   prose it restates. [M8](m8.md).
+2. **The conformance document is deferred, not cut** — written after the first
+   implementation, from questions that were actually asked. [M9](m9.md).
+3. **Whippy writes the first checker**, in a fresh session, from the published
+   repository only, under a hard no-questions rule. The independence is partial
+   and [M10](m10.md) states in what way.
+4. **IdeaWarehouse is the second repository.** It shares a convention lineage
+   with LinkCtrl, so [M11](m11.md) tests re-application rather than generality,
+   and says so before it reports anything.
 
 ### Not in this phase
 
