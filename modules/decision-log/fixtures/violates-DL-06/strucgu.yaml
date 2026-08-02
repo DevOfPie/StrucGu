@@ -1,0 +1,10 @@
+schema: strucgu/adoption@1
+modules:
+  decision-log:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    form: single-log
+    effective_from: 2026-07-31
+    roles:
+      decision_log: decisions.md
+      decision_index: decisions.md

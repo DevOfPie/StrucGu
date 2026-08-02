@@ -1,0 +1,7 @@
+schema: strucgu/adoption@1
+modules:
+  investigations:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      investigations: investigations/

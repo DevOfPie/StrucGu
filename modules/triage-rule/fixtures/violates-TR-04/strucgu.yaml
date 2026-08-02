@@ -1,0 +1,12 @@
+schema: strucgu/adoption@1
+modules:
+  triage-rule:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      triage_doc: triage.md
+  findings-queue:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      findings: findings.md

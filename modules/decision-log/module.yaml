@@ -1,0 +1,189 @@
+# decision-log — the machine-readable half.
+# module.md is normative. If the two disagree, that is a defect to report.
+schema: strucgu/module@1
+id: decision-log
+version: 0.1.0
+title: Decision log
+summary: >
+  Why choices were made, recorded as they are made. Dated, append-only,
+  indexed. A later entry corrects an earlier one; the earlier text stays where
+  it is.
+base: true
+requires: []
+
+applies_when:
+  - Work happens across more than one sitting.
+  - Someone will later need to know why a choice was made, not only what it was.
+  - A choice will turn out to be wrong and its reasoning will matter more then
+    than it does now.
+not_for:
+  - A project where decisions are genuinely obvious and reversible.
+  - Anyone who will treat it as documentation to be kept current. It is a log,
+    not a description of the present.
+
+roles:
+  - id: decision_log
+    cardinality: by_form
+    cardinality_by_form:
+      single-log: file
+      per-decision-files: dir
+    of: Where rationale is recorded.
+  - id: decision_index
+    cardinality: file
+    of: >
+      Navigation. Under single-log this may be a section of the log itself, in
+      which case both roles map to the same path.
+
+obligations:
+  - id: decision-rationale-recorded
+    title: Reasoning has a place that is not a commit message
+    purpose: >
+      Rationale that exists only in commit messages is not recoverable by a
+      reader who does not already know what to search for. Rationale that exists
+      only in someone's head is not recoverable at all.
+    required: true
+    forms:
+      - id: single-log
+        of: One growing file, newest entry last.
+      - id: per-decision-files
+        of: One file per decision, plus an index file.
+    roles: [decision_log]
+
+  - id: decision-entries-dated
+    title: Every entry carries a date
+    purpose: >
+      An undated log cannot show that a later entry corrects an earlier one, and
+      cannot show what was known when.
+    required: true
+    roles: [decision_log]
+
+  - id: decision-log-append-only
+    title: An entry is never edited away
+    purpose: >
+      The record that an earlier belief was held is the thing being preserved.
+      Editing an entry to make it current destroys exactly what the log is for.
+    required: true
+    roles: [decision_log]
+
+  - id: decision-log-indexed
+    title: The log has an index
+    purpose: >
+      Past a few hundred lines an unindexed log is written to and never read
+      from. A log nobody reads is a cost with no benefit.
+    required: true
+    roles: [decision_index]
+
+checks:
+  - id: DL-01
+    obligation: decision-rationale-recorded
+    nature: behaviour
+    kind: path_exists
+    in: decision_log
+    finding: >
+      No decision log is declared or present. Rationale is recoverable only by
+      whoever already knows it.
+    false_positives: none
+
+  - id: DL-02
+    obligation: decision-entries-dated
+    nature: behaviour
+    kind: pattern_present
+    in: decision_log
+    patterns:
+      - '[0-9]{4}-[0-9]{2}-[0-9]{2}'
+    finding: >
+      No date appears in the decision log. An undated log cannot show that a
+      later entry corrects an earlier one.
+    false_positives: >
+      Any date in any context matches. The weakest check in the module; the
+      alternative would mandate a heading format and this module does not
+      mandate formats.
+
+  - id: DL-03
+    obligation: decision-log-append-only
+    nature: behaviour
+    kind: history_deletions
+    in: decision_log
+    requires_effective_from: true
+    finding: >
+      Commits after effective_from removed lines from the decision log. Reported
+      for a look, not as a defect — a rename or a file split is legitimate, an
+      entry edited away is not, and the two are indistinguishable to a checker.
+    false_positives: >
+      Many, by construction. Splitting a log into two files reports every line
+      moved. Never run over history before effective_from.
+
+  - id: DL-04
+    obligation: decision-log-append-only
+    nature: declaration
+    paired_with: DL-03
+    kind: pattern_present
+    in: decision_log
+    patterns:
+      - 'append[ -]only|never edit an entry|not edited|corrects an earlier'
+    finding: >
+      The decision log does not state that it is append-only. A reader who does
+      not know will edit an entry to bring it up to date, in good faith, and
+      destroy the record it existed to keep.
+    false_positives: Matches inside code blocks and quotations.
+
+  - id: DL-05
+    obligation: decision-log-indexed
+    nature: behaviour
+    kind: path_exists
+    in: decision_index
+    finding: >
+      The decision log has no index. Past a few hundred lines it becomes a file
+      that is written to and never read from.
+    false_positives: >
+      Under single-log both roles normally map to the same path, so this passes
+      whenever DL-01 does. Covered by the judgment entry
+      decision-log.index-exists-in-substance.
+
+  - id: DL-06
+    obligation: decision-log-indexed
+    nature: behaviour
+    kind: links_resolve
+    in: [decision_log, decision_index]
+    finding: >
+      A relative link or anchor in the decision records does not resolve. An
+      index whose links have rotted returns the log to being unindexed.
+    false_positives: none
+
+judgment:
+  - id: decision-log.claim-shaped
+    obligation: decision-log-append-only
+    question: Are entry headings assertions that can be true or false, or are they topics?
+    read: [decision_log]
+    evidence: >
+      Quote headings verbatim. "Caching" is a topic; "Cache lifetime is clamped
+      to the link's expiry" is a claim. A log of topics cannot correct itself,
+      which disables the mechanism the module is built on.
+    do_not_report: Headings that are claims but that you would have worded differently.
+
+  - id: decision-log.corrections-preserve
+    obligation: decision-log-append-only
+    question: >
+      Where a later entry contradicts an earlier one, is the earlier text still
+      present with a pointer, or was it edited away?
+    read: [decision_log]
+    evidence: Two entry headings that cannot both be true, and whether the earlier acknowledges the later.
+    do_not_report: An earlier entry that is merely incomplete rather than contradicted.
+
+  - id: decision-log.index-exists-in-substance
+    obligation: decision-log-indexed
+    question: >
+      Under single-log, does the file actually contain an index, or does DL-05
+      pass only because both roles point at the same file?
+    read: [decision_index]
+    evidence: Whether a reader can find an entry without reading the file top to bottom.
+    do_not_report: An index that is short because the log is short.
+
+  - id: decision-log.rationale-not-status
+    obligation: decision-rationale-recorded
+    question: Does the log contain status rather than reasoning?
+    read: [decision_log]
+    evidence: >
+      Quote the passage. A log that accumulates status has to be kept current,
+      and a document that has to be kept current cannot be append-only.
+    do_not_report: Status stated as part of the context a decision was made in.

@@ -1,0 +1,9 @@
+schema: strucgu/adoption@1
+modules:
+  work-units:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      unit_dir: work/
+      unit_template: work/_template.md
+      unit_index: work/README.md
