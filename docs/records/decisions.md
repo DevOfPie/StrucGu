@@ -42,6 +42,16 @@ the file. Append a row when you append an entry.
 | [Three specification gaps were found by use, not by review](#three-specification-gaps-were-found-by-use-not-by-review) | Spec changes during the build |
 | [This repository records no deviation of its own](#this-repository-records-no-deviation-of-its-own) | Corrects part of the M7 work record |
 | [The code-fence rule was wrong the first time](#the-code-fence-rule-was-wrong-the-first-time) | Corrects the entry above |
+| [Fixture expectations become data, and the wording of a finding stays out of them](#fixture-expectations-become-data-and-the-wording-of-a-finding-stays-out-of-them) | `expected.yaml`, and the no-runner line |
+| [The conformance criterion waits until an implementer has asked for it](#the-conformance-criterion-waits-until-an-implementer-has-asked-for-it) | Why M9 is deferred rather than cut |
+| [The first checker is Whippy's, and its independence is partial](#the-first-checker-is-whippys-and-its-independence-is-partial) | What M10's evidence is worth |
+| [The second repository is private, and it tests re-application rather than generality](#the-second-repository-is-private-and-it-tests-re-application-rather-than-generality) | What M11 does and does not answer |
+| [The first checker's inputs exclude this repository's records](#the-first-checkers-inputs-exclude-this-repositorys-records) | Corrects M10's input rule |
+| [The confidence field measures noticed ambiguity, and the lineage risk is unmeasured](#the-confidence-field-measures-noticed-ambiguity-and-the-lineage-risk-is-unmeasured) | Corrects the entry above it |
+| [Separating the checker's repository does not stop it being the reference implementation](#separating-the-checkers-repository-does-not-stop-it-being-the-reference-implementation) | What M10 cannot claim |
+| [A quota for objections manufactures the disagreement it counts](#a-quota-for-objections-manufactures-the-disagreement-it-counts) | Corrects M11's done-means |
+| [Enumerating a private repository's record shapes was itself the leak](#enumerating-a-private-repositorys-record-shapes-was-itself-the-leak) | A redaction, and why it is not a correction |
+| [The phase edits the specification, and hiding that in three work units was the drift](#the-phase-edits-the-specification-and-hiding-that-in-three-work-units-was-the-drift) | Corrects "Not in this phase" |
 
 ---
 
@@ -523,3 +533,265 @@ place rather than quietly widening.
 
 Final state: 0 broken of 185 relative links and anchors, repository-wide,
 excluding the fixture trees, which contain broken links as test data.
+
+---
+
+## 2026-08-02 — planning the second phase
+
+Four scope questions, put to the owner before any of [M8](work/m8.md) through
+[M13](work/m13.md) began, because [triage.md](triage.md) requires stopping and
+asking on scope rather than deciding it inside a unit. What came back, and what
+it costs.
+
+### Fixture expectations become data, and the wording of a finding stays out of them
+
+Each module gains a `fixtures/expected.yaml` beside its `expected.md`, giving one
+of the five audit states per tree per check id. The prose file stays and stays
+normative on intent; the data file answers the only question an implementer
+actually has, which is whether their run matched.
+
+**Finding text is deliberately excluded.** An expectation file that pinned the
+wording would make one implementation's phrasing normative — the thing [There is
+no runner](#there-is-no-runner-and-that-is-the-largest-single-decision-here)
+refused, arriving as a data format instead of as a program. What a finding must
+carry, a location and evidence, is already specified; how it reads is the
+implementer's.
+
+Two costs, both accepted. The neutrality rule — nothing under `modules/` names a
+language, package manager, build tool, or file extension — is under strain, and
+the defence is that `module.yaml` already established that a data file naming
+nothing is not an implementation. And this is the closest thing to shipping
+software the no-runner decision permits: the next request after it will be for a
+harness that reads it. Where that line falls is now discovered rather than
+declared, which is the next entry.
+
+### The conformance criterion waits until an implementer has asked for it
+
+A document stating what passing the fixtures means was proposed for before the
+first implementation and is deferred until after it. Not cut — deferred, so the
+choice gets made against evidence.
+
+The reasoning: a criterion drafted now answers questions nobody has asked. There
+are zero implementations, so every clause would be anticipation, and anticipated
+clauses are where a conformance document quietly becomes a certification
+document. Drafted after [M10](work/m10.md), every clause can be traced to a
+question an implementer actually hit.
+
+The cost is real and is recorded in [M8](work/m8.md) rather than in the deferred
+unit: between shipping a machine-readable expectation file and having a stated
+criterion, nothing written down guards the line against a harness. Holding it is
+the owner's judgment in that window. The second cost is that the first
+implementation now defines the criterion by example, which is a reference
+implementation arriving through the back door — the clause-origin rule in
+[M9](work/m9.md) is the counter-pressure and may not be enough.
+
+### The first checker is Whippy's, and its independence is partial
+
+Phase one was written by the owner with an Opus 5 instance co-authoring. The
+first checker is written by a different Opus 5 instance, in a fresh session,
+from the published repository only, under a rule that the author does not answer
+questions about what a check means.
+
+That is a different session and a different reader. **It is not a different
+lineage,** and the failure mode has no signature in the output: a reader from the
+same model family may reconstruct the co-author's reading of an ambiguous check
+without noticing there was a fork, and the result looks exactly like a
+specification that was simply clear.
+
+The only instrument against it is recording each ambiguity *before* resolving it,
+with the readings available and how confident the choice was. An ambiguity
+resolved correctly at low confidence is a coin-flip that landed, and counting
+those separately is the difference between "the spec was precise" and "two
+instances of one model guessed alike". [M6](work/m6.md) named the first
+independent checker as the real test; this is a weaker instrument than that, it
+is what is available, and calling it what it is costs nothing.
+
+The alternative considered and rejected was the owner writing it — fastest, and
+producing close to no evidence, since an author implementing their own
+specification tests it against the understanding already encoded in it.
+
+### The second repository is private, and it tests re-application rather than generality
+
+A second repository was chosen and adopts in [M11](work/m11.md). It is private,
+and **it is not named in this repository.** The owner's own records name it; this
+one does not, because a public repository is not where a private one's shape gets
+published as a side effect of planning. That is the same rule
+[objections.md](../objections.md) states about audit output carrying paths,
+internal names, and quoted lines, applied to the plan that will produce that
+output rather than only to the output.
+
+The cost of withholding it is real: a reader here cannot check the claims below
+about what that repository contains, and has to take them. Stating that is worth
+more than the alternative, which is a plan that reads as though its evidence were
+open.
+
+It is not the repository this catalog was extracted from, and its own decision
+log already names StrucGu as the intended canonical home for its process rules,
+recording those rules as provisional and written to be lifted out later. The
+audit is therefore the first step of a migration that repository has already
+chosen, rather than an exercise staged to produce a result.
+
+**It shares a convention lineage with LinkCtrl, and that caps what it can
+prove.** It imported LinkCtrl's three-file split, its terse process file, and its
+deferred-findings discipline, deliberately and on the record. LinkCtrl is where
+these modules came from. So a clean map is the *expected* outcome and is not
+evidence that these conventions generalise — it is evidence that an extraction
+survives re-application within the lineage it was extracted from. That is worth
+knowing and it is a different claim, and [M13](work/m13.md) is forbidden from
+reporting the one as the other.
+
+The generality question needs a repository built by someone who has never read
+LinkCtrl. Nothing in this phase answers it, and the alternative — deferring the
+second adoption until an outside adopter appears — was rejected because it has no
+done condition the owner controls and would defer the whole phase's conclusion
+indefinitely.
+
+The more valuable half of that unit's output is therefore not findings against
+the second repository but the record shapes it has that this catalog has no role
+for. Each is either out of scope for a catalog about records of work, or a
+module this catalog is missing. Both answers go in [findings.md](findings.md) as
+rows, and neither becomes a module in this phase.
+
+> Redacted 2026-08-03. This paragraph enumerated four of those shapes. The
+> enumeration is removed rather than corrected by a later entry, because a
+> correction that leaves the text in place would keep publishing the thing the
+> entry above it forbids publishing. The redaction is recorded here and argued
+> below; nothing else in this entry changed.
+
+---
+
+## 2026-08-03 — an adversarial review of the plan, and what it corrected
+
+The plan above was reviewed adversarially before any unit started. Fourteen
+findings; the verdict was that it was not executable as written. The entries
+below correct entries in the section above rather than editing them — that is
+what this file is for, and it is the first time the mechanism has been used on a
+real disagreement.
+
+Two classes of correction are not given their own entries. Several arguments had
+been written out in full in two or three places at once — the work records now
+carry pointers and the reasoning lives here, which is the split
+[work/README.md](work/README.md) already states and which the `work-units`
+module names as an obligation. And several done-means bullets that could be
+satisfied by asserting them are now labelled attested-not-verifiable rather than
+sitting among falsifiable ones.
+
+### The first checker's inputs exclude this repository's records
+
+This corrects [The first checker is Whippy's, and its independence is
+partial](#the-first-checker-is-whippys-and-its-independence-is-partial), which
+set the implementer's inputs to the published repository and left it there.
+
+The published repository contains the plan that grades the implementer. It says
+an empty ambiguity list will be read as the independence rule leaking, a thin
+one as suspicious, and low-confidence resolutions as counted separately. An
+implementer who reads that has been handed the scoring function before starting,
+and will produce the shape it rewards — a healthy list with mixed confidence —
+with nothing in the plan able to tell manufactured ambiguity from found
+ambiguity. The earlier text worried only about the list being too thin. The
+published rubric biases it the other way.
+
+Inputs are now the normative surface only: the specification, the modules, and
+the three consumer-facing documents. `docs/records/` is excluded. The observer's
+notebook does not go to the subject.
+
+### The confidence field measures noticed ambiguity, and the lineage risk is unmeasured
+
+This corrects the same entry, which called the confidence field "the only
+instrument against" the shared-lineage risk immediately after stating that the
+risk "has no signature in the output". Both cannot be true.
+
+A same-lineage reader who reconstructs the co-author's reading without noticing
+there was a fork reports *no ambiguity, high confidence* — which the instrument
+files under "the specification was clear". Confidence bounds the ambiguity the
+implementer noticed and nothing else. It catches coin-flips; it cannot catch the
+fork nobody saw.
+
+The honest position: the shared-lineage risk is **unmeasured in this phase** and
+is discharged only by a later implementation from a different lineage. The
+confidence field stays, because noticed ambiguity is worth counting, and it is
+no longer offered as a defence against the risk it cannot see.
+
+### Separating the checker's repository does not stop it being the reference implementation
+
+This corrects the same entry and sharpens [The conformance criterion
+waits](#the-conformance-criterion-waits-until-an-implementer-has-asked-for-it),
+which already admitted the back door and then let the next unit claim it was
+closed.
+
+Location was never the operative variable. A checker commissioned by the
+catalog's owner, written by the owner's agent, named in the catalog's records
+before it exists, the only implementation in existence, and the thing any
+eventual criterion gets derived from **is** the reference implementation
+wherever it lives. Putting it in another repository buys one thing —
+discoverability by adjacency — and the record now says that instead of implying
+the problem is solved. Whether that repository is public is recorded with its
+name, because a public first mover is a stronger de facto reference than a
+private one.
+
+### A quota for objections manufactures the disagreement it counts
+
+This corrects [The second repository is private](#the-second-repository-is-private-and-it-tests-re-application-rather-than-generality),
+whose unit required that at least one objection be filed or the absence recorded
+as a finding.
+
+Two defects. The escape arm was satisfiable by writing a sentence, which is the
+shape this repository's own cut criterion exists to remove. And the requirement
+itself was justified by an inverted inference: the unit argued that a shared
+convention lineage raises the odds of an honestly clean run *and therefore*
+makes a clean run more suspicious. It makes it **less** informative. If honesty
+and looking-away predict the same observation, the observation distinguishes
+nothing, and the correct response is to weight the evidence down rather than to
+require a disagreement be produced.
+
+With one person as objector, audited owner, checker commissioner, and module
+author, a required objection would have been scripted by the plan that measures
+it — and [objections.md](../objections.md) makes cost the filter, so an objection
+filed to satisfy a done bullet has manufactured cost by construction. The quota
+is gone. What remains is the disposal rule: every finding fixed, waived in
+writing, or objected. That forces the channel exactly when a real disagreement
+exists and never otherwise.
+
+### Enumerating a private repository's record shapes was itself the leak
+
+The entry that established not naming the second repository went on to list four
+of its record shapes, and the unit repeated the list. Naming what a repository
+keeps records of describes it about as well as naming it does, so the rule was
+being stated and broken in the same breath.
+
+The enumeration is removed from both places — a redaction rather than a
+correction, marked where it was. Append-only exists so a belief that was held is
+not erased; it does not oblige this repository to keep publishing a third
+party's shape while arguing that it should not. What survives is what
+[M11](work/m11.md) needs: where that repository keeps something this catalog has
+no role for, the gap is recorded in the catalog's own vocabulary, as a row that
+names the missing module rather than the repository's structure.
+
+The review that found this also held that the surviving disclosures narrow the
+field to roughly one repository. For a reader who can see the owner's private
+repositories, yes. For an outside reader, who can enumerate the public ones and
+not the private ones, "some private repository of this owner's" is not an
+identification. The redaction stands on the first argument, not the second.
+
+### The phase edits the specification, and hiding that in three work units was the drift
+
+This corrects the "Not in this phase" list, which named no specification changes
+while three units forced them.
+
+[M8](work/m8.md) falsifies two sentences in the module contract the moment it
+lands: a module directory contains *exactly* the listed files, and `fixtures/`
+is a `satisfies/` tree, one `violates-<CHECK-ID>/` tree per check, and
+`expected.md`. Its schema identifier also has to be defined where the other two
+are, or it is a pin to nothing. [M10](work/m10.md) produces an unbounded number
+of fixture and obligation edits, one per ambiguity resolved that way.
+[M12](work/m12.md) adds either a fixture tree in a third shape or a check kind.
+
+A section that lists exclusions and omits the largest inclusion is worse than no
+section — it reads as a boundary while being a decoration. The edits are now
+listed as scope.
+
+**One further defect, corrected in the unit rather than here:** the expectation
+file was keyed by check id alone, which cannot express judgment entries, since
+those carry their own ids. The first checker's only conformance test would have
+been silent on the one output channel that keeps a mechanical run from looking
+complete.

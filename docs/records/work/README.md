@@ -18,9 +18,79 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M5](m5.md) | Adoption and the objection loop | M3 M4 | done |
 | [M6](m6.md) | Fixtures, and every check observed failing | M3 M4 | done |
 | [M7](m7.md) | StrucGu adopts, and 0.1.0 is tagged | M5 M6 | done |
+| [M8](m8.md) | Fixture expectations become machine-comparable | M6 | planned |
+| [M9](m9.md) | Conformance is defined narrowly, and stays self-asserted | M10 | deferred |
+| [M10](m10.md) | The first checker, written from the specification alone | M8 | planned |
+| [M11](m11.md) | The second repository adopts, and every finding is disposed of by the rule | M10 | planned |
+| [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | planned |
+| [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | planned |
 
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
+
+M8–M13 are **scoped and unstarted.** They are written here rather than in a plan
+document because this file is where scope lives, and a phase described anywhere
+else is a second home for status. `planned` means agreed and not begun;
+`deferred` means agreed to happen later than its number suggests. Neither has
+appeared in this table before, and neither means `done`.
+
+M10's edge to M8 is hard: an implementer with nothing mechanical to compare
+against produces a reading of the spec rather than a test of it. M9's edge to M10
+is the deferral, not a dependency of substance — and M13's edge to M9 exists
+because nothing else depended on it, which let a deferred unit drift past the
+release as a silent cut. M12's edge is hard for `F2` and an ordering preference
+for `F1`, which needs neither an implementation nor a second adopter.
+
+### Decisions this phase needed, and what came back
+
+Each was a scope question, and [triage.md](../triage.md) requires stopping and
+asking on those rather than deciding them inside a unit. All four were put to the
+owner on 2026-08-02 and answered. The reasoning is in
+[decisions.md](../decisions.md); the answers are here because they change what
+the units say.
+
+1. **A machine-readable expectation file ships under `modules/`,** beside the
+   prose it restates. [M8](m8.md).
+2. **The conformance document is deferred, not cut** — written after the first
+   implementation, from questions that were actually asked. [M9](m9.md).
+3. **Whippy writes the first checker**, in a fresh session, from the published
+   repository only, under a hard no-questions rule. The independence is partial
+   and [M10](m10.md) states in what way.
+4. **The second repository is chosen, is private, and is not named here.**
+   [M11](m11.md) tests re-application rather than generality, and says so before
+   it reports anything.
+
+### Not in this phase
+
+Named because a phase that says only what it includes will acquire the rest by
+drift.
+
+- No new module, and no growth of the base set. Both are major-version
+  arguments in their own right — see [SPEC.md](../../../SPEC.md) "Base and
+  prerequisites".
+- No check added on suspicion. Only [M12](m12.md)'s `F2`, and only if the
+  reasoning survives.
+- Nothing that runs in a consumer's CI, and no action, template, or bot that
+  files anything on anyone's behalf.
+
+### Specification edits are in scope, and this is the list
+
+The first version of this section listed no [SPEC.md](../../../SPEC.md) changes
+while three units forced them. That is the hidden scope this section exists to
+prevent, so the edits are named instead.
+
+- [M8](m8.md) — the module contract's file list, which currently says a module
+  directory contains *exactly* the files named and defines `fixtures/` without
+  an expectation data file. Plus the definition of that file's schema
+  identifier.
+- [M10](m10.md) — an unbounded number of fixture additions and obligation
+  rewordings, one per ambiguity resolved that way. Unbounded is the honest
+  number: the count is the unit's output and cannot be known in advance.
+- [M12](m12.md) — either a fixture tree in a third shape, or a new check kind,
+  depending on how `F2` closes.
+
+Anything beyond these is out of scope and belongs in
+[findings.md](../findings.md).
 
 ---
 
