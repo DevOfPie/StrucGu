@@ -2,7 +2,7 @@
 # module.md is normative. If the two disagree, that is a defect to report.
 schema: strucgu/module@1
 id: triage-rule
-version: 0.2.0
+version: 0.3.0
 title: Triage rule
 summary: >
   One document draws the line between what the work in flight requires and

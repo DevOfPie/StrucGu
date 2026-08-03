@@ -4,6 +4,33 @@ Newest first. Versions follow [semantic versioning](https://semver.org/spec/v2.0
 with bumps defined by what a previously clean adopter will newly see rather than
 by how much source changed. See [SPEC.md](../../SPEC.md).
 
+## 0.3.0 — 2026-08-03
+
+**What a previously clean adopter will newly see: nothing.** No check, no
+obligation, no role and no template changed. The addition is inside `fixtures/`.
+
+`fixtures/violates-FQ-06-reference-link/` is a second violating tree for
+`FQ-06`. Its only broken link is a reference-style one — `[label]` in the row,
+`[label]: archive/findings.md` at the foot of the file — so it pins that a
+reference link is a link at all. [SPEC.md](../../SPEC.md) says how a link
+resolves and never says what a link is, and a checker extracting inline links
+only reports `ok` on this tree while reproducing every other tree in the
+catalog. Reference links are commonest in exactly the documents this module
+describes, where one destination is cited many times.
+
+The tree is permitted by [SPEC.md](../../SPEC.md)'s relaxed `fixtures/` row: a
+check may now carry more than one violating tree.
+
+`FQ-04`'s prose said "Any one pattern matching is sufficient", which
+contradicts [SPEC.md](../../SPEC.md) — every listed pattern must match. The
+check carries a single alternation, so nothing behaves differently; the sentence
+generalised wrongly.
+
+[SPEC.md](../../SPEC.md) changed in the same release, in ways that change what a
+conformant checker outputs rather than what this module asks for. Those are
+contract changes and are versioned by the repository, not here — see the
+[root changelog](../../CHANGELOG.md).
+
 ## 0.2.0 — 2026-08-03
 
 **What a previously clean adopter will newly see: nothing.** No check, no

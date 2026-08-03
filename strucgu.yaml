@@ -51,12 +51,15 @@ modules:
     version: "0.1.0"
     adopted: 2026-07-31
     roles:
-      # Deliberately unmapped. No investigation here has outgrown a decision
-      # entry, so the obligation's condition is unmet and every IN-* check
-      # reports skip rather than ok. This is the only place in the repository
-      # where the conditional path and the skip path are exercised, and it is
-      # why the role is declared rather than the module left unadopted.
-      investigations: ~
+      # Mapped in M10. It was deliberately unmapped from 0.1.0 until then — no
+      # investigation had outgrown a decision entry, so the obligation's
+      # condition was unmet and every IN-* check reported skip. The first
+      # checker's ambiguity log is the investigation that outgrew one, and the
+      # four IN-* checks stop skipping because a real record now exists rather
+      # than because one was invented to exercise them. What that costs the
+      # self-walk — the skip path is now exercised nowhere in this repository —
+      # is M13's to record.
+      investigations: docs/records/investigations/
 
 # No exclusions. Every path this repository owns is intended to be read, and the
 # fixture trees under modules/*/fixtures/ are not inside any mapped role, so

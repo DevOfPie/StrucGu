@@ -4,6 +4,26 @@ Newest first. Versions follow [semantic versioning](https://semver.org/spec/v2.0
 with bumps defined by what a previously clean adopter will newly see rather than
 by how much source changed. See [SPEC.md](../../SPEC.md).
 
+## 0.2.1 — 2026-08-03
+
+**What a previously clean adopter will newly see: nothing.** No check, no
+obligation, no role, no template and no fixture changed.
+
+[module.md](module.md) said the role was deliberately unmapped in this
+repository's own [strucgu.yaml](../../strucgu.yaml) and that every check here
+reported `skip`. That stopped being true: an investigation outgrew a decision
+entry, the role is mapped, and the four `IN-*` checks report against a real
+record. The paragraph now says so, and says what the change costs — this
+repository no longer exercises the `skip` path anywhere.
+
+A statement about the catalog's own adoption is the only thing that moved, which
+is why this is a patch.
+
+[SPEC.md](../../SPEC.md) changed in the same release, in ways that change what a
+conformant checker outputs rather than what this module asks for. Those are
+contract changes and are versioned by the repository, not here — see the
+[root changelog](../../CHANGELOG.md).
+
 ## 0.2.0 — 2026-08-03
 
 **What a previously clean adopter will newly see: nothing.** No check, no

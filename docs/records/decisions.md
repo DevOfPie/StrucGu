@@ -55,6 +55,12 @@ the file. Append a row when you append an entry.
 | [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
 | [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
 | [The first checker is DevOfPie/strucgu-check, and it is public](#the-first-checker-is-devofpiestrucgu-check-and-it-is-public) | Names M10's repository before M10 starts |
+| [The fixtures were wrong about `DL-03`, and the specification stays as it is](#the-fixtures-were-wrong-about-dl-03-and-the-specification-stays-as-it-is) | Corrects five fixture expectations M6 shipped |
+| [A check may carry more than one violating fixture tree](#a-check-may-carry-more-than-one-violating-fixture-tree) | The `fixtures/` shape rule, relaxed |
+| [A transcription defect is repaired; the rule it exposed is left open](#a-transcription-defect-is-repaired-the-rule-it-exposed-is-left-open) | `WU-04`, and what a check reports while its halves disagree |
+| [The ambiguity log is the investigation that outgrew a decision entry](#the-ambiguity-log-is-the-investigation-that-outgrew-a-decision-entry) | Why the `investigations` role is mapped now |
+| [Four modules move a minor version and the fifth waits for a decision](#four-modules-move-a-minor-version-and-the-fifth-waits-for-a-decision) | Bumps for M10, and the one that is not the worker's to take |
+| [Repairing a check's transcription is not adding a check](#repairing-a-checks-transcription-is-not-adding-a-check) | Answers the entry above, and bumps `work-units` |
 
 ---
 
@@ -898,3 +904,230 @@ look identical, and only the ambiguity log would have differed.
 This is recorded rather than left in conversation because the rule it applies is
 attested and not verifiable. A kept restriction and a broken one leave the same
 trace in the checker, so the trace has to be here instead.
+
+---
+
+## 2026-08-03 — M10, the first checker and what it could not determine
+
+*The checker itself is [DevOfPie/strucgu-check](https://github.com/DevOfPie/strucgu-check),
+built in a separate session under the input restriction this log records above.
+Its 18 ambiguity records and the write-up drawn from them are filed here as
+[investigations/0001](investigations/0001-what-the-specification-does-not-determine.md).
+These entries are the catalog's answers to what that log found, and only the
+answers that are not obvious from the diff.*
+
+### The fixtures were wrong about `DL-03`, and the specification stays as it is
+
+The checker's [A03](https://github.com/DevOfPie/strucgu-check/blob/main/ambiguities/A03-history-deletions-with-no-history.md)
+found the sharpest contradiction in the catalog. Five `decision-log` fixture
+trees — `satisfies`, `violates-DL-02`, `violates-DL-04`, `violates-DL-05`,
+`violates-DL-06` — expected `DL-03: ok`. None of them is a git repository, so a
+checker running `DL-03` there reads no history at all. [SPEC.md](../../SPEC.md)
+and [auditing.md](../auditing.md) say four times between them that folding `skip`
+into `ok` is the failure that matters most, because it converts "I did not look"
+into "I looked and it was fine". The fixtures required exactly that fold, and
+`expected.yaml` is the file an implementer is told to compare against.
+
+The implementer took the fixtures, because reproducing them was the brief, and
+recorded that they believed the prose had the better of it. They were right. The
+five rows are corrected to `DL-03: skip` and the specification is not touched.
+
+The choice is worth recording because the cheaper repair was available and was
+proposed: one sentence in `SPEC.md`'s `history_deletions` row saying that a
+target with no readable history reports `ok`. That sentence would have made
+every tree pass and would have made `DL-03` report `ok` on every repository that
+has never committed, every shallow clone, every export and every extracted
+tarball — indistinguishably from a repository whose log has genuinely never been
+edited. `DL-03` is the only behaviour check behind `decision-log-append-only`,
+and `DL-04`, the declaration check, names `DL-03` as the thing that tests whether
+its declaration is true. A `DL-03` that passes without looking makes `DL-04`
+decoration, and [SPEC.md](../../SPEC.md) says decoration should be cut.
+
+**What this admits.** The fixtures shipped in [M6](work/m6.md) and were reviewed
+in [M8](work/m8.md) when they became data, and the contradiction survived both.
+Neither pass caught it because both were performed by the party that wrote the
+rule it violates. It took an implementation to find, which is what
+[M10](work/m10.md) was for and is the first concrete return on it.
+
+**What is deliberately not written down.** `SPEC.md` still does not say, in the
+`history_deletions` row, what the check reports when there is no history. The
+general rule already covers it — a check whose target cannot be read reports
+`skip` — and the five fixtures now pin it. Adding a special case for one check to
+restate a rule that already applies is how a specification acquires the
+redundancy that later drifts.
+
+### A check may carry more than one violating fixture tree
+
+`fixtures/` used to be specified as "one `violates-<CHECK-ID>/` tree per check",
+in a table introduced as listing exactly what each row names. It is now "at least
+one", with further trees permitted as `violates-<CHECK-ID>-<suffix>/`.
+
+The constraint had a consequence nobody had needed until an implementation
+existed: **a check with more than one boundary worth pinning could not have them
+pinned.** One tree demonstrates one way for a check to fail, and three of the
+rules this catalog argues hardest for need a tree in which the check *passes* and
+a wrong implementation reports a finding. `satisfies/` cannot hold them either,
+because it has to satisfy everything at once and these need contradictory
+content.
+
+This was taken because the alternative was measured rather than imagined. The
+checker's
+[mutation harness](https://github.com/DevOfPie/strucgu-check/blob/main/conformance/mutations.py)
+breaks it nine ways, one stated rule at a time, and re-runs every tree. Against
+the catalog as it stood, five breakages went unnoticed — a suite reporting a
+clean run from a checker that is measurably wrong — and two of the five were the
+matching rules `SPEC.md` gives their own paragraphs and a
+learned-the-hard-way provenance: code is not scanned for links, and runs of
+spaces are not collapsed when slugging an anchor. Both were written as warnings.
+Neither had a tree behind it. With the trees this relaxation allows, no breakage
+goes unnoticed.
+
+That correlation is the finding, not the fixtures: **a rule a specification
+bothers to argue for is a rule it learned by being wrong, and those are exactly
+the ones that were argued instead of demonstrated.**
+
+The naming convention is left alone deliberately. A tree called
+`violates-<CHECK-ID>` asserts that the tree violates that check, and the trees
+added here are the opposite — a correct checker reports nothing. The implementer
+proposed and then declined a `pins-<CHECK-ID>-<what>/` category on the grounds
+that settling a naming convention by whatever an implementer happened to call a
+directory is how an implementation's accidents become a specification. That is
+right, and the better name is a decision for whoever needs the third tree.
+
+### A transcription defect is repaired; the rule it exposed is left open
+
+`modules/work-units/module.md` carried `WU-04`'s pattern as
+`&lt;[A-Za-z][A-Za-z ]*&gt;` where [module.yaml](../../modules/work-units/module.yaml)
+carries `<[A-Za-z][A-Za-z ]*>`. The escaped form matches a literal `&lt;`, and
+cannot match `<title>` — which is what `violates-WU-04` exists to be caught by.
+The two halves render identically on GitHub, which is why it survived from M3 to
+here; it was found with `od -c`.
+
+The prose half is repaired. That is forced: the module's own
+[CHANGELOG](../../modules/work-units/CHANGELOG.md) and
+[README](../../modules/work-units/README.md) have told adopters since 0.1.0 that
+`WU-04` matches any angle-bracketed literal, so the escaped pattern was never the
+shipped contract — it was a corrupted rendering of it.
+
+The general rule the implementer proposed alongside is **not** taken. It would
+have `SPEC.md` say what state a check reports while its two halves disagree:
+evaluate under `module.md`, emit the disagreement, and report `skip` where
+`module.md`'s form cannot be evaluated at all. It is a real hole — "report it, do
+not pick" currently leaves a check with no state to be in, and a check must
+report one of five — but the wording changes what `WU-04` reports on
+`violates-WU-04` from `finding` to `skip`, which changes an expectation, which is
+not a wording fix. It stays open rather than being decided inside a unit that was
+not scoped for it.
+
+### The ambiguity log is the investigation that outgrew a decision entry
+
+[strucgu.yaml](../../strucgu.yaml) maps `investigations` at
+`docs/records/investigations/`. It was `~` from 0.1.0 until now, and
+[M10](work/m10.md) required that it stop being `~` **because a real
+investigation exists, not because one was invented to exercise the checks.**
+
+It qualifies on the module's own test: eighteen ambiguity records, a mutation
+experiment with nine deliberate bugs, and two counts that only mean anything
+stated together — 33 trees at 305 rows with five breakages unnoticed, against 36
+trees at 337 rows with none. None of that fits in an entry here, and squeezing it
+in would leave the conclusion with nothing a later reader can re-examine, which is
+the failure the `investigations` module exists to name.
+
+**What it costs.** The four `IN-*` checks were the only exercise the `skip` path
+and the conditional obligation got anywhere in this repository, and
+[self-walk.md](self-walk.md) describes them as the point of that walk. They now
+report `ok`. The repository has lost its only live demonstration that an unmapped
+role produces `skip` rather than `ok` — the single behaviour it insists on most
+loudly. That is a real loss and it is [M13](work/m13.md)'s to record; the
+[self-walk](self-walk.md) is a dated artifact of 0.1.0 and is left as it was
+rather than rewritten to match a later state.
+
+### Four modules move a minor version and the fifth waits for a decision
+
+`decision-log`, `findings-queue` and `triage-rule` move to `0.3.0`;
+`investigations` moves to `0.2.1`. None of the three checks or obligations
+changed in any of them, and no adopter newly sees a finding. The bumps are for
+fixture content that pins a boundary the fixtures did not pin before, which is
+the same reading [M8](work/m8.md) took when `expected.yaml` was added — a
+substantive change that a clean adopter never sees is a minor, and wording alone
+is a patch. `investigations` gets a patch because the only thing that changed is
+a paragraph in its `module.md` describing this repository's own adoption, which
+stopped being true when the role was mapped.
+
+`work-units` is not bumped here. Its version and its changelog entry are held
+open on a question that went to the owner unanswered. Repairing
+`WU-04`'s escaped pattern is either a patch — the shipped contract was always the
+unescaped one and the file is being brought to it — or a major, because a checker
+that followed the normative half literally reported nothing for that check and
+now reports findings against records that were clean. The inherited rule is
+absolute in one direction: a check added to a shipped module is a major version,
+never a minor. Whether repairing an inert one counts as adding it is not a
+question a worker should answer by picking, and in `0.x` a major has a second
+unsettled meaning — nothing here says whether it means `1.0.0` or collapses into
+the minor digit, and `1.0.0` would assert a stability
+[README.md](../../README.md) explicitly disclaims.
+
+### Repairing a check's transcription is not adding a check
+
+`work-units` moves to `0.2.1`. A **patch**, for a change that makes `WU-04` fire
+where it did not fire before.
+
+That sentence looks like the versioning rule being bent, which is why this entry
+exists. [SPEC.md](../../SPEC.md) defines a bump by what a previously clean
+adopter will newly see, and the rule every unit inherits is absolute in one
+direction: **a check added to a shipped module is a major version, never a
+minor.** A checker that read the normative half of `work-units` literally
+reported `WU-04: ok` on records holding `<title>` and will now report findings on
+them. Under a mechanical reading of the bump rule that is a major.
+
+**The shipped contract never moved; only its transcription did.** That is the
+argument, and it is checkable rather than a matter of taste. `WU-04` shipped in
+`0.1.0` with a violating fixture built to be caught by the unescaped pattern.
+`modules/work-units/fixtures/expected.yaml` has said `violates-WU-04` produces
+`WU-04: finding` since [M8](work/m8.md) made expectations data — third-party
+evidence, written before anyone knew the halves disagreed, of which pattern was
+meant. [module.yaml](../../modules/work-units/module.yaml) has carried the
+unescaped form since [M3](work/m3.md). And the module's own
+[README](../../modules/work-units/README.md) and `0.1.0`
+[changelog](../../modules/work-units/CHANGELOG.md) both told adopters from the
+first release that `WU-04` "has the highest false-positive rate in the catalog —
+any angle-bracketed literal in a record matches its placeholder pattern", which
+describes the unescaped pattern and no other, and recommend turning the check off
+rather than rewording records around it.
+
+Four independent artifacts describe one check. One of them — the prose — went
+through a markdown-escaping step at some point between being written and being
+committed, and came out matching a literal `&lt;`. Nothing decided that; it
+happened. A version bump announces a change in what this repository asks of an
+adopter, and this repository has asked the same thing since `0.1.0`.
+
+**The counter-argument is real and this entry does not dispose of it.**
+[SPEC.md](../../SPEC.md) calls `module.md` normative and says so in the same
+paragraph that tells a checker `module.md` wins. An implementer who followed that
+instruction was doing exactly what they were told, and their adopters see new
+findings arrive under a patch bump — which is enforcement-by-release through
+precisely the channel
+[a new check never ships in a minor version](#a-new-check-never-ships-in-a-minor-version)
+was written to close. That cost is not argued away. It is accepted, on the
+grounds that the alternative — a major version for a typo — buys the surprised
+adopter nothing they cannot get from the `0.1.0` changelog they already have,
+and spends the catalog's only major bump on a defect rather than a decision.
+Anyone it surprises has a genuine objection and
+[objections.md](../objections.md) is where it goes.
+
+**What would make this reasoning wrong.** If the two halves had stated
+*materially different* obligations rather than the same one twice, `module.md`
+would win on the merits and changing it would be a real change to what the module
+asks. The test is whether the disagreement is about intent or about
+transcription, and it is not always as easy to answer as it was here — four
+corroborating artifacts is a luxury. Where it cannot be answered, the answer is
+major.
+
+**What is deliberately left undecided.** Whether a MAJOR bump below `1.0.0` means
+`1.0.0` or collapses into the minor digit. Nothing in this repository says, and
+this entry did not need to know: the bump is a patch. Deciding the general rule
+off the one instance that did not require it is how a convention gets fixed by
+whatever the first case happened to be, which is the same failure the
+[fixture naming](#a-check-may-carry-more-than-one-violating-fixture-tree)
+discussion above declined to commit. It stays open until something actually needs
+a major.

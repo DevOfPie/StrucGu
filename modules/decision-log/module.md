@@ -123,7 +123,9 @@ history before `effective_from`.
 
 ### `DL-04` · `pattern_present` · declaration
 
-**Binds** `decision_log`. Any one pattern matching is sufficient.
+**Binds** `decision_log`. One pattern, alternating over the accepted
+phrasings — [SPEC.md](../../SPEC.md) requires every listed pattern to match, and
+there is one.
 
 ```
 append[ -]only|never edit an entry|not edited|corrects an earlier

@@ -69,7 +69,10 @@ and `finding` is hiding two states.
 
 Could not run: no `strucgu.yaml`, an unparseable one, a version pin that is not
 exact, a module directory that is not there, an adopted module with `forms` and
-no `form` declared.
+no `form` declared, or an adopted `history_deletions` check with no
+`effective_from` — the bound is required, because without it the first run on a
+mature repository produces the four-figure output that gets an audit deleted on
+day one.
 
 Findings are output, not failure. This is not a soft default that people are
 expected to override — it is the recommended behaviour, and a flag to gate on
@@ -99,6 +102,12 @@ day one is deleted on day one.
 `add`, `commit`, `update-index`. `git checkout` used to make an operation atomic
 is the single command that has already destroyed uncommitted work in the
 repository this catalog came from, twice.
+
+**Read history from the audited root, not from whatever encloses it.** Git finds
+a repository by walking up; a checker must not. An adoption record vendored
+inside a monorepo, or a submodule checked out in place, is otherwise audited
+against history its owner does not control. Where the audited root is not itself
+a repository root there is no history to read.
 
 **File anything anywhere.** See [objections](#objections-are-drafted-not-filed).
 

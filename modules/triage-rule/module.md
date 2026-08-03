@@ -112,7 +112,9 @@ document to satisfy a check.
 
 ### `TR-04` · `pattern_present` · declaration
 
-**Binds** `triage_doc`. Any one pattern matching is sufficient.
+**Binds** `triage_doc`. One pattern, alternating over the accepted phrasings —
+[SPEC.md](../../SPEC.md) requires every listed pattern to match, and there is
+one.
 
 ```
 conflict|contradict|disagree|precedence|takes precedence|wins on

@@ -70,6 +70,17 @@ checks:
     FQ-05: ok
     FQ-06: finding
 
+  # Pins that a reference-style link is a link. The row points at
+  # archive/findings.md through a [label]: definition, and it is not there. A
+  # checker extracting inline links only reports ok.
+  violates-FQ-06-reference-link:
+    FQ-01: ok
+    FQ-02: ok
+    FQ-03: ok
+    FQ-04: ok
+    FQ-05: ok
+    FQ-06: finding
+
 judgment:
   findings.evidence-is-observed: judgment
   findings.severity-argues: judgment

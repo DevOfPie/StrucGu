@@ -18,6 +18,13 @@ documentation, and are excluded from any repository-wide link check.
 No findings. `TR-01` through `TR-05` all `ok`. Four `judgment` lines still
 emitted — a mechanical run is never complete.
 
+**`TR-05` staying `ok` is load-bearing.** The document ends with a fenced example
+containing a link to `scope.md`, which is not in this tree. Code is not scanned
+for links, so a correct checker does not see it. A checker that scans fences
+reports `TR-05: finding` here — which is the failure
+[SPEC.md](../../../SPEC.md) records having hit twice, now with a tree behind
+it.
+
 ## `violates-TR-01/`
 
 `triage.md` is not present, though the adoption record maps it.

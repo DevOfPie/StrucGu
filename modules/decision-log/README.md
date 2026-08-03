@@ -1,6 +1,6 @@
 # decision-log
 
-**base** · 0.2.0 · requires nothing
+**base** · 0.3.0 · requires nothing
 
 Why choices were made, recorded as they are made. Dated, append-only, indexed.
 A later entry corrects an earlier one; the earlier text stays where it is.

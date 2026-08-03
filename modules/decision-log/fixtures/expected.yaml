@@ -10,10 +10,15 @@ schema: strucgu/expected@1
 # it, so the value does not vary by tree.
 
 checks:
+  # DL-03 reports skip on every tree here but violates-DL-03: none of them is a
+  # git repository, so no history is readable and nothing was observed. Folding
+  # that into ok would convert "I did not look" into "I looked and it was fine",
+  # which SPEC.md "Audit output" and docs/auditing.md both name as the failure
+  # that matters most.
   satisfies:
     DL-01: ok
     DL-02: ok
-    DL-03: ok
+    DL-03: skip
     DL-04: ok
     DL-05: ok
     DL-06: ok
@@ -29,7 +34,7 @@ checks:
   violates-DL-02:
     DL-01: ok
     DL-02: finding
-    DL-03: ok
+    DL-03: skip
     DL-04: ok
     DL-05: ok
     DL-06: ok
@@ -48,7 +53,7 @@ checks:
   violates-DL-04:
     DL-01: ok
     DL-02: ok
-    DL-03: ok
+    DL-03: skip
     DL-04: finding
     DL-05: ok
     DL-06: ok
@@ -56,7 +61,7 @@ checks:
   violates-DL-05:
     DL-01: ok
     DL-02: ok
-    DL-03: ok
+    DL-03: skip
     DL-04: ok
     DL-05: finding
     DL-06: ok
@@ -64,7 +69,7 @@ checks:
   violates-DL-06:
     DL-01: ok
     DL-02: ok
-    DL-03: ok
+    DL-03: skip
     DL-04: ok
     DL-05: ok
     DL-06: finding

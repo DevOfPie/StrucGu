@@ -82,6 +82,30 @@ checks:
     WU-06: ok
     WU-07: finding
 
+  # Pins that a dir-bound check reports one state for the whole role, finding if
+  # ANY file fails. work/ holds two records; only m2.md is missing its risks
+  # section. A checker reporting ok because m1.md passes has the wrong rule.
+  violates-WU-03-second-record:
+    WU-01: ok
+    WU-02: ok
+    WU-03: finding
+    WU-04: ok
+    WU-05: ok
+    WU-06: ok
+    WU-07: ok
+
+  # Pins that pattern_present requires EVERY listed pattern. The template asks
+  # for dependencies and not for what the unit discharges, so one of WU-06's two
+  # patterns matches. A checker satisfied by any one reports ok.
+  violates-WU-06-one-pattern-only:
+    WU-01: ok
+    WU-02: ok
+    WU-03: ok
+    WU-04: ok
+    WU-05: ok
+    WU-06: finding
+    WU-07: ok
+
 judgment:
   work-units.done-is-falsifiable: judgment
   work-units.rules-not-repeated: judgment
