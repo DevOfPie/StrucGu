@@ -9,3 +9,7 @@ Thumbs.db
 .vscode/
 *.swp
 *~
+
+# The build loop's working note. Untracked so an interruption costs effort and
+# not knowledge; it is working state, never a record. Records live in docs/.
+.current-task.md
