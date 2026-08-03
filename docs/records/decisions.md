@@ -54,6 +54,7 @@ the file. Append a row when you append an entry.
 | [The phase edits the specification, and hiding that in three work units was the drift](#the-phase-edits-the-specification-and-hiding-that-in-three-work-units-was-the-drift) | Corrects "Not in this phase" |
 | [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
 | [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
+| [The first checker is DevOfPie/strucgu-check, and it is public](#the-first-checker-is-devofpiestrucgu-check-and-it-is-public) | Names M10's repository before M10 starts |
 
 ---
 
@@ -837,3 +838,63 @@ propagation mechanism working rather than a defect.
 
 This is recorded because the gap reads as an oversight. Anyone tidying it away
 is undoing a decision, not fixing a slip.
+
+---
+
+## 2026-08-03 — naming M10's repository, before M10 starts
+
+*No work unit was under way. This entry answers a precondition
+[M10](work/m10.md) states for itself, and is written before the unit is
+started rather than inside it.*
+
+### The first checker is DevOfPie/strucgu-check, and it is public
+
+[M10](work/m10.md) requires its repository "named before the unit starts, and
+whether that repository is public is recorded with the name". The name is
+`DevOfPie/strucgu-check` and it is public. It does not exist yet; naming it is
+what M10 asked for, not creating it.
+
+**Public**, because M10 already says this will be the only implementation in
+existence and that the second implementer will find it and read it. A private
+reference implementation costs the discoverability that separating the
+repository was meant to preserve, and buys only room to get the ambiguity log
+wrong unobserved — which is the log whose whole value is that it was written
+before the resolutions were.
+
+**Under `DevOfPie` rather than the implementer's own account**, which is the
+option that costs the most and was chosen anyway. M10's bullet on separation is
+careful: location was never the operative variable, primacy is, and separating
+the repository "buys discoverability-by-adjacency and nothing more". Putting it
+in the catalog owner's organisation spends even that. An implementation sitting
+beside the catalog reads as the reference implementation by adjacency, and the
+record's answer is not to deny it — the bullet already refuses to claim the
+problem away — but to stop pretending the org boundary was ever doing work the
+separate repository was not. The alternative was an account boundary that looks
+like independence while the commissioning, the naming, and the primacy all stay
+exactly where they were.
+
+What this does *not* buy is any part of the independence M10 is actually after.
+That is bought by the input restriction — the normative surface only,
+`docs/records/` excluded, this file included — and by nothing about where the
+repository sits.
+
+### The orchestrator that landed M8 is disqualified from implementing M10
+
+M10 excludes `docs/records/` from the implementer's inputs, "this file
+included", because an implementer who has read the scoring function produces the
+shape it rewards. The session that validated and accepted [M8](work/m8.md) has
+read this log, [self-walk.md](self-walk.md), [findings.md](findings.md) and
+[m10.md](work/m10.md) itself. It cannot brief an implementer without leaking
+exactly what the exclusion exists to prevent, so it does not: M10 opens in a
+fresh session whose first read is the published repository.
+
+The cost is a session boundary and the re-derivation of context that already
+existed, and that cost is the point rather than a side effect. The cheaper path
+— briefing a worker from this session — was rejected because its failure would
+be invisible. M10 says so in its own risks: a checker built with help still
+passes the fixtures, so the output of the compromised run and the honest one
+look identical, and only the ambiguity log would have differed.
+
+This is recorded rather than left in conversation because the rule it applies is
+attested and not verifiable. A kept restriction and a broken one leave the same
+trace in the checker, so the trace has to be here instead.
