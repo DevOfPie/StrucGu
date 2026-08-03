@@ -19,6 +19,56 @@ point rather than the exception.
 
 ## [Unreleased]
 
+### A second repository adopted, and the audit is published redacted
+
+A repository other than this one now carries a `strucgu.yaml`. It is private and
+is not named here, so **the record of that audit is redacted** — every path,
+filename and quoted line removed — and
+[second-repository-walk.md](docs/records/second-repository-walk.md) says so in its
+title rather than reading as though its evidence were open. A reader cannot verify
+it. That is a knowing deviation from this repository's own release gate, argued in
+[decisions.md](docs/records/decisions.md#a-redacted-audit-is-weaker-evidence-than-an-open-one-and-the-release-gate-is-deviated-from-knowingly).
+
+**Nothing about the modules changed, and no version moved.** Adoption elsewhere
+is not a release event here: this repository keeps no registry of who adopts
+anything, and the walk is recorded because it produced findings about *this*
+catalog, not because someone used it.
+
+What it produced, and what it is worth:
+
+- **Four findings against that repository.** Two fixed — a process document that
+  named its deferral destination without linking to it, which is the same defect
+  this catalog was extracted after finding, and a queue that did not state its
+  rows are not commitments. Two left standing under an objection.
+- **The objection channel's first real use, and it was declined.** Two
+  obligations in [findings-queue](modules/findings-queue/) assume a queue whose
+  rows persist and are annotated in place. The objection argued that a queue whose
+  rows are consumed by a mandatory triage step serves both purposes otherwise, and
+  asked for a `form`. Declined: one instance is thin evidence for a shape meant to
+  be legitimately common rather than legitimately local, and this phase's list of
+  permitted specification edits does not include this module. **No module
+  changed.** What that costs — an adopter who files carefully and gets nothing
+  back learns not to file — is stated rather than offset, in
+  [decisions.md](docs/records/decisions.md#the-first-objection-is-declined-and-what-that-costs-the-channel-is-not-argued-away).
+- **The deviation mechanism is no longer untested by use.** `0.1.0` shipped it
+  specified across three documents and this changelog has called it untested ever
+  since, because this repository has no genuine deviation and one was not invented
+  to exercise it. The decline produced two real ones elsewhere, and both checks
+  now report `waived` with the reason echoed on every run and an expiry. The full
+  path — finding, objection, decline, deviation — had never been walked end to
+  end before.
+- **Six new rows in [findings.md](docs/records/findings.md)**, `F8` through `F13`.
+  Four are gaps in this catalog rather than in that repository: two name a module
+  this catalog is missing, two are out of scope and say why. The sharpest is
+  `F9` — nothing here can reach a repository's scope contract unless that
+  repository also has units of work, a coupling this repository cannot see in
+  itself because one file plays both parts.
+- **A clean map was the expected outcome.** That repository imported this
+  catalog's source conventions deliberately. This tests whether an extraction
+  survives re-application inside one lineage; it says nothing about whether these
+  conventions generalise, and no objection would have been the uninformative case
+  rather than the reassuring one.
+
 ### The contract
 
 [SPEC.md](SPEC.md) defines a third schema identifier, `strucgu/expected@1`, and

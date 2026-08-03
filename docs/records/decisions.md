@@ -61,6 +61,12 @@ the file. Append a row when you append an entry.
 | [The ambiguity log is the investigation that outgrew a decision entry](#the-ambiguity-log-is-the-investigation-that-outgrew-a-decision-entry) | Why the `investigations` role is mapped now |
 | [Four modules move a minor version and the fifth waits for a decision](#four-modules-move-a-minor-version-and-the-fifth-waits-for-a-decision) | Bumps for M10, and the one that is not the worker's to take |
 | [Repairing a check's transcription is not adding a check](#repairing-a-checks-transcription-is-not-adding-a-check) | Answers the entry above, and bumps `work-units` |
+| [Declining a module is a stronger answer than mapping its roles to nothing](#declining-a-module-is-a-stronger-answer-than-mapping-its-roles-to-nothing) | Corrects what `adopting.md` recommends |
+| [The second repository's intake file is its findings queue, and mapping it elsewhere would have hidden the answer](#the-second-repositorys-intake-file-is-its-findings-queue-and-mapping-it-elsewhere-would-have-hidden-the-answer) | The mapping M11 turns on |
+| [An objection was filed rather than a deviation recorded, because a waiver claims a reason that is not settled](#an-objection-was-filed-rather-than-a-deviation-recorded-because-a-waiver-claims-a-reason-that-is-not-settled) | The objection channel's first real use |
+| [The catalog cannot reach a scope contract unless a repository has units of work](#the-catalog-cannot-reach-a-scope-contract-unless-a-repository-has-units-of-work) | M11's more valuable half |
+| [A redacted audit is weaker evidence than an open one, and the release gate is deviated from knowingly](#a-redacted-audit-is-weaker-evidence-than-an-open-one-and-the-release-gate-is-deviated-from-knowingly) | What the walk record is worth |
+| [The first objection is declined, and what that costs the channel is not argued away](#the-first-objection-is-declined-and-what-that-costs-the-channel-is-not-argued-away) | Disposes of M11's objection, and what a decline teaches |
 
 ---
 
@@ -1131,3 +1137,217 @@ whatever the first case happened to be, which is the same failure the
 [fixture naming](#a-check-may-carry-more-than-one-violating-fixture-tree)
 discussion above declined to commit. It stays open until something actually needs
 a major.
+
+---
+
+## 2026-08-03 — M11, the second repository adopts
+
+### Declining a module is a stronger answer than mapping its roles to nothing
+
+The second repository adopted the three base modules and declined both optional
+ones outright, rather than adopting them with `~` roles. [adopting.md](../adopting.md)
+recommends the second shape — "leave roles unmapped rather than inventing files"
+— and it is the wrong recommendation for a repository the module does not apply
+to at all.
+
+An adoption is a claim that a module applies. A module adopted with every role
+unmapped makes that claim and then reports `skip` on every check, which reads as
+*applies, not got round to it yet*. Declining says *does not apply*, which is
+what was true in both cases: one module asks for records of work that comes in
+units, and that repository's records of intent describe work nobody has committed
+to; the other asks for an investigation that outgrew a decision entry, and that
+repository states the opposite position deliberately in its own scope contract.
+[SPEC.md](../../SPEC.md) already supports this — adoption is "voluntary,
+revocable, never inferred" and a partial adoption reports nothing — so nothing
+changes except which shape gets recommended for which case.
+
+`~` is still right where a module applies and a role is genuinely absent. The
+distinction is whether the module's `applies_when` is met, and that is exactly
+the question `applies_when` and `not_for` exist to make a person answer at
+adoption time.
+
+**What this costs.** The run produced no `skip` at all, in either module or
+anywhere else. Combined with this repository's own record — which lost its last
+`skip` in [M10](work/m10.md) — the catalog's most important escape hatch now has
+no live demonstration in any committed output. [M13](work/m13.md) reports that.
+
+### The second repository's intake file is its findings queue, and mapping it elsewhere would have hidden the answer
+
+That repository's process document sends anything out of scope of the work in
+flight to one file. That file is therefore its findings destination, and
+`findings` was mapped to it — which produced three findings on the first run,
+two of which are still standing.
+
+The alternative was to leave `findings` unmapped on the grounds that the file
+holds a different kind of thing from the one `findings-queue` was extracted
+around. That would have reported `skip` for six checks and `skip` for `TR-03`,
+and a `skip` means *I could not tell*. It was tellable. Choosing the mapping that
+produces no findings, over the mapping that matches what the repository's own
+rule says, is the failure [work/m11.md](work/m11.md) names in its Risks section —
+an audit performed to pass — and it would have been invisible in the output,
+because a clean run and a run that looked away are the same document.
+
+The counter-argument is real and is recorded rather than answered: if the mapping
+is wrong, the two standing findings are artifacts of the mapping and not
+information about anything. The objection below is the mechanism that settles
+which, and it carries the counter-argument in its own body.
+
+### An objection was filed rather than a deviation recorded, because a waiver claims a reason that is not settled
+
+Two checks report findings against that repository's queue: it has no evidence
+column and no review-state column. Both were left standing.
+
+[work/m11.md](work/m11.md) permits three disposals — fixed, waived with a reason
+in that repository's own adoption record, or filed as an objection. A waiver was
+available and was not taken. A deviation reports the check as `waived` with its
+reason echoed every run, and the reason on offer is that the obligations are
+wrong about queues of this shape — which is not a deviation's kind of reason. A
+deviation says *this is genuinely local to us*. This claim is that a module
+assumes a queue whose rows persist, and that a queue whose rows are consumed by a
+mandatory triage step serves both obligations' purposes by a mechanism no check
+can see. That is an argument about the module, and [objections.md](../objections.md)
+is where an argument about the module goes.
+
+**No quota produced this.** [A quota for objections manufactures the
+disagreement it counts](#a-quota-for-objections-manufactures-the-disagreement-it-counts)
+removed the requirement that one be filed, and the cost field is what filtered
+this one: complying puts a decision back into a capture step that repository's
+first principle requires to cost nothing, and duplicates a state that already
+lives in the record its triage produces. Had the cost been "we would rather not",
+the answer would have been a deviation and this entry would not exist.
+
+**Its outcome is not this unit's to take.** Three of the four outcomes in
+[objections.md](../objections.md) change a shipped module's version, and all four
+are the owner's. The objection stands undisposed, both checks report `finding`
+every run until it is disposed of, and that is the honest state rather than a
+gap in the record.
+
+### The catalog cannot reach a scope contract unless a repository has units of work
+
+The more valuable half of this unit was never the findings. It is the record
+shapes that repository keeps which this catalog has no role for, and four are
+recorded in [findings.md](findings.md) as `F9` through `F12` — two of them a
+module this catalog is missing, two of them out of scope, each answered in the
+catalog's own vocabulary rather than by describing that repository.
+
+`F9` is the one worth naming here. The audit could reach that repository's
+process document, its rationale and its deferral destination, and could not reach
+its scope contract at all — the document stating what is true and what is in
+scope for the project. The only role that comes near it is `work-units`'
+`unit_index`, which binds the scope contract to a repository having units of
+work. That repository has none, declined the module, and its most load-bearing
+record is invisible to every check in the catalog.
+
+This repository could not have found that by looking at itself.
+[work/README.md](work/README.md) is both its scope contract and its unit index,
+so the coupling has never cost it anything, and a self-walk cannot see a coupling
+it satisfies by coincidence. That is what a second adopter is for, and it is a
+better argument for the whole exercise than the check results are.
+
+**Nothing becomes a module in this phase.** `F9` and `F10` are rows, and closing
+either is a major-version argument in its own right — see
+[work/README.md](work/README.md) "Not in this phase".
+
+### A redacted audit is weaker evidence than an open one, and the release gate is deviated from knowingly
+
+[second-repository-walk.md](second-repository-walk.md) is committed with every
+path, filename and quoted line removed. [triage.md](triage.md) requires every
+documented claim to be verifiable by a reader who does not trust you, and that
+file is not. The conflict between two governing documents is reported here rather
+than resolved silently, which is the rule [triage.md](triage.md) states for
+exactly this case.
+
+The deviation is confined to that one record. Redaction and evidence pull against
+each other and redaction wins, on the same reasoning as
+[Enumerating a private repository's record shapes was itself the leak](#enumerating-a-private-repositorys-record-shapes-was-itself-the-leak):
+a public repository is not where a private one's shape gets published as a side
+effect of a milestone. The objection's body is the sharpest instance —
+[objections.md](../objections.md) requires "what your project does instead,
+concretely, with paths", so a redacted objection is not a filed one, and the body
+lives in that repository's own adoption record where it can carry the paths.
+
+**What the reader gets instead of verifiability**: the walk states what it is
+worth before it states any result, names redaction in its title, and says which
+of its claims are attested rather than checkable. That is not a substitute and is
+not offered as one.
+
+**And a clean map was expected.** That repository imported this catalog's source
+conventions deliberately and on its own record, so re-application inside one
+lineage is what this tests. It is not evidence of generality, no objection would
+have been the uninformative case rather than the reassuring one, and
+[M13](work/m13.md) is forbidden from reporting the one as the other.
+
+### The first objection is declined, and what that costs the channel is not argued away
+
+The objection filed above is **declined.** Both checks now report `waived` in
+that repository with its reason echoed every run, and the deviation block naming
+this entry is written in its adoption record.
+
+**The argument, as it was made, at full strength.** `findings-carry-evidence`
+exists because "a row saying something is broken, written a month ago by someone
+who is no longer sure, cannot be acted on and cannot be dismissed. It sits there
+forever." `findings-have-review-state` exists because "this is what separates
+noticing something from committing to fix it", and because per-item approval is
+"the whole mechanism". Both purposes describe a queue whose rows **persist** and
+are annotated in place, and both are stated as purposes rather than as shapes.
+
+That repository's queue is **consumed.** Every row is removed by a triage step
+that is mandatory per row and resolves each to exactly one of four outcomes, one
+of which is a rejection that still leaves a durable record. So the aged
+unactionable row the first obligation describes cannot form — not because someone
+is diligent, but because the structure gives a row nowhere to age. And the
+separation the second obligation wants is structural rather than columnar:
+nothing in that file is ever work, work begins only when triage produces a
+separate record, and every judging transition on that record is approved
+individually through a review the owner has to sign. Both purposes are served.
+Neither check can see it, because both read for a column.
+
+The cost of complying is real and was named concretely, which is the filter
+[objections.md](../objections.md) applies: two columns on that file turn capture
+from "append a line" into "append a row and decide what goes in three cells",
+against a first principle stating that capture must cost seconds or it does not
+happen, and a recorded decision that capture and triage were split precisely
+because they have opposite requirements. The review-state cell would also
+duplicate a state that already lives in the record triage produces — two places
+to look for one fact, which is the failure that module's own README names when it
+warns against two queues.
+
+**That is a good objection.** It is not a preference, it names a cost, and it
+argues against the `purpose` field rather than around it. It is declined anyway,
+for two reasons.
+
+**One repository is thin evidence for a form.** A `form` is the catalog saying a
+shape is *legitimately common* — configuration from then on, for everyone. What
+is known here is that one repository has a consumed queue, and that repository
+shares a convention lineage with the one these modules were extracted from, which
+is the same limit
+[The second repository is private, and it tests re-application rather than generality](#the-second-repository-is-private-and-it-tests-re-application-rather-than-generality)
+puts on everything else this unit produced. A deviation is what the catalog has
+for legitimately *local*, and one instance is what local looks like.
+
+**And the phase's own scope contract forbids it.**
+[work/README.md](work/README.md) "Specification edits are in scope, and this is
+the list" names three units and the edits each forces —
+[M8](work/m8.md), [M10](work/m10.md), [M12](work/m12.md). A `findings-queue` form
+is on none of them. That section exists because the first version of it listed no
+specification changes while three units were forcing them, and recognising an
+alternative here would be exactly the hidden scope it was written to prevent. The
+right time to add a form is a unit that says it is adding one.
+
+**What this costs, stated plainly.** This is the objection channel's first real
+use, and the answer is no. [objections.md](../objections.md) calls the channel
+"the only way a module here finds out it is wrong", and the first thing it
+returned was a decline. An adopter who files carefully, names a genuine cost, and
+gets nothing back learns that filing is not worth the effort — and the channel
+then fails silently, because a channel nobody uses looks identical to a catalog
+nobody disagrees with. That is not argued away here and it is not offset by the
+deviation: `waived` is visible and honest, and it is still the adopter carrying
+the difference rather than the catalog moving.
+
+**What would change the answer.** A second adopter with a consumed queue. At two
+independent instances the shape stops being local and the argument for a form
+stops resting on one repository's habits, which is the whole test this catalog
+applies to itself. The deviation carries a `review_by` so the question comes back
+whether or not anyone remembers it, and this entry is what makes the second
+answer consistent with the first — or makes the change of mind visible if it is
+not.

@@ -159,6 +159,16 @@ wearing a rule's clothing. 0.x is the honest label for that: **pins are cheap,
 breaking changes will happen, and the objection channel is the point rather than
 the exception.**
 
+A second repository has since adopted, and it moves that statement less than it
+looks. It is private, it is not named here, and **it shares a convention lineage
+with the repository this was extracted from** — so it tests whether the
+extraction survives re-application, not whether these conventions generalise. The
+generality question needs a repository built by someone who has never read
+LinkCtrl. What that adoption did produce is four gaps in this catalog, recorded
+as rows in [findings.md](docs/records/findings.md); the redacted walk is
+[second-repository-walk.md](docs/records/second-repository-walk.md) and it states
+what it is worth before it states any result.
+
 ## Provenance and evidence
 
 Extracted from [LinkCtrl](https://github.com/DevOfPie/LinkCtrl), whose process
