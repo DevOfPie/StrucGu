@@ -45,7 +45,7 @@ the file. Append a row when you append an entry.
 | [Fixture expectations become data, and the wording of a finding stays out of them](#fixture-expectations-become-data-and-the-wording-of-a-finding-stays-out-of-them) | `expected.yaml`, and the no-runner line |
 | [The conformance criterion waits until an implementer has asked for it](#the-conformance-criterion-waits-until-an-implementer-has-asked-for-it) | Why M9 is deferred rather than cut |
 | [The first checker is Whippy's, and its independence is partial](#the-first-checker-is-whippys-and-its-independence-is-partial) | What M10's evidence is worth |
-| [IdeaWarehouse is the second repository, and it tests re-application rather than generality](#ideawarehouse-is-the-second-repository-and-it-tests-re-application-rather-than-generality) | What M11 does and does not answer |
+| [The second repository is private, and it tests re-application rather than generality](#the-second-repository-is-private-and-it-tests-re-application-rather-than-generality) | What M11 does and does not answer |
 
 ---
 
@@ -604,23 +604,35 @@ The alternative considered and rejected was the owner writing it — fastest, an
 producing close to no evidence, since an author implementing their own
 specification tests it against the understanding already encoded in it.
 
-### IdeaWarehouse is the second repository, and it tests re-application rather than generality
+### The second repository is private, and it tests re-application rather than generality
 
-`DevOfPie/IdeaWarehouse` adopts. It is not the repository this catalog was
-extracted from, and its own decision log already names StrucGu as the intended
-canonical home for its process rules, recording those rules as provisional and
-written to be lifted out later. The audit is therefore the first step of a
-migration that repository has already chosen, rather than an exercise staged to
-produce a result.
+A second repository was chosen and adopts in [M11](work/m11.md). It is private,
+and **it is not named in this repository.** The owner's own records name it; this
+one does not, because a public repository is not where a private one's shape gets
+published as a side effect of planning. That is the same rule
+[objections.md](../objections.md) states about audit output carrying paths,
+internal names, and quoted lines, applied to the plan that will produce that
+output rather than only to the output.
+
+The cost of withholding it is real: a reader here cannot check the claims below
+about what that repository contains, and has to take them. Stating that is worth
+more than the alternative, which is a plan that reads as though its evidence were
+open.
+
+It is not the repository this catalog was extracted from, and its own decision
+log already names StrucGu as the intended canonical home for its process rules,
+recording those rules as provisional and written to be lifted out later. The
+audit is therefore the first step of a migration that repository has already
+chosen, rather than an exercise staged to produce a result.
 
 **It shares a convention lineage with LinkCtrl, and that caps what it can
-prove.** IdeaWarehouse imported LinkCtrl's three-file split, its terse process
-file, and its deferred-findings discipline, deliberately and on the record.
-LinkCtrl is where these modules came from. So a clean map is the *expected*
-outcome and is not evidence that these conventions generalise — it is evidence
-that an extraction survives re-application within the lineage it was extracted
-from. That is worth knowing and it is a different claim, and
-[M13](work/m13.md) is forbidden from reporting the one as the other.
+prove.** It imported LinkCtrl's three-file split, its terse process file, and its
+deferred-findings discipline, deliberately and on the record. LinkCtrl is where
+these modules came from. So a clean map is the *expected* outcome and is not
+evidence that these conventions generalise — it is evidence that an extraction
+survives re-application within the lineage it was extracted from. That is worth
+knowing and it is a different claim, and [M13](work/m13.md) is forbidden from
+reporting the one as the other.
 
 The generality question needs a repository built by someone who has never read
 LinkCtrl. Nothing in this phase answers it, and the alternative — deferring the
@@ -629,8 +641,8 @@ done condition the owner controls and would defer the whole phase's conclusion
 indefinitely.
 
 The more valuable half of that unit's output is therefore not findings against
-IdeaWarehouse but the shapes IdeaWarehouse has that this catalog has no role
-for: an intake inbox, a graveyard, a graduation bar, a sweep cadence. Each is
+the second repository but the record shapes it has that this catalog has no role
+for: an intake, a disposal path, a promotion bar, a staleness sweep. Each is
 either out of scope for a catalog about records of work, or a module this
 catalog is missing. Both answers go in [findings.md](findings.md) as rows, and
 neither becomes a module in this phase.

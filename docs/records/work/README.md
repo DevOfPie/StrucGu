@@ -21,7 +21,7 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M8](m8.md) | Fixture expectations become machine-comparable | M6 | planned |
 | [M9](m9.md) | Conformance is defined narrowly, and stays self-asserted | M10 | deferred |
 | [M10](m10.md) | The first checker, written from the specification alone | M8 | planned |
-| [M11](m11.md) | IdeaWarehouse adopts, and the objection channel is used in anger | M10 | planned |
+| [M11](m11.md) | The second repository adopts, and the objection channel is used in anger | M10 | planned |
 | [M12](m12.md) | F1 and F2 are closed by use rather than by review | M10 M11 | planned |
 | [M13](m13.md) | The catalog says what a year of one repository could not | M10 M11 M12 | planned |
 
@@ -53,9 +53,10 @@ the units say.
 3. **Whippy writes the first checker**, in a fresh session, from the published
    repository only, under a hard no-questions rule. The independence is partial
    and [M10](m10.md) states in what way.
-4. **IdeaWarehouse is the second repository.** It shares a convention lineage
-   with LinkCtrl, so [M11](m11.md) tests re-application rather than generality,
-   and says so before it reports anything.
+4. **The second repository is chosen, is private, and is not named here.** It
+   shares a convention lineage with LinkCtrl, so [M11](m11.md) tests
+   re-application rather than generality, and says so before it reports
+   anything.
 
 ### Not in this phase
 
