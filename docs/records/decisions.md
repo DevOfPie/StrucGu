@@ -52,6 +52,9 @@ the file. Append a row when you append an entry.
 | [A quota for objections manufactures the disagreement it counts](#a-quota-for-objections-manufactures-the-disagreement-it-counts) | Corrects M11's done-means |
 | [Enumerating a private repository's record shapes was itself the leak](#enumerating-a-private-repositorys-record-shapes-was-itself-the-leak) | A redaction, and why it is not a correction |
 | [The phase edits the specification, and hiding that in three work units was the drift](#the-phase-edits-the-specification-and-hiding-that-in-three-work-units-was-the-drift) | Corrects "Not in this phase" |
+| [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
+| [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
+| [The first checker is DevOfPie/strucgu-check, and it is public](#the-first-checker-is-devofpiestrucgu-check-and-it-is-public) | Names M10's repository before M10 starts |
 
 ---
 
@@ -795,3 +798,103 @@ file was keyed by check id alone, which cannot express judgment entries, since
 those carry their own ids. The first checker's only conformance test would have
 been silent on the one output channel that keeps a mechanical run from looking
 complete.
+
+---
+
+## 2026-08-03 — M8, fixture expectations become data
+
+### Judgment expectations are recorded once per module, not once per tree
+
+`fixtures/expected.yaml` carries two sections. `checks` is keyed by fixture tree
+and then by check id, because a check's result is exactly what varies from one
+tree to the next. `judgment` is keyed by entry id alone, with no tree above it.
+
+The asymmetry is the point. [SPEC.md](../../SPEC.md) requires one `judgment`
+line per entry whether or not anyone is available to judge it, so the value is
+`judgment` on every tree — including the trees where the role is absent and
+every check reports `skip`. Keying it per tree would produce 33 copies of an
+invariant and invite a reader to hunt for the tree where it differs. There is
+none, and that absence is the property worth recording.
+
+The identifier is `strucgu/expected@1`, and it is defined in
+[SPEC.md](../../SPEC.md) beside `strucgu/module@1` and `strucgu/adoption@1`
+rather than only used inside a fixture directory. An identifier defined nowhere
+is a pin to nothing.
+
+### The modules bump to 0.2.0 and no adoption record moves with them
+
+Adding `expected.yaml` is a minor bump under [SPEC.md](../../SPEC.md)
+"Versioning": a previously clean adopter newly sees nothing, because nothing
+inside `fixtures/` is ever read against an adopting repository. All five modules
+gain the file, so all five move on the same day.
+
+Every `version:` pin stays at `0.1.0` — in the 33 fixture adoption records, and
+in [this repository's own](../../strucgu.yaml). A pin is a dated claim about
+what was reviewed and adopted, not a field kept current. The
+[self-walk](self-walk.md) was performed against `0.1.0` on 2026-07-31, and
+moving the pin would assert a review that did not happen. A checker reading a
+`0.2.0` module against a `0.1.0` pin prints one line saying so, which is the
+propagation mechanism working rather than a defect.
+
+This is recorded because the gap reads as an oversight. Anyone tidying it away
+is undoing a decision, not fixing a slip.
+
+---
+
+## 2026-08-03 — naming M10's repository, before M10 starts
+
+*No work unit was under way. This entry answers a precondition
+[M10](work/m10.md) states for itself, and is written before the unit is
+started rather than inside it.*
+
+### The first checker is DevOfPie/strucgu-check, and it is public
+
+[M10](work/m10.md) requires its repository "named before the unit starts, and
+whether that repository is public is recorded with the name". The name is
+`DevOfPie/strucgu-check` and it is public. It does not exist yet; naming it is
+what M10 asked for, not creating it.
+
+**Public**, because M10 already says this will be the only implementation in
+existence and that the second implementer will find it and read it. A private
+reference implementation costs the discoverability that separating the
+repository was meant to preserve, and buys only room to get the ambiguity log
+wrong unobserved — which is the log whose whole value is that it was written
+before the resolutions were.
+
+**Under `DevOfPie` rather than the implementer's own account**, which is the
+option that costs the most and was chosen anyway. M10's bullet on separation is
+careful: location was never the operative variable, primacy is, and separating
+the repository "buys discoverability-by-adjacency and nothing more". Putting it
+in the catalog owner's organisation spends even that. An implementation sitting
+beside the catalog reads as the reference implementation by adjacency, and the
+record's answer is not to deny it — the bullet already refuses to claim the
+problem away — but to stop pretending the org boundary was ever doing work the
+separate repository was not. The alternative was an account boundary that looks
+like independence while the commissioning, the naming, and the primacy all stay
+exactly where they were.
+
+What this does *not* buy is any part of the independence M10 is actually after.
+That is bought by the input restriction — the normative surface only,
+`docs/records/` excluded, this file included — and by nothing about where the
+repository sits.
+
+### The orchestrator that landed M8 is disqualified from implementing M10
+
+M10 excludes `docs/records/` from the implementer's inputs, "this file
+included", because an implementer who has read the scoring function produces the
+shape it rewards. The session that validated and accepted [M8](work/m8.md) has
+read this log, [self-walk.md](self-walk.md), [findings.md](findings.md) and
+[m10.md](work/m10.md) itself. It cannot brief an implementer without leaking
+exactly what the exclusion exists to prevent, so it does not: M10 opens in a
+fresh session whose first read is the published repository.
+
+The cost is a session boundary and the re-derivation of context that already
+existed, and that cost is the point rather than a side effect. The cheaper path
+— briefing a worker from this session — was rejected because its failure would
+be invisible. M10 says so in its own risks: a checker built with help still
+passes the fixtures, so the output of the compromised run and the honest one
+look identical, and only the ambiguity log would have differed.
+
+This is recorded rather than left in conversation because the rule it applies is
+attested and not verifiable. A kept restriction and a broken one leave the same
+trace in the checker, so the trace has to be here instead.

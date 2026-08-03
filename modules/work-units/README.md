@@ -1,6 +1,6 @@
 # work-units
 
-optional · 0.1.0 · requires nothing
+optional · 0.2.0 · requires nothing
 
 Each unit of work gets a short record: what it depends on, which promise it
 closes, a definition of done stated as claims a skeptic could check, and its

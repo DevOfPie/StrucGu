@@ -19,7 +19,24 @@ point rather than the exception.
 
 ## [Unreleased]
 
-Nothing yet.
+### The contract
+
+[SPEC.md](SPEC.md) defines a third schema identifier, `strucgu/expected@1`, and
+the list of what a module directory holds now names `fixtures/expected.yaml`.
+Nothing an adoption record or a checker written against `0.1.0` has to change —
+a checker that ignores the file is still a checker.
+
+### The modules
+
+All five move to `0.2.0`, and each says in its own changelog that a previously
+clean adopter will newly see nothing. Every module's `fixtures/` now carries
+`expected.yaml` beside `expected.md`: the same expected results as data, keyed
+by fixture tree and check id, plus one entry per judgment id. The prose file
+stays and stays the statement of intent.
+
+Adoption records are deliberately left pinned at `0.1.0`, including this
+repository's own. A pin is a dated claim about what was reviewed, and the
+[self-walk](docs/records/self-walk.md) was run against `0.1.0`.
 
 ## [0.1.0] — 2026-07-31
 

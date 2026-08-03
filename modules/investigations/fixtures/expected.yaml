@@ -1,0 +1,50 @@
+schema: strucgu/expected@1
+# What a correct checker produces on each tree here, as data. expected.md says
+# the same thing in prose and is the statement of intent — why each tree exists
+# and what boundary it pins. The two must agree; where they disagree that is a
+# defect to report, not a precedence order to apply.
+#
+# Values are the five states in SPEC.md "Audit output" and nothing else.
+# Judgment entries are keyed by their own ids rather than per tree: one line is
+# emitted per entry on every tree, whether or not anyone is available to judge
+# it, so the value does not vary by tree.
+#
+# Every tree here maps the investigations role. A project that has not yet run
+# an investigation leaves it unmapped instead, which is what StrucGu's own
+# adoption record does — and every check then reports skip rather than ok.
+
+checks:
+  satisfies:
+    IN-01: ok
+    IN-02: ok
+    IN-03: ok
+    IN-04: ok
+
+  violates-IN-01:
+    IN-01: finding
+    IN-02: skip
+    IN-03: skip
+    IN-04: skip
+
+  violates-IN-02:
+    IN-01: ok
+    IN-02: finding
+    IN-03: ok
+    IN-04: ok
+
+  violates-IN-03:
+    IN-01: ok
+    IN-02: ok
+    IN-03: finding
+    IN-04: ok
+
+  violates-IN-04:
+    IN-01: ok
+    IN-02: ok
+    IN-03: ok
+    IN-04: finding
+
+judgment:
+  investigations.findings-are-observed: judgment
+  investigations.versions-are-named: judgment
+  investigations.right-size: judgment

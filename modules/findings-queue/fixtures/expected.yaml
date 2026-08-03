@@ -1,0 +1,77 @@
+schema: strucgu/expected@1
+# What a correct checker produces on each tree here, as data. expected.md says
+# the same thing in prose and is the statement of intent — why each tree exists
+# and what boundary it pins. The two must agree; where they disagree that is a
+# defect to report, not a precedence order to apply.
+#
+# Values are the five states in SPEC.md "Audit output" and nothing else.
+# Judgment entries are keyed by their own ids rather than per tree: one line is
+# emitted per entry on every tree, whether or not anyone is available to judge
+# it, so the value does not vary by tree.
+#
+# Only this module's checks and judgment entries appear. Every tree also adopts
+# triage-rule, because this module declares it as a prerequisite and every check
+# here would otherwise skip; its TR-* results are that module's fixtures.
+
+checks:
+  satisfies:
+    FQ-01: ok
+    FQ-02: ok
+    FQ-03: ok
+    FQ-04: ok
+    FQ-05: ok
+    FQ-06: ok
+
+  violates-FQ-01:
+    FQ-01: finding
+    FQ-02: skip
+    FQ-03: skip
+    FQ-04: skip
+    FQ-05: skip
+    FQ-06: skip
+
+  violates-FQ-02:
+    FQ-01: ok
+    FQ-02: finding
+    FQ-03: ok
+    FQ-04: ok
+    FQ-05: ok
+    FQ-06: ok
+
+  violates-FQ-03:
+    FQ-01: ok
+    FQ-02: ok
+    FQ-03: finding
+    FQ-04: ok
+    FQ-05: ok
+    FQ-06: ok
+
+  violates-FQ-04:
+    FQ-01: ok
+    FQ-02: ok
+    FQ-03: ok
+    FQ-04: finding
+    FQ-05: ok
+    FQ-06: ok
+
+  violates-FQ-05:
+    FQ-01: ok
+    FQ-02: ok
+    FQ-03: ok
+    FQ-04: ok
+    FQ-05: finding
+    FQ-06: ok
+
+  violates-FQ-06:
+    FQ-01: ok
+    FQ-02: ok
+    FQ-03: ok
+    FQ-04: ok
+    FQ-05: ok
+    FQ-06: finding
+
+judgment:
+  findings.evidence-is-observed: judgment
+  findings.severity-argues: judgment
+  findings.rows-are-findings: judgment
+  findings.queue-is-reviewed: judgment
