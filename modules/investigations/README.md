@@ -1,6 +1,6 @@
 # investigations
 
-optional · 0.1.0 · requires nothing
+optional · 0.2.0 · requires nothing
 
 When something had to be tested before it could be decided, the record of what
 was tested, what was observed, and what rules came out of it.

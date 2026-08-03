@@ -1,0 +1,89 @@
+schema: strucgu/expected@1
+# What a correct checker produces on each tree here, as data. expected.md says
+# the same thing in prose and is the statement of intent — why each tree exists
+# and what boundary it pins. The two must agree; where they disagree that is a
+# defect to report, not a precedence order to apply.
+#
+# Values are the five states in SPEC.md "Audit output" and nothing else.
+# Judgment entries are keyed by their own ids rather than per tree: one line is
+# emitted per entry on every tree, whether or not anyone is available to judge
+# it, so the value does not vary by tree.
+
+checks:
+  satisfies:
+    WU-01: ok
+    WU-02: ok
+    WU-03: ok
+    WU-04: ok
+    WU-05: ok
+    WU-06: ok
+    WU-07: ok
+
+  violates-WU-01:
+    WU-01: finding
+    WU-02: skip
+    WU-03: ok
+    WU-04: ok
+    WU-05: ok
+    WU-06: skip
+    WU-07: ok
+
+  violates-WU-02:
+    WU-01: ok
+    WU-02: finding
+    WU-03: ok
+    WU-04: ok
+    WU-05: ok
+    WU-06: ok
+    WU-07: ok
+
+  violates-WU-03:
+    WU-01: ok
+    WU-02: ok
+    WU-03: finding
+    WU-04: ok
+    WU-05: ok
+    WU-06: ok
+    WU-07: ok
+
+  violates-WU-04:
+    WU-01: ok
+    WU-02: ok
+    WU-03: ok
+    WU-04: finding
+    WU-05: ok
+    WU-06: ok
+    WU-07: ok
+
+  violates-WU-05:
+    WU-01: ok
+    WU-02: ok
+    WU-03: ok
+    WU-04: ok
+    WU-05: finding
+    WU-06: ok
+    WU-07: ok
+
+  violates-WU-06:
+    WU-01: ok
+    WU-02: ok
+    WU-03: ok
+    WU-04: ok
+    WU-05: ok
+    WU-06: finding
+    WU-07: ok
+
+  violates-WU-07:
+    WU-01: ok
+    WU-02: ok
+    WU-03: ok
+    WU-04: ok
+    WU-05: ok
+    WU-06: ok
+    WU-07: finding
+
+judgment:
+  work-units.done-is-falsifiable: judgment
+  work-units.rules-not-repeated: judgment
+  work-units.discharges-is-real: judgment
+  work-units.risks-considered: judgment

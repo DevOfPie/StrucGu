@@ -2,7 +2,7 @@
 # module.md is normative. If the two disagree, that is a defect to report.
 schema: strucgu/module@1
 id: investigations
-version: 0.1.0
+version: 0.2.0
 title: Investigations
 summary: >
   When something had to be tested before it could be decided, the record of what

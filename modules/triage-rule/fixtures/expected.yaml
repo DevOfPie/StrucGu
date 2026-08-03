@@ -1,0 +1,61 @@
+schema: strucgu/expected@1
+# What a correct checker produces on each tree here, as data. expected.md says
+# the same thing in prose and is the statement of intent — why each tree exists
+# and what boundary it pins. The two must agree; where they disagree that is a
+# defect to report, not a precedence order to apply.
+#
+# Values are the five states in SPEC.md "Audit output" and nothing else.
+# Judgment entries are keyed by their own ids rather than per tree: one line is
+# emitted per entry on every tree, whether or not anyone is available to judge
+# it, so the value does not vary by tree.
+#
+# Only this module's checks and judgment entries appear. Every tree also adopts
+# findings-queue, because TR-03 needs a findings role to point at; its FQ-*
+# results are that module's fixtures.
+
+checks:
+  satisfies:
+    TR-01: ok
+    TR-02: ok
+    TR-03: ok
+    TR-04: ok
+    TR-05: ok
+
+  violates-TR-01:
+    TR-01: finding
+    TR-02: skip
+    TR-03: skip
+    TR-04: skip
+    TR-05: skip
+
+  violates-TR-02:
+    TR-01: ok
+    TR-02: finding
+    TR-03: ok
+    TR-04: ok
+    TR-05: ok
+
+  violates-TR-03:
+    TR-01: ok
+    TR-02: ok
+    TR-03: finding
+    TR-04: ok
+    TR-05: ok
+
+  violates-TR-04:
+    TR-01: ok
+    TR-02: ok
+    TR-03: ok
+    TR-04: finding
+    TR-05: ok
+
+  violates-TR-05:
+    TR-01: ok
+    TR-02: ok
+    TR-03: ok
+    TR-04: ok
+    TR-05: finding
+
+judgment:
+  triage.boundary-is-a-claim: judgment
+  triage.destination-is-real: judgment

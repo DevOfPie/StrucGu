@@ -37,7 +37,8 @@ repository" is a grade, and a grade implies a grader.
 
 ## What a module is
 
-A directory under [modules/](modules/) containing exactly these:
+A directory under [modules/](modules/) containing exactly these, and — where a
+row names a directory — exactly what that row lists inside it:
 
 | File | | |
 | --- | --- | --- |
@@ -46,7 +47,7 @@ A directory under [modules/](modules/) containing exactly these:
 | `module.yaml` | required | The same obligations and checks as data. Convenience. |
 | `CHANGELOG.md` | required | Per version, what a previously clean adopter will newly see. |
 | `templates/` | required | Starting files, one per role where a starting file makes sense. Licensed MIT-0. |
-| `fixtures/` | required | A `satisfies/` tree, one `violates-<CHECK-ID>/` tree per check, and `expected.md`. |
+| `fixtures/` | required | A `satisfies/` tree, one `violates-<CHECK-ID>/` tree per check, `expected.md`, and `expected.yaml`. See [Fixture expectations](#fixture-expectations). |
 
 **Prose is normative; the manifest is convenience.** A checker may read either.
 If they disagree, `module.md` wins **and the disagreement is a defect — report
@@ -462,6 +463,64 @@ fixtures do not pin the boundary.
 File it — see [docs/objections.md](docs/objections.md) — and the fixture that
 settles it becomes part of the specification. This is the ordinary way the
 specification gets sharper, not an edge case.
+
+---
+
+## Fixture expectations
+
+Every module states its fixture results twice. `expected.md` is prose: why each
+tree exists and which boundary it pins. `expected.yaml` is the same statement as
+data, so that the one question an implementer actually has — *did my run match?*
+— is answered mechanically rather than by reading every tree against every
+document.
+
+```yaml
+schema: strucgu/expected@1
+
+checks:
+  satisfies:
+    GL-01: ok
+    GL-02: ok
+  violates-GL-01:
+    GL-01: finding
+    GL-02: skip
+  violates-GL-02:
+    GL-01: ok
+    GL-02: finding
+
+judgment:
+  glossary.non-obvious: judgment
+```
+
+Two sections, and nothing else in the file.
+
+| Section | | |
+| --- | --- | --- |
+| `checks` | required | Keyed by fixture tree, then by check id. |
+| `judgment` | required | Keyed by judgment entry id. **Not per tree** — one line is emitted per entry on every tree whether or not anyone is available to judge it, so the value cannot vary by tree, and that invariance is the property being recorded. |
+
+Every value is one of the five states in [Audit output](#audit-output). **The
+vocabulary is closed there rather than here:** a sixth value is a change to this
+document, and cannot enter through a fixture directory.
+
+A file keyed by check id alone cannot express a judgment entry, because those
+carry their own ids. A conformance test built on one would be silent on the one
+output channel that stops a mechanical run from looking complete.
+
+**Every tree in the directory has an entry, and every entry names a tree that is
+there.** A missing row and a passing check are otherwise indistinguishable. Only
+the module's own checks and judgment entries appear, even where a tree adopts a
+prerequisite as well — the prerequisite's results are that module's fixtures.
+
+**No finding text.** What a finding must carry is a location and evidence, which
+[Vocabulary](#vocabulary) already states and each check's `finding` field
+already explains; how it reads is the implementer's. A file pinning the wording
+would make one implementation's phrasing normative, which is the thing shipping
+no runner refused.
+
+**`expected.md` stays the statement of intent.** The two must agree. Where they
+do not, that is a defect to report and not a precedence order to apply — the
+same rule `module.md` and `module.yaml` already carry.
 
 ---
 

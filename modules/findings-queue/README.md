@@ -1,6 +1,6 @@
 # findings-queue
 
-**base** · 0.1.0 · requires [triage-rule](../triage-rule/)
+**base** · 0.2.0 · requires [triage-rule](../triage-rule/)
 
 Where a finding goes when it is real but is not what you are working on. One row
 per finding, with the evidence it is real and a state saying whether anyone has

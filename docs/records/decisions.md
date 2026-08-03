@@ -52,6 +52,8 @@ the file. Append a row when you append an entry.
 | [A quota for objections manufactures the disagreement it counts](#a-quota-for-objections-manufactures-the-disagreement-it-counts) | Corrects M11's done-means |
 | [Enumerating a private repository's record shapes was itself the leak](#enumerating-a-private-repositorys-record-shapes-was-itself-the-leak) | A redaction, and why it is not a correction |
 | [The phase edits the specification, and hiding that in three work units was the drift](#the-phase-edits-the-specification-and-hiding-that-in-three-work-units-was-the-drift) | Corrects "Not in this phase" |
+| [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
+| [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
 
 ---
 
@@ -795,3 +797,43 @@ file was keyed by check id alone, which cannot express judgment entries, since
 those carry their own ids. The first checker's only conformance test would have
 been silent on the one output channel that keeps a mechanical run from looking
 complete.
+
+---
+
+## 2026-08-03 — M8, fixture expectations become data
+
+### Judgment expectations are recorded once per module, not once per tree
+
+`fixtures/expected.yaml` carries two sections. `checks` is keyed by fixture tree
+and then by check id, because a check's result is exactly what varies from one
+tree to the next. `judgment` is keyed by entry id alone, with no tree above it.
+
+The asymmetry is the point. [SPEC.md](../../SPEC.md) requires one `judgment`
+line per entry whether or not anyone is available to judge it, so the value is
+`judgment` on every tree — including the trees where the role is absent and
+every check reports `skip`. Keying it per tree would produce 33 copies of an
+invariant and invite a reader to hunt for the tree where it differs. There is
+none, and that absence is the property worth recording.
+
+The identifier is `strucgu/expected@1`, and it is defined in
+[SPEC.md](../../SPEC.md) beside `strucgu/module@1` and `strucgu/adoption@1`
+rather than only used inside a fixture directory. An identifier defined nowhere
+is a pin to nothing.
+
+### The modules bump to 0.2.0 and no adoption record moves with them
+
+Adding `expected.yaml` is a minor bump under [SPEC.md](../../SPEC.md)
+"Versioning": a previously clean adopter newly sees nothing, because nothing
+inside `fixtures/` is ever read against an adopting repository. All five modules
+gain the file, so all five move on the same day.
+
+Every `version:` pin stays at `0.1.0` — in the 33 fixture adoption records, and
+in [this repository's own](../../strucgu.yaml). A pin is a dated claim about
+what was reviewed and adopted, not a field kept current. The
+[self-walk](self-walk.md) was performed against `0.1.0` on 2026-07-31, and
+moving the pin would assert a review that did not happen. A checker reading a
+`0.2.0` module against a `0.1.0` pin prints one line saying so, which is the
+propagation mechanism working rather than a defect.
+
+This is recorded because the gap reads as an oversight. Anyone tidying it away
+is undoing a decision, not fixing a slip.

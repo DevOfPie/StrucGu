@@ -1,0 +1,76 @@
+schema: strucgu/expected@1
+# What a correct checker produces on each tree here, as data. expected.md says
+# the same thing in prose and is the statement of intent — why each tree exists
+# and what boundary it pins. The two must agree; where they disagree that is a
+# defect to report, not a precedence order to apply.
+#
+# Values are the five states in SPEC.md "Audit output" and nothing else.
+# Judgment entries are keyed by their own ids rather than per tree: one line is
+# emitted per entry on every tree, whether or not anyone is available to judge
+# it, so the value does not vary by tree.
+
+checks:
+  satisfies:
+    DL-01: ok
+    DL-02: ok
+    DL-03: ok
+    DL-04: ok
+    DL-05: ok
+    DL-06: ok
+
+  violates-DL-01:
+    DL-01: finding
+    DL-02: skip
+    DL-03: skip
+    DL-04: skip
+    DL-05: finding
+    DL-06: skip
+
+  violates-DL-02:
+    DL-01: ok
+    DL-02: finding
+    DL-03: ok
+    DL-04: ok
+    DL-05: ok
+    DL-06: ok
+
+  # DL-03 reports a finding only after the tree's SETUP.md has been run; a
+  # fixture cannot carry a nested repository. Before setup there is no history
+  # to read. expected.md records that gap and so does the M6 work record.
+  violates-DL-03:
+    DL-01: ok
+    DL-02: ok
+    DL-03: finding
+    DL-04: ok
+    DL-05: ok
+    DL-06: ok
+
+  violates-DL-04:
+    DL-01: ok
+    DL-02: ok
+    DL-03: ok
+    DL-04: finding
+    DL-05: ok
+    DL-06: ok
+
+  violates-DL-05:
+    DL-01: ok
+    DL-02: ok
+    DL-03: ok
+    DL-04: ok
+    DL-05: finding
+    DL-06: ok
+
+  violates-DL-06:
+    DL-01: ok
+    DL-02: ok
+    DL-03: ok
+    DL-04: ok
+    DL-05: ok
+    DL-06: finding
+
+judgment:
+  decision-log.claim-shaped: judgment
+  decision-log.corrections-preserve: judgment
+  decision-log.index-exists-in-substance: judgment
+  decision-log.rationale-not-status: judgment

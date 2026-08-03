@@ -1,6 +1,6 @@
 # triage-rule
 
-**base** · 0.1.0 · requires nothing
+**base** · 0.2.0 · requires nothing
 
 One document draws the line between what the work in flight requires and
 everything else, says what happens on each side, and says what to do when two
