@@ -45,6 +45,22 @@ commitment.
 A defect that makes the *current* work unit's claim false is in spec, whatever
 it looks like. Judge by the claim, not by the file.
 
+### A shipped unit's claim turns out to be false
+
+It **reopens that unit** — status back to `reopened`, the correction written into
+the unit's own file — rather than arriving as a successor. A successor leaves a
+`done` row asserting something untrue, which is the one outcome worth spending a
+reopening to avoid, and it scatters one piece of work across two numbers.
+
+The defect still gets a [findings.md](findings.md) row first. Reopening is
+scheduling, and scheduling is the owner's.
+
+A reopened unit returns to `done` when the correction lands, so the status word
+is not where the reopening survives. The unit's own file carries what was false,
+what closed it, and the finding it came from. A status table that can round-trip
+without leaving a mark records only the present — which is the failure
+[findings.md](findings.md) moves rows rather than deleting them to avoid.
+
 ### A check is written
 
 Write the violating fixture first, or at the same time. A check nobody has

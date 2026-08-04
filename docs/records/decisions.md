@@ -78,6 +78,7 @@ the file. Append a row when you append an entry.
 | [Below 1.0.0, a breaking change collapses into the minor digit](#below-100-a-breaking-change-collapses-into-the-minor-digit) | Closes `F7`, and sizes this release |
 | [The second walk exercises `skip` nowhere, and that is a loss rather than a cleaner summary](#the-second-walk-exercises-skip-nowhere-and-that-is-a-loss-rather-than-a-cleaner-summary) | What mapping `investigations` cost the self-walk |
 | [Two data points adjacent to the author are not a track record](#two-data-points-adjacent-to-the-author-are-not-a-track-record) | What the rewritten 0.x section may and may not claim |
+| [A shipped unit whose claim is false is reopened, not succeeded](#a-shipped-unit-whose-claim-is-false-is-reopened-not-succeeded) | The fourth status word, and why a successor is the worse record |
 
 ---
 
@@ -1798,3 +1799,55 @@ is defensible rather than determined. None was resolved at low confidence, and
 that says less than it looks: low would have meant a guess the implementer
 distrusted, and an implementer who reaches that point files a question instead.
 The section reports the medium count for that reason, rather than the zero.
+
+---
+
+## 2026-08-04 — the process contract catches up with the one it was extracted from
+
+[triage.md](triage.md) was written once, on 2026-07-31, as an adaptation of the
+operating contract of the repository this catalog was extracted from. That
+contract kept moving; this one did not. Four rules were added or hardened there
+across the following two days, and one existed hours before the adaptation was
+written and was not carried across. None of them is about links or modules, so
+nothing here noticed.
+
+The gap is worth naming rather than quietly closing. **A process document that is
+forked and then frozen looks maintained** — it is short, internally consistent,
+and every rule in it is true. What it stops being is *current*, and the only
+signal is that the file has one commit against a repository with sixty.
+
+The entries below take four of those rules. The ones deliberately not taken are
+named in each entry: this repository ships no code, runs no loop of its own, and
+has no capture queue, so several of the rules on the other side guard machinery
+that does not exist here.
+
+### A shipped unit whose claim is false is reopened, not succeeded
+
+The status table had three words — `planned`, `deferred`, `done` — and no way to
+say that a `done` row is asserting something untrue. There are three such rows
+today. `F3` says `triage-rule`'s expectations state a count matching no reading
+of its own fixtures; `F14` says five expectation rows are no longer reproduced by
+the only implementation; `F17` says the decision index is one row short of its
+entries and has been since M13 shipped.
+
+Each of those is a shipped unit's claim being false. Under the vocabulary as it
+stood, correcting one meant a new unit — which leaves the old `done` row in place,
+still asserting what was found to be wrong, and splits one piece of work across
+two numbers. **A successor is a worse record than a reopening**, and the whole
+point of the status table is to be a record.
+
+So `reopened` is the fourth word, and the rule that produces it is in
+[triage.md](triage.md). Two details are this repository's rather than inherited:
+
+- **The finding comes first.** A reopening is scheduling, and scheduling is the
+  owner's — the same rule that makes an unreviewed queue row a report rather than
+  a commitment. Nothing reopens because an actor noticed something.
+- **The status word is not where the reopening survives.** It returns to `done`,
+  so a table read a month later shows no trace. The unit's own file carries what
+  was false and what closed it, which is [findings.md](findings.md)'s rule about
+  moving rows rather than deleting them, applied to the other tracker.
+
+The second detail is the one the source contract does not have, and it is not an
+improvement so much as a different exposure: over there a reopening is legible in
+a milestone's history because the loop that ran it writes an entry either way.
+Here nothing writes anything unless a rule says to.
