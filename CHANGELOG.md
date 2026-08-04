@@ -12,12 +12,66 @@ upgrade:
 | The module contract | This repository's version | An adoption record or a checker written against the old contract needs changing |
 | Each module | Its own version, pinned in your adoption record | New findings are possible in a repository that was clean — see that module's changelog |
 
-`0.x` here means the shape will move. The whole catalog was extracted from one
-repository, which is not enough to tell a general convention from one project's
-habits, so pins are cheap and the [objection channel](docs/objections.md) is the
-point rather than the exception.
+`0.x` here means the shape will move: pins are cheap and the
+[objection channel](docs/objections.md) is the point rather than the exception.
+What one implementation and one second adopter have since returned, and what
+they still cannot show, is
+[what 0.x means here](README.md#what-0x-means-here).
 
-## [Unreleased]
+## [0.2.0] — 2026-08-04
+
+### The number, explained once
+
+**This release is breaking, and it is `0.2.0` rather than `1.0.0`.**
+
+Breaking, because the table at the top of this file defines this repository's
+version by whether a checker or an adoption record written against the old
+contract needs changing, and one does: a checker built against `0.1.0` is wrong
+about how a `dir` role recurses, where its `exclude` list lives, how per-file
+results collapse, whether `effective_from` is inclusive, what `path_exists`
+requires of a directory, and when a multi-role check skips. There is one such
+checker in existence and it had to change.
+
+`0.2.0`, because below `1.0.0` a breaking change collapses into the minor digit.
+`1.0.0` is not a bigger number, it is a claim about stability, and
+[README.md](README.md#what-0x-means-here) makes the opposite claim on purpose.
+
+Two rules in this repository size a version and on this release they disagree —
+[SPEC.md](SPEC.md#versioning) reads MINOR, because no check was added and no
+obligation's shape changed. That is not an error in either. SPEC.md's table
+sizes a **module** by what an adopter newly sees; this file's table sizes the
+**contract** by what an implementer must re-read, and a phase can move a great
+deal of the second while moving none of the first. Both are published, neither
+is overruled, and the reasoning is in
+[decisions.md](docs/records/decisions.md#the-two-versioning-rules-measure-different-readers-and-the-conflict-is-reported-rather-than-picked).
+The related question — what a major means while everything is `0.x` — was open
+as `F7` and is [now answered](docs/records/decisions.md#below-100-a-breaking-change-collapses-into-the-minor-digit).
+
+### The release was walked, and the walk is committed
+
+[docs/records/self-walk-0.2.0.md](docs/records/self-walk-0.2.0.md). Every commit
+gate over the whole repository, then all 28 checks by hand:
+`27 ok, 1 finding, 0 skipped, 0 waived, 17 for judgment`.
+
+It is a **second file**, beside the walk at
+[0.1.0](docs/records/self-walk.md) rather than over it, because the diff between
+two walks is the first thing here that shows movement.
+
+Three things in it are worth reading before the tables:
+
+- **The one finding is against this repository.** `DL-03` reports that a commit
+  removed lines from the decision log after `effective_from`. The commit is real
+  and the redaction is argued; the check cannot tell a justified redaction from
+  an entry edited away, which is the check working as specified. It is open as
+  `F6`, its disposition is the owner's, and the release ships with it standing.
+- **No check reported `skip`, and that is a loss.** At `0.1.0` four did, and the
+  first walk called them the point of that walk — the only exercise of the
+  `skip` path and of a conditional obligation anywhere here. Mapping
+  `investigations` to a real investigation was right and it cost that. The
+  cleaner-looking summary is the worse one, and the walk says so.
+- **`M11`'s deviation from the verifiability gate is named at the gate.** The
+  second repository's audit is redacted and a reader cannot verify it. That is
+  recorded in the release walk as a knowing deviation rather than passed over.
 
 ### A second repository adopted, and the audit is published redacted
 

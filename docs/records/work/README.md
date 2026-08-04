@@ -23,7 +23,7 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M10](m10.md) | The first checker, written from the specification alone | M8 | done |
 | [M11](m11.md) | The second repository adopts, and every finding is disposed of by the rule | M10 | done |
 | [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | done |
-| [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | planned |
+| [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | done |
 
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
