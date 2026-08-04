@@ -55,6 +55,7 @@ the file. Append a row when you append an entry.
 | [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
 | [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
 | [The first checker is DevOfPie/strucgu-check, and it is public](#the-first-checker-is-devofpiestrucgu-check-and-it-is-public) | Names M10's repository before M10 starts |
+| [The orchestrator that landed M8 is disqualified from implementing M10](#the-orchestrator-that-landed-m8-is-disqualified-from-implementing-m10) | Why M10 opens in a fresh session |
 | [The fixtures were wrong about `DL-03`, and the specification stays as it is](#the-fixtures-were-wrong-about-dl-03-and-the-specification-stays-as-it-is) | Corrects five fixture expectations M6 shipped |
 | [A check may carry more than one violating fixture tree](#a-check-may-carry-more-than-one-violating-fixture-tree) | The `fixtures/` shape rule, relaxed |
 | [A transcription defect is repaired; the rule it exposed is left open](#a-transcription-defect-is-repaired-the-rule-it-exposed-is-left-open) | `WU-04`, and what a check reports while its halves disagree |
@@ -93,6 +94,7 @@ the file. Append a row when you append an entry.
 | [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
 | [M20 and M21 swapped roles, and two entries above still point the old way](#m20-and-m21-swapped-roles-and-two-entries-above-still-point-the-old-way) | A link that resolves and misdirects, and which two entries to read backwards |
 | [The queue gained a row during this branch's own review, and it is not scheduled](#the-queue-gained-a-row-during-this-branchs-own-review-and-it-is-not-scheduled) | `F20` moves the counts to seventeen open and eight unscheduled; the nine are unchanged |
+| [A phase plan whose phase has ended is put in the past tense, not cut](#a-phase-plan-whose-phase-has-ended-is-put-in-the-past-tense-not-cut) | How `F19` closed, and the rule the next phase inherits |
 
 ---
 
@@ -2294,3 +2296,40 @@ That it was found at all is the argument for the row existing. The instance was
 caught by a person re-reading a plan against itself, after every gate here had
 passed over it, and a gap recorded only in a rationale entry is a gap nothing
 tracks.
+
+---
+
+## 2026-08-04 — M14, two records are corrected before the phase reads them
+
+### A phase plan whose phase has ended is put in the past tense, not cut
+
+`F19` found [work/README.md](work/README.md)'s opening paragraph asserting that
+M8–M13 were scoped and unstarted, and that `planned` and `deferred` were words
+its table had never used. Both were true when written and neither survived the
+phase closing. [m14.md](work/m14.md) allowed either fix — past tense, or a cut
+with the cut recorded — and left the choice to the unit, so the choice is
+recorded here rather than left in the diff.
+
+**Past tense.** Cutting would have removed two things that are still load
+bearing. The first is the reason a phase is scoped in that file rather than in a
+plan document: a phase described anywhere else is a second home for status, and
+that argument governs phase three exactly as it governed phase two — M14 to M21
+are in the same table for the same reason. The second is the definitions of
+`planned` and `deferred`. `planned` is in use by eight rows right now, and the
+`reopened` paragraph immediately below says that word *joins that vocabulary*,
+which is a sentence with nothing to join if the vocabulary is deleted.
+
+What the cut would have bought is a shorter file, and what it would have cost is
+a reader arriving at the scope contract with no statement of why scope lives
+there. That trade is bad in this instance and it is worth naming as a rule,
+because the same paragraph will be stale again the day phase three closes:
+**a plan's claims about its own phase are put in the past tense when the phase
+ends; its rules are left in the present tense, because they are not about that
+phase.** The test is whether the sentence describes a state or a practice.
+
+This is a correction to a record and not a reopening of any unit. No unit's
+*Done means* asserted the paragraph — it belongs to the phase-two plan, which is
+scope rather than a definition of done — and [triage.md](triage.md) reopens a
+unit whose own claim is false. A new rule gets applied too widely before it gets
+applied well, and the first place to hold that line is the first correction after
+the rule ships.

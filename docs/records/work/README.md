@@ -24,7 +24,7 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M11](m11.md) | The second repository adopts, and every finding is disposed of by the rule | M10 | done |
 | [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | done |
 | [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | done |
-| [M14](m14.md) | Two records are corrected before the phase reads them | — | planned |
+| [M14](m14.md) | Two records are corrected before the phase reads them | — | done |
 | [M15](m15.md) | A bump sized by what an implementer must re-do | — | planned |
 | [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | planned |
 | [M17](m17.md) | The expectation file learns to say what it currently cannot | M15, M16 (ordering) | planned |
@@ -36,11 +36,12 @@ building** — that is what this split is for. Nothing here restates another fil
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
 
-M8–M13 are **scoped and unstarted.** They are written here rather than in a plan
-document because this file is where scope lives, and a phase described anywhere
-else is a second home for status. `planned` means agreed and not begun;
-`deferred` means agreed to happen later than its number suggests. Neither has
-appeared in this table before, and neither means `done`.
+M8–M13 were **scoped and unstarted** when this paragraph was written. That phase
+has since closed and all six are `done`. A phase is scoped here rather than in a
+plan document because this file is where scope lives, and a phase described
+anywhere else is a second home for status — which is why M14–M21 are here too.
+`planned` means agreed and not begun; `deferred` means agreed to happen later
+than its number suggests. Neither means `done`.
 
 `reopened` joins that vocabulary: a shipped unit whose claim was found false and
 is being corrected in place rather than succeeded, per
