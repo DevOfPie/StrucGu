@@ -1,6 +1,6 @@
 # triage-rule
 
-**base** · 0.3.0 · requires nothing
+**base** · 0.4.0 · requires nothing
 
 One document draws the line between what the work in flight requires and
 everything else, says what happens on each side, and says what to do when two
@@ -40,6 +40,12 @@ Stated plainly, because a README that only argues one side is advertising.
 - **A queue nobody reviews is worse than no queue.** Deferring to a list that is
   never read is forgetting with extra steps and a clear conscience. If nobody
   will review it, do not adopt this.
+- **Naming your destination is not enough; you have to link it.** A rule that
+  reads perfectly to a person — "write it in the findings queue" — reports a
+  finding until the words are a link. That is deliberate: a name does not break
+  when the destination moves, and a rule pointing at a place that has moved is
+  the defect this module was extracted after finding. It still costs you an edit
+  to a document that was not wrong.
 - **It needs an owner.** Someone has to decide what gets promoted from the queue.
   In a project with no such person, deferred items accumulate and the rule
   becomes a way of never fixing anything.

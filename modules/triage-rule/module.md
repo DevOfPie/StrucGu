@@ -27,13 +27,30 @@ table's *In spec* and *Out of spec* rows.
 
 **Satisfied in this repository by** [docs/records/triage.md](../../docs/records/triage.md).
 
-### `triage-destination` — the document names where out-of-scope findings go
+### `triage-destination` — the document links to where out-of-scope findings go
 
 **Purpose.** A boundary with no destination on the far side is an instruction to
 forget. The destination must be somewhere a reader can actually reach from the
 rule, because a rule naming a place that has moved reads as correct to everyone
 who already knows where the place is — which is everyone except the person the
 rule was written for.
+
+**A link, and not merely a name.** This obligation asks for the one form of
+reference that can be resolved and therefore can rot audibly. A document naming
+its destination only in prose satisfies nothing here: nothing about that name
+breaks when the destination moves, which is exactly the failure the obligation
+exists to catch. The wording used to say *names*, which read as though prose
+counted, while [`TR-03`](#tr-03--role_referenced--behaviour) has only ever
+resolved links — the obligation is narrowed to what is checkable rather than the
+check widened to what is not. See
+[decisions.md](../../docs/records/decisions.md#the-obligation-is-narrowed-to-what-the-check-can-see-rather-than-the-check-widened-to-prose).
+
+**Prose is not forbidden, and the link need not be in the sentence stating the
+rule.** A rule may read "out of scope, write it in the findings queue and carry
+on" and satisfy this obligation on the strength of a link anywhere else in the
+document. [`fixtures/satisfies-prose-destination/`](fixtures/satisfies-prose-destination/)
+is that tree, and a checker reporting a finding on it has read the obligation as
+being about the sentence rather than about the document.
 
 **Required.** Conditional. Applies when `findings-queue` is adopted. A repository
 routing findings to an issue tracker instead satisfies the obligation's purpose
@@ -103,12 +120,18 @@ names one that has moved.
 **Reports `skip`** when `findings-queue` is not adopted or the `findings` role
 is unmapped.
 
-**Known false positives.** The check resolves markdown links only. A document
-naming its destination in prose rather than as a link reports a finding despite
-satisfying the obligation's purpose — and prose is the form the original defect
-took. Recorded as `F2` in [docs/records/findings.md](../../docs/records/findings.md);
-a repository hitting it should record a deviation rather than reword its
-document to satisfy a check.
+**Known false positives.** None. The check resolves markdown links only, and
+that is now what `triage-destination` asks for: a document naming its
+destination in prose alone reports a finding, and the finding is correct.
+
+**What that costs, stated rather than hidden.** A rule whose prose is perfectly
+clear to a human reader still fails this check until someone adds a link, and
+prose is the form the original defect took. The remedy is one link, not a
+deviation and not a rewritten document — the one repository outside this one to
+have hit it named its destination in fenced blocks, and adding the link was both
+the cheapest fix and the right one. `F2` in
+[docs/records/findings.md](../../docs/records/findings.md) is closed on that
+evidence.
 
 ### `TR-04` · `pattern_present` · declaration
 

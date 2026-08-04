@@ -192,15 +192,22 @@ Each module has a `fixtures/` directory:
 ```
 fixtures/
   satisfies/           a tree where every check passes
+  satisfies-<suffix>/  another tree where every check passes, pinning a boundary
+                       whose content satisfies/ cannot also hold
   violates-DL-01/      a tree where exactly DL-01 fails
   violates-DL-02/
   ...
   expected.md          per fixture, the exact finding a correct checker produces
 ```
 
-Run yours against all of them. `satisfies/` must produce no findings; each
-`violates-*` must produce exactly the finding named in `expected.md` and no
+Run yours against all of them. Every `satisfies*` tree must produce no findings;
+each `violates-*` must produce exactly the finding named in `expected.md` and no
 others.
+
+A tree whose name asserts that everything passes is not a spare copy of
+`satisfies/`. It is there because a checker can be wrong in a way that produces
+a **finding on a correct repository**, and that failure has no tree to catch it
+unless one exists where the check must stay quiet.
 
 This is what makes a specification with no reference implementation workable,
 and it is also the only evidence the checks detect anything at all — a check

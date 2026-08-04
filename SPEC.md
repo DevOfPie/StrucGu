@@ -47,7 +47,7 @@ row names a directory — exactly what that row lists inside it:
 | `module.yaml` | required | The same obligations and checks as data. Convenience. |
 | `CHANGELOG.md` | required | Per version, what a previously clean adopter will newly see. |
 | `templates/` | required | Starting files, one per role where a starting file makes sense. Licensed MIT-0. |
-| `fixtures/` | required | A `satisfies/` tree, at least one `violates-<CHECK-ID>/` tree per check, `expected.md`, and `expected.yaml`. A check with more than one boundary worth pinning may carry further trees named `violates-<CHECK-ID>-<suffix>/` — a boundary needing two trees is otherwise unpinnable, and an unpinned boundary is where two correct-looking checkers disagree. See [Fixture expectations](#fixture-expectations). |
+| `fixtures/` | required | A `satisfies/` tree, at least one `violates-<CHECK-ID>/` tree per check, `expected.md`, and `expected.yaml`. A check with more than one boundary worth pinning may carry further trees named `violates-<CHECK-ID>-<suffix>/` — a boundary needing two trees is otherwise unpinnable, and an unpinned boundary is where two correct-looking checkers disagree. A boundary pinned by a tree where **every check passes** is named `satisfies-<suffix>/`, for the case `satisfies/` cannot hold because the content that pins it contradicts what that tree already carries. Each name asserts what its tree does: `violates-<CHECK-ID>` that the tree violates that check, `satisfies-` that nothing here fails. See [Fixture expectations](#fixture-expectations). |
 
 **Prose is normative; the manifest is convenience.** A checker may read either.
 If they disagree, `module.md` wins **and the disagreement is a defect — report
@@ -185,7 +185,7 @@ check of an existing kind is a module edit. That friction ratio is deliberate.
 | `pattern_present` | Every listed pattern matches somewhere in the target. | one role |
 | `pattern_absent` | No listed pattern matches anywhere in the target. | one role |
 | `links_resolve` | Every relative link and anchor in the target resolves. | one or more roles |
-| `role_referenced` | The target contains a relative link resolving to another role's path. | two roles |
+| `role_referenced` | The target contains a relative link resolving to another role's path, anywhere in it. | two roles |
 | `history_deletions` | Commits removed lines from the target. Requires `effective_from`. Read from the repository whose root is the audited root. | one role |
 
 **There is no `kind: shell` and there never will be.** A manifest that can carry
@@ -256,8 +256,12 @@ an adopter can recognise one.
 - `pattern_present` and `pattern_absent` cannot see intent. A pattern matching
   inside a code block, a quotation, or an example is a match.
 - `role_referenced` resolves markdown links only. A record that names its
-  destination in prose rather than as a link is not covered. See
-  [findings.md](docs/records/findings.md) `F2`.
+  destination in prose rather than as a link is not covered — which makes this a
+  limitation on the **obligation** rather than a false positive in the check:
+  an obligation served by this kind asks for a link, never for a name, or it
+  claims coverage the check does not have. `F2` in
+  [findings.md](docs/records/findings.md) is closed on that reading, and
+  `triage-destination` is the obligation that was reworded to it.
 - `history_deletions` cannot distinguish an entry being erased from a file being
   split or renamed. It reports for a look; the judgment is a person's.
 
@@ -602,8 +606,23 @@ exfiltration channel with a friendly name.
 ## Base and prerequisites
 
 **Base** — a module without which an adoption is not an adoption. Three carry
-`base: true`: `triage-rule`, `decision-log`, `findings-queue`. Each states in its
-README what breaks without it.
+`base: true`.
+
+**This section is the argument's one normative home.** Every other document that
+mentions the base set links here rather than restating it, including
+[README.md](README.md). Two prose statements that must agree and that no check
+can compare will eventually disagree, and the one that gets edited is whichever a
+reader arrived at first.
+
+| Base module | What breaks without it |
+| --- | --- |
+| `triage-rule` | Nothing decides what belongs in the findings queue, so no row in it can be wrong about anything. |
+| `decision-log` | There is no record of why a choice was made, so a project that disagrees with a module here has nothing to argue from. |
+| `findings-queue` | Every incidental discovery becomes scope, which is the failure this whole family exists to prevent. |
+
+Each module's own README argues its adoption in full, at a length this table is
+not trying to reach. What is normative here is which three are base and what
+their absence breaks.
 
 Nothing forces adoption of anything, and a repository may copy a template and owe
 nothing at all. But "adopt this catalog and skip the decision log" is like "use

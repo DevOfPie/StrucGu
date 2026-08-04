@@ -67,6 +67,9 @@ the file. Append a row when you append an entry.
 | [The catalog cannot reach a scope contract unless a repository has units of work](#the-catalog-cannot-reach-a-scope-contract-unless-a-repository-has-units-of-work) | M11's more valuable half |
 | [A redacted audit is weaker evidence than an open one, and the release gate is deviated from knowingly](#a-redacted-audit-is-weaker-evidence-than-an-open-one-and-the-release-gate-is-deviated-from-knowingly) | What the walk record is worth |
 | [The first objection is declined, and what that costs the channel is not argued away](#the-first-objection-is-declined-and-what-that-costs-the-channel-is-not-argued-away) | Disposes of M11's objection, and what a decline teaches |
+| [The base set argument is normative in SPEC.md, and the README links to it](#the-base-set-argument-is-normative-in-specmd-and-the-readme-links-to-it) | Closes `F1` |
+| [The obligation is narrowed to what the check can see, rather than the check widened to prose](#the-obligation-is-narrowed-to-what-the-check-can-see-rather-than-the-check-widened-to-prose) | Closes `F2`, and what the rejected option would have cost |
+| [A passing fixture tree that `satisfies/` cannot hold is named `satisfies-<suffix>/`](#a-passing-fixture-tree-that-satisfies-cannot-hold-is-named-satisfies-suffix) | Answers the naming question A17 left open |
 
 ---
 
@@ -1351,3 +1354,158 @@ applies to itself. The deviation carries a `review_by` so the question comes bac
 whether or not anyone remembers it, and this entry is what makes the second
 answer consistent with the first — or makes the change of mind visible if it is
 not.
+
+---
+
+## 2026-08-04 — M12, F1 and F2 are closed
+
+Both rows were recorded during phase one, neither was produced by a check, and
+neither would have been produced by one: they are observations about the
+catalog's own construction. They are closed here together because they were
+scheduled together, not because they are related.
+
+### The base set argument is normative in SPEC.md, and the README links to it
+
+The what-breaks-without-it argument for `triage-rule`, `decision-log` and
+`findings-queue` lived in two documents at once —
+[README.md](../../README.md) "Why three modules are base" and
+[SPEC.md](../../SPEC.md) "Base and prerequisites" — and had already drifted in
+wording, which is what `F1` recorded. Neither statement was wrong. Nothing kept
+them together, and no check in this catalog can see prose agreeing with prose.
+
+**[SPEC.md](../../SPEC.md#base-and-prerequisites) is the normative home.** The
+three-row table moved there; the README now names the three modules and links.
+
+The choice is not a coin toss between two documents that both explain things.
+
+- SPEC.md declares itself normative in its first line and everything under
+  `modules/` is downstream of it. A document that says that about itself and
+  then defers the definition of `base` to a README is describing a contract it
+  does not hold.
+- The base list is a **contract property**. `base: true` is a manifest field
+  defined in SPEC.md's field reference, and growing the list is a versioning
+  rule defined in SPEC.md's versioning table. The argument for *why three*
+  belongs beside both, because it is the thing a major-version proposal to add a
+  fourth has to defeat.
+- The objection channel argues against stated purposes in normative documents.
+  An objection to the base set aimed at a README is aimed at marketing copy.
+- One of the two cross-links already existed and already pointed this way:
+  [adopting.md](../adopting.md) sends a reader asking about partial adoption to
+  `SPEC.md#base-and-prerequisites`, not to the README.
+
+**What it costs.** The front door no longer carries the argument, so a reader
+deciding whether to adopt takes one hop to find out what the base set is for.
+That is the right trade only because of who edits what: a README is revised for
+tone, length and first impressions by people who are not revising the contract,
+and every one of those revisions was a chance for the two statements to move
+apart again.
+
+**What did not change.** Each module's README still argues its own adoption in
+full, at a length the table in SPEC.md is not trying to reach. That is a
+hierarchy — the catalog-level claim in one place, the module-level argument in
+the module — rather than the duplication `F1` is about.
+
+### The obligation is narrowed to what the check can see, rather than the check widened to prose
+
+`role_referenced` resolves markdown links only. `triage-destination` used to say
+the triage document **names** where out-of-scope findings go, which reads as
+though a sentence would do. `TR-03` has never accepted a sentence. The gap was
+recorded as `F2` at the first release and left open deliberately, because both
+ways of closing it were available and neither had any evidence behind it.
+
+**Taken: the obligation is reworded to say what the check does.** It now reads
+*the document links to where out-of-scope findings go*, its purpose says why a
+link and not a name, and
+[`fixtures/satisfies-prose-destination/`](../../modules/triage-rule/fixtures/satisfies-prose-destination/)
+is a tree where the rule names its destination in prose, the resolving link sits
+two sections away, and `TR-03` reports `ok`. `TR-03` itself is untouched. The
+module's advice that a repository hitting this should record a deviation is
+withdrawn: the remedy is one link.
+
+**Not taken: a new check kind matching a path-shaped string anywhere in the
+target.** That is the option that would have made the obligation's old wording
+true, and it is the more generous reading of what an adopter meant. Its cost, in
+the order that decided it:
+
+- **A major version on the catalog's highest-value check.** A check added is a
+  major bump by a rule this repository argues at length —
+  [a new check never ships in a minor version](#a-new-check-never-ships-in-a-minor-version)
+  — and it would have landed on a base module, in the one area where the catalog
+  claims its checks are worth having.
+- **An addition to a deliberately closed vocabulary.** [SPEC.md](../../SPEC.md)
+  opens the check-kind table with "Closed. Adding a kind is a change to this
+  document, not to a module. That friction ratio is deliberate." An eighth kind
+  is affordable exactly once before the friction stops meaning anything.
+- **False positives on any prose that quotes a path.** Every document in this
+  repository quotes paths; so does every triage rule worth reading. A check that
+  reports a pass because a sentence happens to contain something path-shaped is
+  measuring the presence of a string, which is the cut criterion in
+  [triage.md](triage.md) applied to a behaviour check — and one that passes for
+  the wrong reason is worse than one that fails for the right one, because
+  nobody investigates a pass.
+
+**The evidence that decided it, and it did not exist when `F2` was written.**
+
+- [M11](work/m11.md)'s second repository named its findings destination in
+  fenced code blocks and never linked it. `TR-03` fired. The correct fix was to
+  **add the link**, and it was cheap — one edit to a document that was already
+  clear to its readers and already wrong for anyone arriving later. Being strict
+  about links produced the right outcome on a repository that was not built to
+  demonstrate anything.
+- [M10](work/m10.md)'s `A12` settled that a reference-style link counts as a
+  link, so the strictness being defended here is strictness about *linking*, not
+  about one syntax for it.
+- `A17` had already relaxed the one-violating-tree-per-check rule, which made
+  the third-shape fixture this option needs a smaller specification change than
+  it would have been when `F2` was written.
+
+**Why this is a MINOR and not a MAJOR.** No check was added, removed or changed,
+and no repository that passed `TR-03` starts failing it — the bump rule is what
+a previously clean adopter newly sees, and the answer is nothing. The
+obligation's *shape* in the sense the versioning table means it — its id, its
+roles, `required`, its condition — is unchanged; what moved is a title and a
+purpose, narrowed onto the check that was already there. It is not a PATCH
+either: the module now asks for something narrower than the words it shipped
+with, and it withdraws advice an adopter may have acted on. The one adopter this
+is visible to is one that recorded a deviation on the strength of that advice.
+Their deviation still stands — deviations belong to the repository that records
+them — but the justification this module offered for it is gone, and they should
+add the link.
+
+**On the risk this unit named against itself.** [M12](work/m12.md) warned that
+the cheaper option is also the one with the stronger argument available to it,
+which is the condition under which a decision gets taken on cost and justified
+on principle afterwards. The defence is the ordering — this waited for two units
+that produced real instances of the check's behaviour — and the requirement that
+the cost of the rejected option be stated, which is the section above. If that
+section had been unwritable, the decision would have been convenience.
+
+### A passing fixture tree that `satisfies/` cannot hold is named `satisfies-<suffix>/`
+
+[A check may carry more than one violating fixture tree](#a-check-may-carry-more-than-one-violating-fixture-tree)
+left this open in as many words: a `pins-<CHECK-ID>-<what>/` category was
+proposed and declined on the grounds that settling a convention by whatever an
+implementer happened to call a directory is how an implementation's accidents
+become a specification, and "the better name is a decision for whoever needs the
+third tree". This is that unit.
+
+**The name is `satisfies-<suffix>/`,** and the reason is the property that makes
+`violates-<CHECK-ID>/` a good name: it asserts something about the tree that is
+either true or false. `violates-TR-03` claims `TR-03` fails there.
+`satisfies-prose-destination` claims nothing fails there, which is exactly what
+`expected.yaml` says and exactly what the harness checks. `pins-` would have
+named the author's intent instead, and every fixture tree in the catalog pins
+something.
+
+The shape is needed because `satisfies/` has to satisfy everything at once, and
+a boundary worth pinning here is one where a *correct* repository must not
+produce a finding — the content that pins it contradicts the content already in
+that tree. Without the shape, the only way to test that a check stays quiet when
+it should is to make the canonical satisfying tree carry every such case, and the
+first pair of mutually exclusive cases makes that impossible.
+
+[SPEC.md](../../SPEC.md) admits the shape in the same release, and
+[auditing.md](../auditing.md) says why such a tree is not a spare copy of
+`satisfies/`: a checker can be wrong in a way that produces a finding on a
+correct repository, and that failure has nothing to catch it unless a tree exists
+where the check must report `ok`.

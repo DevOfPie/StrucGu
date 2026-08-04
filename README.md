@@ -84,20 +84,13 @@ repository now has something it can check itself against.
 ### Why three modules are base
 
 Nothing makes you adopt anything. But once you do, three of the five come with
-it, because the rest of the catalog rests on them and each one's absence breaks
-something specific:
+it — `triage-rule`, `decision-log`, `findings-queue` — because the rest of the
+catalog rests on them and each one's absence breaks something specific.
 
-| Base module | What breaks without it |
-| --- | --- |
-| `triage-rule` | Nothing decides what belongs in the findings queue, so the queue cannot be wrong about anything. |
-| `decision-log` | There is no record of why a choice was made, so a project that disagrees with a module here has nothing to argue from. |
-| `findings-queue` | Every incidental discovery becomes scope, which is the failure this whole family exists to prevent. |
-
-"Adopt StrucGu but skip the decision log" is like "use semantic versioning but
-skip version numbers" — the word stops meaning anything. That is a definition,
-not a demand. **The base list stays at three**, and growing it is a major
-version that has to argue its case, because a base list that grows makes
-adoption all-or-nothing, and all-or-nothing is enforcement wearing a new name.
+**What breaks without each, and why the list stays at three, is in
+[SPEC.md](SPEC.md#base-and-prerequisites).** It is stated there and not here on
+purpose: this was the same argument in two places, in wording that had already
+drifted apart, and no check can see prose agreeing with prose.
 
 ---
 

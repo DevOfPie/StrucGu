@@ -69,6 +69,29 @@ What it produced, and what it is worth:
   conventions generalise, and no objection would have been the uninformative case
   rather than the reassuring one.
 
+### Two things this catalog knew were wrong about itself are fixed
+
+Both were recorded at `0.1.0` as rows in
+[findings.md](docs/records/findings.md), neither was produced by a check, and
+neither could have been. They are closed together and the rows are moved to that
+file's `Closed` section rather than deleted — a queue that empties by deletion
+cannot show what it caught.
+
+- **The base set was argued in two documents at once**, in wording that had
+  already drifted apart. [SPEC.md](SPEC.md#base-and-prerequisites) is now the one
+  normative home for what breaks without each base module, and
+  [README.md](README.md) links to it. Nothing about the base set itself changed;
+  it is still three, and growing it is still a major version.
+- **`triage-destination` claimed coverage `TR-03` does not have.** The obligation
+  said the triage document *names* where out-of-scope findings go; the check has
+  only ever resolved markdown links. The obligation is narrowed to say *links
+  to*, and the check is left exactly as strict as it was. A repository naming its
+  destination in prose alone gets a finding, correctly, and the remedy is one
+  link rather than the deviation this module used to advise. The alternative —
+  an eighth check kind matching a path-shaped string anywhere in a document —
+  was rejected at a stated cost, in
+  [decisions.md](docs/records/decisions.md#the-obligation-is-narrowed-to-what-the-check-can-see-rather-than-the-check-widened-to-prose).
+
 ### The contract
 
 [SPEC.md](SPEC.md) defines a third schema identifier, `strucgu/expected@1`, and
@@ -104,6 +127,14 @@ run outputs:
 - `fixtures/` takes **at least** one violating tree per check, with further
   trees named `violates-<CHECK-ID>-<suffix>/`. A check with two boundaries worth
   pinning could not previously have both pinned.
+- `fixtures/` also takes `satisfies-<suffix>/` — a tree where **every check
+  passes**, for a boundary `satisfies/` cannot pin because the content
+  contradicts what that tree already carries. A checker can be wrong in a way
+  that produces a finding on a correct repository, and until now that failure had
+  nothing to catch it.
+- `role_referenced` resolving markdown links only is stated as a constraint on
+  the **obligations** that use the kind rather than as a false positive in the
+  check: such an obligation asks for a link, never for a name.
 
 [auditing.md](docs/auditing.md) gains the missing entry in its closed list of
 reasons a run cannot start — an adopted `history_deletions` check with no
@@ -125,7 +156,7 @@ Since then, all five have moved again:
 | --- | --- | --- | --- |
 | [decision-log](modules/decision-log/) | `0.3.0` | `DL-03` reports `skip`, not `ok`, where no history is readable. A fixture pins that runs of spaces are not collapsed when slugging an anchor. | Nothing, unless the audited root is not a git repository — there `DL-03` reports `skip` instead of `ok`, which is a pass correctly downgraded to "I could not tell". |
 | [findings-queue](modules/findings-queue/) | `0.3.0` | A second violating tree for `FQ-06` pins that a reference-style link is a link. | Nothing. |
-| [triage-rule](modules/triage-rule/) | `0.3.0` | A fixture pins that code is not scanned for links. | Nothing. |
+| [triage-rule](modules/triage-rule/) | `0.4.0` | A fixture pins that code is not scanned for links. `triage-destination` asks for a link rather than a name, and a second fixture pins that the link may sit anywhere in the document rather than in the sentence stating the rule. | Nothing. `TR-03` is unchanged, so no repository that passed it starts failing it — but an adopter who recorded a deviation because this module advised one for a prose reference should add the link instead. |
 | [investigations](modules/investigations/) | `0.2.1` | Its `module.md` no longer says this repository leaves the role unmapped, because it does not. | Nothing. |
 | [work-units](modules/work-units/) | `0.2.1` | `WU-04`'s pattern was HTML-escaped in `module.md` and could not match the placeholder text the check exists to catch. Repaired. Two fixtures pin how a `dir` role aggregates and that `pattern_present` needs every pattern. | **Findings**, if your checker read `module.md` rather than `module.yaml`. `WU-04` fires on angle-bracketed placeholders it previously ignored. |
 

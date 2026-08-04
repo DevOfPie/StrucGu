@@ -1,0 +1,16 @@
+schema: strucgu/adoption@1
+# Pinned at 0.4.0 rather than 0.1.0 like the trees beside it. A pin is a dated
+# claim about what was reviewed, and this tree was written against the
+# obligation as it reads from 0.4.0 — the version that stopped saying "names"
+# and started saying "links to".
+modules:
+  triage-rule:
+    version: "0.4.0"
+    adopted: 2026-08-04
+    roles:
+      triage_doc: triage.md
+  findings-queue:
+    version: "0.1.0"
+    adopted: 2026-08-04
+    roles:
+      findings: findings.md

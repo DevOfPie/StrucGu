@@ -2,7 +2,7 @@
 # module.md is normative. If the two disagree, that is a defect to report.
 schema: strucgu/module@1
 id: triage-rule
-version: 0.3.0
+version: 0.4.0
 title: Triage rule
 summary: >
   One document draws the line between what the work in flight requires and
@@ -36,11 +36,14 @@ obligations:
     roles: [triage_doc]
 
   - id: triage-destination
-    title: The document names where out-of-scope findings go
+    title: The document links to where out-of-scope findings go
     purpose: >
       A boundary with no destination on the far side is an instruction to
       forget. A rule naming a place that has moved reads as correct to everyone
-      who already knows where the place is.
+      who already knows where the place is. A link is the one form of reference
+      that breaks audibly when the destination moves, so it is the form asked
+      for; a name in prose alone satisfies nothing here. The link may sit
+      anywhere in the document rather than in the sentence stating the rule.
     required: conditional
     condition: >
       Applies when findings-queue is adopted. A repository routing findings to
@@ -95,8 +98,9 @@ checks:
       queue. The rule names a destination the reader cannot reach from it, or
       names one that has moved.
     false_positives: >
-      Resolves markdown links only. A document naming its destination in prose
-      reports a finding despite serving the purpose. See finding F2.
+      None. Resolves markdown links only, which is what triage-destination asks
+      for: a document naming its destination in prose alone reports a finding,
+      and the finding is correct. The remedy is one link. See finding F2, closed.
 
   - id: TR-04
     obligation: triage-precedence

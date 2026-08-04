@@ -56,6 +56,19 @@ checks:
     TR-04: ok
     TR-05: finding
 
+  # A tree in the third shape: every check passes, and it is not `satisfies/`
+  # because the content it needs contradicts that tree's. The rule sentence
+  # names the destination in prose only — "write one row in the findings queue"
+  # — and the resolving link is in a table further down. TR-03 is ok. A checker
+  # that read triage-destination as being about the sentence rather than about
+  # the document reports a finding here.
+  satisfies-prose-destination:
+    TR-01: ok
+    TR-02: ok
+    TR-03: ok
+    TR-04: ok
+    TR-05: ok
+
 judgment:
   triage.boundary-is-a-claim: judgment
   triage.destination-is-real: judgment

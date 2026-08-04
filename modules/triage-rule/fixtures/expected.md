@@ -13,6 +13,11 @@ listed.
 **These trees deliberately contain broken links.** They are fixtures, not
 documentation, and are excluded from any repository-wide link check.
 
+**One tree here is in a third shape.** `satisfies-prose-destination/` is neither
+`satisfies/` nor a `violates-*` tree: every check passes, and it exists because
+the content that pins its boundary contradicts what `satisfies/` has to hold.
+[SPEC.md](../../../SPEC.md) admits the shape as `satisfies-<suffix>/`.
+
 ## `satisfies/`
 
 No findings. `TR-01` through `TR-05` all `ok`. Four `judgment` lines still
@@ -81,3 +86,32 @@ The document links to `scope.md`, which is not there.
 
 `TR-03` still passes: the link to the findings queue resolves. Only the other
 one is broken, which is what keeps this fixture testing one check.
+
+## `satisfies-prose-destination/`
+
+**The tree that states the limitation instead of hiding it.** The rule names its
+destination in prose — "write one row in the findings queue and carry on" — and
+the resolving link is in a table two sections further down, under a heading that
+says why it is there.
+
+| Check | |
+| --- | --- |
+| `TR-01` `TR-02` `TR-03` `TR-04` `TR-05` | `ok` |
+
+`TR-03` reporting `ok` is the whole tree. `triage-destination` asks for a link
+and says nothing about where in the document it sits, so a rule that reads as a
+sentence rather than as a path conforms to `TR-03` on the strength of a link
+elsewhere.
+A checker that looked for the link in the sentence stating the rule — a reading
+the obligation's old wording invited, since it spoke of the document *naming* a
+destination — reports a finding here and is wrong.
+
+Read it against [`violates-TR-03/`](violates-TR-03/), which is the same shape
+with the link absent altogether: prose alone is a finding, prose plus a link
+anywhere is `ok`. The pair is what closed `F2` in
+[findings.md](../../../docs/records/findings.md) — the check was left as strict
+as it was and the obligation was narrowed to match it.
+
+This tree pins its adoption record at `0.4.0` where the others pin `0.1.0`,
+because a pin is a dated claim about what was reviewed and this tree was
+reviewed against the obligation as `0.4.0` words it.
