@@ -13,9 +13,10 @@ Contract terms are defined in [SPEC.md](../../SPEC.md).
 | `unit_template` | file | The skeleton new records start from. |
 | `unit_index` | file | The index, and the one place rules common to all units are stated. |
 
-Module-level exclusions from `unit_dir`: `_*`, `README.md`, `index.md`. A
-template and an index living inside the directory they describe is the common
-layout and must not be reported as an unfilled record.
+`unit_dir` excludes `_*`, `README.md`, `index.md` — declared on the role, per
+[SPEC.md](../../SPEC.md) "Roles", and matched against each file's basename at any
+depth. A template and an index living inside the directory they describe is the
+common layout and must not be reported as an unfilled record.
 
 ## Obligations
 
@@ -118,7 +119,7 @@ completed is reported like any other. Exclude it or close it.
 **Binds** `unit_dir`. No pattern may match.
 
 ```
-&lt;[A-Za-z][A-Za-z ]*&gt;
+<[A-Za-z][A-Za-z ]*>
 TODO|TBD|FIXME
 ```
 

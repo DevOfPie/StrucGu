@@ -16,15 +16,3 @@ If they conflict, the conflict is a defect — report it, do not pick.
 
 In spec, fix it now inside the current unit. Out of spec, do not fix it —
 append one row to [findings.md](findings.md) and carry on.
-
-## Recording one
-
-A row names where the issue was observed:
-
-```
-| F1 | Example | [scope.md](scope.md) | Observed 2026-07-31 | No |
-```
-
-There is no `scope.md` in this tree. The block above is an example, and **code is
-not scanned for links** — a checker reporting `TR-05` here is reporting a finding
-against an example of its own check.

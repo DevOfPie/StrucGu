@@ -47,7 +47,7 @@ row names a directory — exactly what that row lists inside it:
 | `module.yaml` | required | The same obligations and checks as data. Convenience. |
 | `CHANGELOG.md` | required | Per version, what a previously clean adopter will newly see. |
 | `templates/` | required | Starting files, one per role where a starting file makes sense. Licensed MIT-0. |
-| `fixtures/` | required | A `satisfies/` tree, one `violates-<CHECK-ID>/` tree per check, `expected.md`, and `expected.yaml`. See [Fixture expectations](#fixture-expectations). |
+| `fixtures/` | required | A `satisfies/` tree, at least one `violates-<CHECK-ID>/` tree per check, `expected.md`, and `expected.yaml`. A check with more than one boundary worth pinning may carry further trees named `violates-<CHECK-ID>-<suffix>/` — a boundary needing two trees is otherwise unpinnable, and an unpinned boundary is where two correct-looking checkers disagree. A boundary pinned by a tree where **every check passes** is named `satisfies-<suffix>/`, for the case `satisfies/` cannot hold because the content that pins it contradicts what that tree already carries. Each name asserts what its tree does: `violates-<CHECK-ID>` that the tree violates that check, `satisfies-` that nothing here fails. See [Fixture expectations](#fixture-expectations). |
 
 **Prose is normative; the manifest is convenience.** A checker may read either.
 If they disagree, `module.md` wins **and the disagreement is a defect — report
@@ -114,9 +114,21 @@ This is what lets a repository adopt a convention without renaming anything.
 to a security scanner, and a repository with years of history has no interest in
 moving files to satisfy a convention it just adopted.
 
-A role declares a `cardinality` of `file` or `dir`. When a role is `dir`, a check
-bound to it applies to every markdown file in that directory, minus the module's
-`exclude` list and the adoption record's.
+A role declares a `cardinality` of `file` or `dir`. A role of `cardinality: dir`
+may also declare an `exclude` list.
+
+When a role is `dir`, a check bound to it applies to every markdown file in that
+directory **and below it**, minus that role's `exclude` list — matched against
+each file's basename, at any depth — and the adoption record's, matched against
+the path relative to the repository root. A record filed in a subdirectory is
+still a record; a directory a checker declines to descend into is reported as
+neither checked nor skipped, which is the one outcome the five states exist to
+prevent.
+
+The check reports **one** state for the role: `finding` if any file fails it,
+`ok` only if every file passes. A role with no surviving markdown file fails
+`path_exists`, so a content check never runs vacuously over an empty directory
+and reports `ok` from nothing having been looked at.
 
 When an obligation declares `forms` and the shape differs between them, a role
 declares `cardinality: by_form` and a `cardinality_by_form` map from form id to
@@ -168,13 +180,13 @@ check of an existing kind is a module edit. That friction ratio is deliberate.
 
 | kind | observes | binds |
 | --- | --- | --- |
-| `path_exists` | The role resolves to an existing, tracked path. For a `dir` role, the directory must also contain at least one file that survives exclusions — an empty directory satisfies a filesystem check while satisfying nothing the obligation wanted. | one role |
+| `path_exists` | The role resolves to an existing path. Where the audited root is a git repository the path must also be tracked — a role mapped at an ignored or never-added path exists for its author and for nobody who clones. Where it is not a repository, existence is the whole test: trackedness has no truth value there, and requiring it would fail every check on an exported tree, including these fixtures. For a `dir` role, the directory must also contain at least one **markdown** file that survives exclusions — a directory holding only an empty-directory placeholder satisfies a filesystem check while satisfying nothing the obligation wanted. | one role |
 | `heading_present` | Every listed pattern matches at least one heading. | one role |
 | `pattern_present` | Every listed pattern matches somewhere in the target. | one role |
 | `pattern_absent` | No listed pattern matches anywhere in the target. | one role |
 | `links_resolve` | Every relative link and anchor in the target resolves. | one or more roles |
-| `role_referenced` | The target contains a relative link resolving to another role's path. | two roles |
-| `history_deletions` | Commits removed lines from the target. Requires `effective_from`. | one role |
+| `role_referenced` | The target contains a relative link resolving to another role's path, anywhere in it. | two roles |
+| `history_deletions` | Commits removed lines from the target. Requires `effective_from`. Read from the repository whose root is the audited root. | one role |
 
 **There is no `kind: shell` and there never will be.** A manifest that can carry
 an executable string means adopting a module is arbitrary code execution on the
@@ -216,14 +228,25 @@ to the right document with a rotted anchor passes here and is reported by
 `links_resolve`, which is where it belongs.
 
 **A check whose target cannot be read reports `skip`, not a finding.** When
-`path_exists` fails for a role, every other check bound to that role skips: they
-did not observe anything, and reporting five findings for one absent file
-tells a reader the repository is five times more broken than it is.
+`path_exists` fails for a role, every other check bound to **only** that role
+skips: they did not observe anything, and reporting five findings for one absent
+file tells a reader the repository is five times more broken than it is.
+
+A check bound to more than one role evaluates over the roles that did resolve,
+and skips only when none of them did. A `links_resolve` bound to three roles, one
+of which is absent, has read two of them and reporting `skip` would claim it
+could not tell.
 
 `history_deletions` reports commits, not lines, and **must not be run over
 history earlier than the adoption record's `effective_from`.** Without that
 bound, the first run on a mature repository produces four-figure findings, and
 an audit that reports four thousand findings on day one is deleted the same day.
+
+**History comes from the repository rooted at the audited root** — the directory
+holding `strucgu.yaml`. A checker does not discover the repository by walking up
+from there: an adoption record vendored inside a larger repository, or a
+submodule checked out in place, would otherwise be audited against history its
+owner does not control, producing findings naming commits they cannot see.
 
 ### Known false positives
 
@@ -233,8 +256,12 @@ an adopter can recognise one.
 - `pattern_present` and `pattern_absent` cannot see intent. A pattern matching
   inside a code block, a quotation, or an example is a match.
 - `role_referenced` resolves markdown links only. A record that names its
-  destination in prose rather than as a link is not covered. See
-  [findings.md](docs/records/findings.md) `F2`.
+  destination in prose rather than as a link is not covered — which makes this a
+  limitation on the **obligation** rather than a false positive in the check:
+  an obligation served by this kind asks for a link, never for a name, or it
+  claims coverage the check does not have. `F2` in
+  [findings.md](docs/records/findings.md) is closed on that reading, and
+  `triage-destination` is the obligation that was reworded to it.
 - `history_deletions` cannot distinguish an entry being erased from a file being
   split or renamed. It reports for a look; the judgment is a person's.
 
@@ -242,7 +269,11 @@ an adopter can recognise one.
 
 Everything a check cannot decide. A manifest declares them so that a purely
 mechanical run can never look complete: **a checker emits one `judgment` line per
-entry whether or not anyone is available to judge it.**
+entry whether or not anyone is available to judge it**, and whether or not the
+roles it names resolve. Where a `read:` role is unmapped or unreadable the line
+says so — the entry is still emitted, because a mechanical run must never look
+complete, but a person handed the output must not be sent to a document that is
+not there. The state does not vary by tree; the annotation does.
 
 ```yaml
 judgment:
@@ -338,7 +369,7 @@ so that this document describes a contract rather than its only instances.
 | `base` | required | Whether an adoption is incomplete without it. Three modules carry `true`. |
 | `requires` | required | Module ids this one needs to be falsifiable. May be empty. |
 | `applies_when`, `not_for` | required | Evaluated by a person at adoption time, never by a checker. |
-| `roles` | required | `id`, `cardinality`, `of`. May be empty only if every check binds roles from a prerequisite. |
+| `roles` | required | `id`, `cardinality`, `of`, and `exclude` on a `dir` role. May be empty only if every check binds roles from a prerequisite. |
 | `obligations` | required | See [Obligations](#obligations). |
 | `checks` | required | Every check names an existing obligation and existing roles. |
 | `judgment` | required | May be empty, and empty is a claim worth questioning. |
@@ -402,7 +433,7 @@ deviations:
 | `version` | required | **Exact.** A checker refuses to run against a floating version — see [Versioning](#versioning). |
 | `adopted` | required | The date the claim was made. |
 | `form` | when the module declares `forms` | Which shape this repository uses. |
-| `effective_from` | when any adopted check is `history_deletions` | A commit or date. History before it is out of scope. |
+| `effective_from` | when any adopted check is `history_deletions` | A commit or a date — a commit if git resolves it, a date otherwise. **Exclusive:** the named commit is the last one out of scope, and where a date is given commits are compared by committer date. History before it is not out of compliance; it is not covered. |
 | `roles` | required | Role id to path. `~` means deliberately unmapped, and every check bound to it reports `skip`. |
 | `exclude` | optional | Globs excluded from every `dir` role. |
 | `deviations` | optional | Accepted findings. |
@@ -575,8 +606,23 @@ exfiltration channel with a friendly name.
 ## Base and prerequisites
 
 **Base** — a module without which an adoption is not an adoption. Three carry
-`base: true`: `triage-rule`, `decision-log`, `findings-queue`. Each states in its
-README what breaks without it.
+`base: true`.
+
+**This section is the argument's one normative home.** Every other document that
+mentions the base set links here rather than restating it, including
+[README.md](README.md). Two prose statements that must agree and that no check
+can compare will eventually disagree, and the one that gets edited is whichever a
+reader arrived at first.
+
+| Base module | What breaks without it |
+| --- | --- |
+| `triage-rule` | Nothing decides what belongs in the findings queue, so no row in it can be wrong about anything. |
+| `decision-log` | There is no record of why a choice was made, so a project that disagrees with a module here has nothing to argue from. |
+| `findings-queue` | Every incidental discovery becomes scope, which is the failure this whole family exists to prevent. |
+
+Each module's own README argues its adoption in full, at a length this table is
+not trying to reach. What is normative here is which three are base and what
+their absence breaks.
 
 Nothing forces adoption of anything, and a repository may copy a template and owe
 nothing at all. But "adopt this catalog and skip the decision log" is like "use
@@ -621,3 +667,11 @@ Propagation is pull-only. No bot, no pull request, no notification. The mechanis
 is the pin: a checker notices the module it read is newer than the version
 declared and prints one line pointing at that module's changelog. That is the
 entire push surface, and it is a print statement.
+
+**A checker evaluates the module as it reads it.** Nothing in a module lets it
+evaluate a version other than the one in the working tree, so an exact pin that
+is behind the module on disk does not withhold newly added checks — it records
+what the adopter agreed to and produces the notice. Where the read version is a
+MAJOR ahead of the pin, checks may have been added since the adopter agreed, and
+the notice says so. The pin documents intent and reports drift; it does not
+constrain what runs, and a reader should not assume otherwise.

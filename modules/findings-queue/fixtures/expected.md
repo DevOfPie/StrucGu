@@ -81,3 +81,20 @@ A row cites `triage.md#glossary`. The document is there; that heading is not.
 to the triage document, which is all `role_referenced` asks; the rotted anchor
 belongs to `links_resolve`. A checker that fails both has conflated two checks
 that answer different questions.
+
+## `violates-FQ-06-reference-link/`
+
+**Pins which markdown constructs count as a link.** The `Where` cell uses a
+reference-style link, `[the old queue][old]`, defined at the foot of the file as
+`archive/findings.md`. That path is not in the tree.
+
+| Check | |
+| --- | --- |
+| `FQ-06` | **finding** — the reference definition points at `archive/findings.md`, which does not resolve |
+| everything else | `ok` |
+
+`violates-FQ-06/` pins a rotted anchor on an inline link. This tree pins that a
+reference-style link is a link at all. [SPEC.md](../../../SPEC.md) says how a
+link resolves and never says what a link is, so a checker extracting inline
+links only reports `ok` here — and reference links are commonest in exactly the
+documents this module describes, where one destination is cited many times.

@@ -69,7 +69,10 @@ and `finding` is hiding two states.
 
 Could not run: no `strucgu.yaml`, an unparseable one, a version pin that is not
 exact, a module directory that is not there, an adopted module with `forms` and
-no `form` declared.
+no `form` declared, or an adopted `history_deletions` check with no
+`effective_from` — the bound is required, because without it the first run on a
+mature repository produces the four-figure output that gets an audit deleted on
+day one.
 
 Findings are output, not failure. This is not a soft default that people are
 expected to override — it is the recommended behaviour, and a flag to gate on
@@ -99,6 +102,12 @@ day one is deleted on day one.
 `add`, `commit`, `update-index`. `git checkout` used to make an operation atomic
 is the single command that has already destroyed uncommitted work in the
 repository this catalog came from, twice.
+
+**Read history from the audited root, not from whatever encloses it.** Git finds
+a repository by walking up; a checker must not. An adoption record vendored
+inside a monorepo, or a submodule checked out in place, is otherwise audited
+against history its owner does not control. Where the audited root is not itself
+a repository root there is no history to read.
 
 **File anything anywhere.** See [objections](#objections-are-drafted-not-filed).
 
@@ -183,16 +192,28 @@ Each module has a `fixtures/` directory:
 ```
 fixtures/
   satisfies/           a tree where every check passes
+  satisfies-<suffix>/  another tree where every check passes, pinning a boundary
+                       whose content satisfies/ cannot also hold
   violates-DL-01/      a tree where exactly DL-01 fails
   violates-DL-02/
   ...
   expected.md          per fixture, the exact finding a correct checker produces
 ```
 
-Run yours against all of them. `satisfies/` must produce no findings; each
-`violates-*` must produce exactly the finding named in `expected.md` and no
+Run yours against all of them. Every `satisfies*` tree must produce no findings;
+each `violates-*` must produce exactly the finding named in `expected.md` and no
 others.
+
+A tree whose name asserts that everything passes is not a spare copy of
+`satisfies/`. It is there because a checker can be wrong in a way that produces
+a **finding on a correct repository**, and that failure has no tree to catch it
+unless one exists where the check must stay quiet.
 
 This is what makes a specification with no reference implementation workable,
 and it is also the only evidence the checks detect anything at all — a check
 nobody has watched fail has not been shown to detect anything.
+
+**What a clean run entitles you to say** is [conformance.md](conformance.md).
+Read it before you write the sentence: matching every expectation means the
+fixtures did not catch you, which is a narrower claim than it sounds, and five
+things a checker has to get right are exercised by no tree in the catalog.

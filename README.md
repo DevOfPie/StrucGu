@@ -7,8 +7,10 @@ go that are not scope.
 Adopt a module and your repository can check itself against what it claimed. It
 is a way of finding drift in your own project, run by you, on your own terms.
 
-**Status: 0.1.0.** Five modules, extracted from one repository. Expect the shape
-to move. See [what 0.x means here](#what-0x-means-here).
+**Status: 0.2.0.** Five modules, extracted from one repository, since implemented
+once and adopted once elsewhere. Breaking: a checker written against `0.1.0`
+needs changing. Expect the shape to keep moving. See
+[what 0.x means here](#what-0x-means-here).
 
 ---
 
@@ -21,9 +23,11 @@ it will be read.
 - **There is no enforcement.** StrucGu never blocks your work, never opens an
   issue on your behalf, and never runs anywhere you did not run it.
 - **There is no certification.** No badge, no score, no conformance level, no
-  list of adopters. StrucGu keeps no records about anyone who uses it — that is
-  a structural guarantee, not a promise of good behaviour. There is nothing to
-  certify against because upstream holds nothing.
+  list of adopters, and no register of implementations. StrucGu keeps no records
+  about anyone who uses it — that is a structural guarantee, not a promise of
+  good behaviour. There is nothing to certify against because upstream holds
+  nothing. What "conforms" does mean, and what it deliberately cannot, is
+  [docs/conformance.md](docs/conformance.md).
 - **There is no tool to install.** StrucGu ships no runner, no binary, no
   action, no dependency. See [Spec, not software](#spec-not-software).
 - **There is no verdict.** A check produces a *finding* — a report, with a
@@ -44,7 +48,9 @@ What it ships instead is a **specification** — each check defined precisely
 enough to implement, plus **fixtures**: tiny repository trees that violate a
 check, and the exact finding a correct implementation must produce on each. You
 write the checker, in whatever your project already uses, and the fixtures tell
-you whether you got it right.
+you whether you got it right. What "right" means is stated —
+[docs/conformance.md](docs/conformance.md) — along with the things a clean run
+does not demonstrate, because the fixtures cannot reach them.
 
 This costs you the checker. It buys three things: nothing new enters your
 dependency manifest, your build, or your CI; a shop that has only PowerShell is
@@ -84,20 +90,13 @@ repository now has something it can check itself against.
 ### Why three modules are base
 
 Nothing makes you adopt anything. But once you do, three of the five come with
-it, because the rest of the catalog rests on them and each one's absence breaks
-something specific:
+it — `triage-rule`, `decision-log`, `findings-queue` — because the rest of the
+catalog rests on them and each one's absence breaks something specific.
 
-| Base module | What breaks without it |
-| --- | --- |
-| `triage-rule` | Nothing decides what belongs in the findings queue, so the queue cannot be wrong about anything. |
-| `decision-log` | There is no record of why a choice was made, so a project that disagrees with a module here has nothing to argue from. |
-| `findings-queue` | Every incidental discovery becomes scope, which is the failure this whole family exists to prevent. |
-
-"Adopt StrucGu but skip the decision log" is like "use semantic versioning but
-skip version numbers" — the word stops meaning anything. That is a definition,
-not a demand. **The base list stays at three**, and growing it is a major
-version that has to argue its case, because a base list that grows makes
-adoption all-or-nothing, and all-or-nothing is enforcement wearing a new name.
+**What breaks without each, and why the list stays at three, is in
+[SPEC.md](SPEC.md#base-and-prerequisites).** It is stated there and not here on
+purpose: this was the same argument in two places, in wording that had already
+drifted apart, and no check can see prose agreeing with prose.
 
 ---
 
@@ -153,11 +152,69 @@ surface, and it is a print statement.
 
 ## What 0.x means here
 
-The whole catalog was extracted from a single repository. One instance is not
-enough to know which conventions are general and which are one project's habits
-wearing a rule's clothing. 0.x is the honest label for that: **pins are cheap,
-breaking changes will happen, and the objection channel is the point rather than
-the exception.**
+This used to be a disclaimer: the catalog came from one repository, one instance
+cannot tell a general convention from one project's habits, so pin cheaply and
+expect breakage. The disclaimer was right and it was untested. Two things have
+since tested it, and this section is what they returned.
+
+**Someone implemented the specification, and it was not precise enough.** A
+checker was written from the published repository alone, under a rule forbidding
+it to ask questions. It came back with **eighteen places where the specification
+did not determine what a checker should do** — every one recorded before the code
+that resolved it, sixteen answered by rewording the contract and two by a fixture
+that pins the boundary, and two of the eighteen leaving a question still standing
+in [findings.md](docs/records/findings.md). **Six of the eighteen were resolved
+at medium confidence**, meaning the reading taken is defensible rather than
+forced. None was resolved at low confidence, and that says less than it looks:
+low would mean a guess the implementer distrusted, and an implementer who reaches
+that point files a question instead. Eighteen is the honest measure of how much
+of this contract was in its author's head rather than on the page.
+
+It got worse before it got better. The same implementation was **broken on
+purpose nine ways, one stated rule at a time, and five of the nine still
+reproduced every fixture** in the catalog as it then stood. Fixtures were added
+until none of the nine goes unnoticed. What a clean run means, and what it still
+does not, is [docs/conformance.md](docs/conformance.md).
+
+**A second repository adopted, and its audit changed no module.** Four checks
+fired against it. Two were fixed — one of them the same defect this catalog was
+extracted after finding, reproduced independently. The other two were answered
+with the objection channel's first real use, arguing that a different queue shape
+serves the same obligations, and **the objection was declined.** No obligation
+was amended, no `form` was recognised, no check was narrowed. **No module changed
+as a result of any objection, from that adopter or anyone.** What a decline costs
+a channel whose whole value is that filing is worth doing is stated rather than
+offset, in
+[decisions.md](docs/records/decisions.md#the-first-objection-is-declined-and-what-that-costs-the-channel-is-not-argued-away).
+What the audit did produce is six rows in
+[findings.md](docs/records/findings.md), four of them naming records this catalog
+cannot reach at all.
+
+**Neither result is evidence that these conventions generalise, and the reason is
+the same both times.** The implementer shares a model lineage with phase one's
+co-author. The second repository shares a convention lineage with the repository
+this was extracted from — it imported those conventions deliberately, so a clean
+map there was the expected outcome and tests re-application inside one lineage
+rather than generality. That is **two data points, both from parties adjacent to
+the author.** It is a great deal more than this repository had a release ago and
+it is not a track record. The generality question needs a repository built by
+someone who has never read LinkCtrl, and nothing here answers it.
+
+Two further limits, stated here rather than left in the records that admit them.
+The second repository is private, so
+[its walk](docs/records/second-repository-walk.md) is redacted and **a reader
+cannot verify it** — a knowing deviation from this repository's own release gate,
+named at the gate in [the release walk](docs/records/self-walk-0.2.0.md). And
+this repository's own walk now reports **no `skip` anywhere**, so the escape
+hatch that keeps "I did not look" from being reported as "I looked and it was
+fine" has no live demonstration outside the fixture trees. That is a loss and the
+walk records it as one.
+
+So 0.x still means what it said: **pins are cheap, breaking changes will happen,
+and the objection channel is the point rather than the exception.** `0.2.0` is
+itself a breaking release — below `1.0.0` a breaking change collapses into the
+minor digit rather than
+[claiming a stability this section disclaims](docs/records/decisions.md#below-100-a-breaking-change-collapses-into-the-minor-digit).
 
 ## Provenance and evidence
 
@@ -179,7 +236,7 @@ check nobody has watched fail has not been shown to detect anything.
 | --- | --- |
 | [SPEC.md](SPEC.md) | The module contract. Normative. Everything else is downstream of it. |
 | [modules/](modules/) | The five modules. |
-| [docs/](docs/) | Adopting, auditing, objections. |
+| [docs/](docs/) | Adopting, auditing, [conformance](docs/conformance.md), objections. |
 | [docs/records/](docs/records/) | StrucGu's own records. |
 | [strucgu.yaml](strucgu.yaml) | StrucGu's own adoption record. |
 

@@ -83,6 +83,39 @@ promise the unit closes.
 | `WU-06` | **finding** — the template does not ask for dependencies or discharges |
 | `WU-01` `WU-02` `WU-03` `WU-04` `WU-05` `WU-07` | `ok` |
 
+## `violates-WU-03-second-record/`
+
+**Pins how a `dir` role becomes one state.** `work/` holds two records. `m1.md`
+is complete; `m2.md` has a definition of done and no risks section.
+
+| Check | |
+| --- | --- |
+| `WU-03` | **finding** — `work/m2.md` is missing a section its own template requires |
+| everything else | `ok` |
+
+`violates-WU-03/` already pins that the check fires on a non-conforming record.
+This tree pins something the single-record trees cannot: that one bad record is
+enough. A checker reporting `ok` because `m1.md` passes has read
+[SPEC.md](../../../SPEC.md) as "finding only if every file fails", and no
+single-record tree can tell the two rules apart.
+
+## `violates-WU-06-one-pattern-only/`
+
+**Pins that `pattern_present` requires every listed pattern.** The template asks
+for dependencies and never asks what the unit discharges, so exactly one of
+`WU-06`'s two patterns matches.
+
+| Check | |
+| --- | --- |
+| `WU-06` | **finding** — the template does not ask what promise the unit closes |
+| everything else | `ok` |
+
+`violates-WU-06/` removes the content matching *both* patterns, so it fires under
+either rule. This tree fires only under the rule
+[SPEC.md](../../../SPEC.md) states — every listed pattern must match. A checker
+satisfied by any one reports `ok` here and reproduces every other tree in the
+catalog.
+
 ## `violates-WU-07/`
 
 `work/m1.md` declares a dependency on `m0.md`, which does not exist.

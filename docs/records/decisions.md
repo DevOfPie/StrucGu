@@ -55,6 +55,29 @@ the file. Append a row when you append an entry.
 | [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
 | [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
 | [The first checker is DevOfPie/strucgu-check, and it is public](#the-first-checker-is-devofpiestrucgu-check-and-it-is-public) | Names M10's repository before M10 starts |
+| [The fixtures were wrong about `DL-03`, and the specification stays as it is](#the-fixtures-were-wrong-about-dl-03-and-the-specification-stays-as-it-is) | Corrects five fixture expectations M6 shipped |
+| [A check may carry more than one violating fixture tree](#a-check-may-carry-more-than-one-violating-fixture-tree) | The `fixtures/` shape rule, relaxed |
+| [A transcription defect is repaired; the rule it exposed is left open](#a-transcription-defect-is-repaired-the-rule-it-exposed-is-left-open) | `WU-04`, and what a check reports while its halves disagree |
+| [The ambiguity log is the investigation that outgrew a decision entry](#the-ambiguity-log-is-the-investigation-that-outgrew-a-decision-entry) | Why the `investigations` role is mapped now |
+| [Four modules move a minor version and the fifth waits for a decision](#four-modules-move-a-minor-version-and-the-fifth-waits-for-a-decision) | Bumps for M10, and the one that is not the worker's to take |
+| [Repairing a check's transcription is not adding a check](#repairing-a-checks-transcription-is-not-adding-a-check) | Answers the entry above, and bumps `work-units` |
+| [Declining a module is a stronger answer than mapping its roles to nothing](#declining-a-module-is-a-stronger-answer-than-mapping-its-roles-to-nothing) | Corrects what `adopting.md` recommends |
+| [The second repository's intake file is its findings queue, and mapping it elsewhere would have hidden the answer](#the-second-repositorys-intake-file-is-its-findings-queue-and-mapping-it-elsewhere-would-have-hidden-the-answer) | The mapping M11 turns on |
+| [An objection was filed rather than a deviation recorded, because a waiver claims a reason that is not settled](#an-objection-was-filed-rather-than-a-deviation-recorded-because-a-waiver-claims-a-reason-that-is-not-settled) | The objection channel's first real use |
+| [The catalog cannot reach a scope contract unless a repository has units of work](#the-catalog-cannot-reach-a-scope-contract-unless-a-repository-has-units-of-work) | M11's more valuable half |
+| [A redacted audit is weaker evidence than an open one, and the release gate is deviated from knowingly](#a-redacted-audit-is-weaker-evidence-than-an-open-one-and-the-release-gate-is-deviated-from-knowingly) | What the walk record is worth |
+| [The first objection is declined, and what that costs the channel is not argued away](#the-first-objection-is-declined-and-what-that-costs-the-channel-is-not-argued-away) | Disposes of M11's objection, and what a decline teaches |
+| [The base set argument is normative in SPEC.md, and the README links to it](#the-base-set-argument-is-normative-in-specmd-and-the-readme-links-to-it) | Closes `F1` |
+| [The obligation is narrowed to what the check can see, rather than the check widened to prose](#the-obligation-is-narrowed-to-what-the-check-can-see-rather-than-the-check-widened-to-prose) | Closes `F2`, and what the rejected option would have cost |
+| [A passing fixture tree that `satisfies/` cannot hold is named `satisfies-<suffix>/`](#a-passing-fixture-tree-that-satisfies-cannot-hold-is-named-satisfies-suffix) | Answers the naming question A17 left open |
+| [Conformance is measured against `expected.yaml`, and reproducing it is not evidence of correctness](#conformance-is-measured-against-expectedyaml-and-reproducing-it-is-not-evidence-of-correctness) | What the criterion measures, and what it proves |
+| [The register a prospective adopter wants is the register a standards body keeps](#the-register-a-prospective-adopter-wants-is-the-register-a-standards-body-keeps) | Why `F14`'s gap stays open, and what that costs |
+| [The only implementation in existence does not conform to `decision-log` 0.3.0](#the-only-implementation-in-existence-does-not-conform-to-decision-log-030) | Stale rather than false, on a live instance |
+| [Two clauses were cut for having no origin, and a third for being an expiry](#two-clauses-were-cut-for-having-no-origin-and-a-third-for-being-an-expiry) | What M9's clause-origin rule removed |
+| [The two versioning rules measure different readers, and the conflict is reported rather than picked](#the-two-versioning-rules-measure-different-readers-and-the-conflict-is-reported-rather-than-picked) | Reports a conflict between SPEC.md and CHANGELOG.md, and which governs which version |
+| [Below 1.0.0, a breaking change collapses into the minor digit](#below-100-a-breaking-change-collapses-into-the-minor-digit) | Closes `F7`, and sizes this release |
+| [The second walk exercises `skip` nowhere, and that is a loss rather than a cleaner summary](#the-second-walk-exercises-skip-nowhere-and-that-is-a-loss-rather-than-a-cleaner-summary) | What mapping `investigations` cost the self-walk |
+| [Two data points adjacent to the author are not a track record](#two-data-points-adjacent-to-the-author-are-not-a-track-record) | What the rewritten 0.x section may and may not claim |
 
 ---
 
@@ -898,3 +921,880 @@ look identical, and only the ambiguity log would have differed.
 This is recorded rather than left in conversation because the rule it applies is
 attested and not verifiable. A kept restriction and a broken one leave the same
 trace in the checker, so the trace has to be here instead.
+
+---
+
+## 2026-08-03 — M10, the first checker and what it could not determine
+
+*The checker itself is [DevOfPie/strucgu-check](https://github.com/DevOfPie/strucgu-check),
+built in a separate session under the input restriction this log records above.
+Its 18 ambiguity records and the write-up drawn from them are filed here as
+[investigations/0001](investigations/0001-what-the-specification-does-not-determine.md).
+These entries are the catalog's answers to what that log found, and only the
+answers that are not obvious from the diff.*
+
+### The fixtures were wrong about `DL-03`, and the specification stays as it is
+
+The checker's [A03](https://github.com/DevOfPie/strucgu-check/blob/main/ambiguities/A03-history-deletions-with-no-history.md)
+found the sharpest contradiction in the catalog. Five `decision-log` fixture
+trees — `satisfies`, `violates-DL-02`, `violates-DL-04`, `violates-DL-05`,
+`violates-DL-06` — expected `DL-03: ok`. None of them is a git repository, so a
+checker running `DL-03` there reads no history at all. [SPEC.md](../../SPEC.md)
+and [auditing.md](../auditing.md) say four times between them that folding `skip`
+into `ok` is the failure that matters most, because it converts "I did not look"
+into "I looked and it was fine". The fixtures required exactly that fold, and
+`expected.yaml` is the file an implementer is told to compare against.
+
+The implementer took the fixtures, because reproducing them was the brief, and
+recorded that they believed the prose had the better of it. They were right. The
+five rows are corrected to `DL-03: skip` and the specification is not touched.
+
+The choice is worth recording because the cheaper repair was available and was
+proposed: one sentence in `SPEC.md`'s `history_deletions` row saying that a
+target with no readable history reports `ok`. That sentence would have made
+every tree pass and would have made `DL-03` report `ok` on every repository that
+has never committed, every shallow clone, every export and every extracted
+tarball — indistinguishably from a repository whose log has genuinely never been
+edited. `DL-03` is the only behaviour check behind `decision-log-append-only`,
+and `DL-04`, the declaration check, names `DL-03` as the thing that tests whether
+its declaration is true. A `DL-03` that passes without looking makes `DL-04`
+decoration, and [SPEC.md](../../SPEC.md) says decoration should be cut.
+
+**What this admits.** The fixtures shipped in [M6](work/m6.md) and were reviewed
+in [M8](work/m8.md) when they became data, and the contradiction survived both.
+Neither pass caught it because both were performed by the party that wrote the
+rule it violates. It took an implementation to find, which is what
+[M10](work/m10.md) was for and is the first concrete return on it.
+
+**What is deliberately not written down.** `SPEC.md` still does not say, in the
+`history_deletions` row, what the check reports when there is no history. The
+general rule already covers it — a check whose target cannot be read reports
+`skip` — and the five fixtures now pin it. Adding a special case for one check to
+restate a rule that already applies is how a specification acquires the
+redundancy that later drifts.
+
+### A check may carry more than one violating fixture tree
+
+`fixtures/` used to be specified as "one `violates-<CHECK-ID>/` tree per check",
+in a table introduced as listing exactly what each row names. It is now "at least
+one", with further trees permitted as `violates-<CHECK-ID>-<suffix>/`.
+
+The constraint had a consequence nobody had needed until an implementation
+existed: **a check with more than one boundary worth pinning could not have them
+pinned.** One tree demonstrates one way for a check to fail, and three of the
+rules this catalog argues hardest for need a tree in which the check *passes* and
+a wrong implementation reports a finding. `satisfies/` cannot hold them either,
+because it has to satisfy everything at once and these need contradictory
+content.
+
+This was taken because the alternative was measured rather than imagined. The
+checker's
+[mutation harness](https://github.com/DevOfPie/strucgu-check/blob/main/conformance/mutations.py)
+breaks it nine ways, one stated rule at a time, and re-runs every tree. Against
+the catalog as it stood, five breakages went unnoticed — a suite reporting a
+clean run from a checker that is measurably wrong — and two of the five were the
+matching rules `SPEC.md` gives their own paragraphs and a
+learned-the-hard-way provenance: code is not scanned for links, and runs of
+spaces are not collapsed when slugging an anchor. Both were written as warnings.
+Neither had a tree behind it. With the trees this relaxation allows, no breakage
+goes unnoticed.
+
+That correlation is the finding, not the fixtures: **a rule a specification
+bothers to argue for is a rule it learned by being wrong, and those are exactly
+the ones that were argued instead of demonstrated.**
+
+The naming convention is left alone deliberately. A tree called
+`violates-<CHECK-ID>` asserts that the tree violates that check, and the trees
+added here are the opposite — a correct checker reports nothing. The implementer
+proposed and then declined a `pins-<CHECK-ID>-<what>/` category on the grounds
+that settling a naming convention by whatever an implementer happened to call a
+directory is how an implementation's accidents become a specification. That is
+right, and the better name is a decision for whoever needs the third tree.
+
+### A transcription defect is repaired; the rule it exposed is left open
+
+`modules/work-units/module.md` carried `WU-04`'s pattern as
+`&lt;[A-Za-z][A-Za-z ]*&gt;` where [module.yaml](../../modules/work-units/module.yaml)
+carries `<[A-Za-z][A-Za-z ]*>`. The escaped form matches a literal `&lt;`, and
+cannot match `<title>` — which is what `violates-WU-04` exists to be caught by.
+The two halves render identically on GitHub, which is why it survived from M3 to
+here; it was found with `od -c`.
+
+The prose half is repaired. That is forced: the module's own
+[CHANGELOG](../../modules/work-units/CHANGELOG.md) and
+[README](../../modules/work-units/README.md) have told adopters since 0.1.0 that
+`WU-04` matches any angle-bracketed literal, so the escaped pattern was never the
+shipped contract — it was a corrupted rendering of it.
+
+The general rule the implementer proposed alongside is **not** taken. It would
+have `SPEC.md` say what state a check reports while its two halves disagree:
+evaluate under `module.md`, emit the disagreement, and report `skip` where
+`module.md`'s form cannot be evaluated at all. It is a real hole — "report it, do
+not pick" currently leaves a check with no state to be in, and a check must
+report one of five — but the wording changes what `WU-04` reports on
+`violates-WU-04` from `finding` to `skip`, which changes an expectation, which is
+not a wording fix. It stays open rather than being decided inside a unit that was
+not scoped for it.
+
+### The ambiguity log is the investigation that outgrew a decision entry
+
+[strucgu.yaml](../../strucgu.yaml) maps `investigations` at
+`docs/records/investigations/`. It was `~` from 0.1.0 until now, and
+[M10](work/m10.md) required that it stop being `~` **because a real
+investigation exists, not because one was invented to exercise the checks.**
+
+It qualifies on the module's own test: eighteen ambiguity records, a mutation
+experiment with nine deliberate bugs, and two counts that only mean anything
+stated together — 33 trees at 305 rows with five breakages unnoticed, against 36
+trees at 337 rows with none. None of that fits in an entry here, and squeezing it
+in would leave the conclusion with nothing a later reader can re-examine, which is
+the failure the `investigations` module exists to name.
+
+**What it costs.** The four `IN-*` checks were the only exercise the `skip` path
+and the conditional obligation got anywhere in this repository, and
+[self-walk.md](self-walk.md) describes them as the point of that walk. They now
+report `ok`. The repository has lost its only live demonstration that an unmapped
+role produces `skip` rather than `ok` — the single behaviour it insists on most
+loudly. That is a real loss and it is [M13](work/m13.md)'s to record; the
+[self-walk](self-walk.md) is a dated artifact of 0.1.0 and is left as it was
+rather than rewritten to match a later state.
+
+### Four modules move a minor version and the fifth waits for a decision
+
+`decision-log`, `findings-queue` and `triage-rule` move to `0.3.0`;
+`investigations` moves to `0.2.1`. None of the three checks or obligations
+changed in any of them, and no adopter newly sees a finding. The bumps are for
+fixture content that pins a boundary the fixtures did not pin before, which is
+the same reading [M8](work/m8.md) took when `expected.yaml` was added — a
+substantive change that a clean adopter never sees is a minor, and wording alone
+is a patch. `investigations` gets a patch because the only thing that changed is
+a paragraph in its `module.md` describing this repository's own adoption, which
+stopped being true when the role was mapped.
+
+`work-units` is not bumped here. Its version and its changelog entry are held
+open on a question that went to the owner unanswered. Repairing
+`WU-04`'s escaped pattern is either a patch — the shipped contract was always the
+unescaped one and the file is being brought to it — or a major, because a checker
+that followed the normative half literally reported nothing for that check and
+now reports findings against records that were clean. The inherited rule is
+absolute in one direction: a check added to a shipped module is a major version,
+never a minor. Whether repairing an inert one counts as adding it is not a
+question a worker should answer by picking, and in `0.x` a major has a second
+unsettled meaning — nothing here says whether it means `1.0.0` or collapses into
+the minor digit, and `1.0.0` would assert a stability
+[README.md](../../README.md) explicitly disclaims.
+
+### Repairing a check's transcription is not adding a check
+
+`work-units` moves to `0.2.1`. A **patch**, for a change that makes `WU-04` fire
+where it did not fire before.
+
+That sentence looks like the versioning rule being bent, which is why this entry
+exists. [SPEC.md](../../SPEC.md) defines a bump by what a previously clean
+adopter will newly see, and the rule every unit inherits is absolute in one
+direction: **a check added to a shipped module is a major version, never a
+minor.** A checker that read the normative half of `work-units` literally
+reported `WU-04: ok` on records holding `<title>` and will now report findings on
+them. Under a mechanical reading of the bump rule that is a major.
+
+**The shipped contract never moved; only its transcription did.** That is the
+argument, and it is checkable rather than a matter of taste. `WU-04` shipped in
+`0.1.0` with a violating fixture built to be caught by the unescaped pattern.
+`modules/work-units/fixtures/expected.yaml` has said `violates-WU-04` produces
+`WU-04: finding` since [M8](work/m8.md) made expectations data — third-party
+evidence, written before anyone knew the halves disagreed, of which pattern was
+meant. [module.yaml](../../modules/work-units/module.yaml) has carried the
+unescaped form since [M3](work/m3.md). And the module's own
+[README](../../modules/work-units/README.md) and `0.1.0`
+[changelog](../../modules/work-units/CHANGELOG.md) both told adopters from the
+first release that `WU-04` "has the highest false-positive rate in the catalog —
+any angle-bracketed literal in a record matches its placeholder pattern", which
+describes the unescaped pattern and no other, and recommend turning the check off
+rather than rewording records around it.
+
+Four independent artifacts describe one check. One of them — the prose — went
+through a markdown-escaping step at some point between being written and being
+committed, and came out matching a literal `&lt;`. Nothing decided that; it
+happened. A version bump announces a change in what this repository asks of an
+adopter, and this repository has asked the same thing since `0.1.0`.
+
+**The counter-argument is real and this entry does not dispose of it.**
+[SPEC.md](../../SPEC.md) calls `module.md` normative and says so in the same
+paragraph that tells a checker `module.md` wins. An implementer who followed that
+instruction was doing exactly what they were told, and their adopters see new
+findings arrive under a patch bump — which is enforcement-by-release through
+precisely the channel
+[a new check never ships in a minor version](#a-new-check-never-ships-in-a-minor-version)
+was written to close. That cost is not argued away. It is accepted, on the
+grounds that the alternative — a major version for a typo — buys the surprised
+adopter nothing they cannot get from the `0.1.0` changelog they already have,
+and spends the catalog's only major bump on a defect rather than a decision.
+Anyone it surprises has a genuine objection and
+[objections.md](../objections.md) is where it goes.
+
+**What would make this reasoning wrong.** If the two halves had stated
+*materially different* obligations rather than the same one twice, `module.md`
+would win on the merits and changing it would be a real change to what the module
+asks. The test is whether the disagreement is about intent or about
+transcription, and it is not always as easy to answer as it was here — four
+corroborating artifacts is a luxury. Where it cannot be answered, the answer is
+major.
+
+**What is deliberately left undecided.** Whether a MAJOR bump below `1.0.0` means
+`1.0.0` or collapses into the minor digit. Nothing in this repository says, and
+this entry did not need to know: the bump is a patch. Deciding the general rule
+off the one instance that did not require it is how a convention gets fixed by
+whatever the first case happened to be, which is the same failure the
+[fixture naming](#a-check-may-carry-more-than-one-violating-fixture-tree)
+discussion above declined to commit. It stays open until something actually needs
+a major.
+
+---
+
+## 2026-08-03 — M11, the second repository adopts
+
+### Declining a module is a stronger answer than mapping its roles to nothing
+
+The second repository adopted the three base modules and declined both optional
+ones outright, rather than adopting them with `~` roles. [adopting.md](../adopting.md)
+recommends the second shape — "leave roles unmapped rather than inventing files"
+— and it is the wrong recommendation for a repository the module does not apply
+to at all.
+
+An adoption is a claim that a module applies. A module adopted with every role
+unmapped makes that claim and then reports `skip` on every check, which reads as
+*applies, not got round to it yet*. Declining says *does not apply*, which is
+what was true in both cases: one module asks for records of work that comes in
+units, and that repository's records of intent describe work nobody has committed
+to; the other asks for an investigation that outgrew a decision entry, and that
+repository states the opposite position deliberately in its own scope contract.
+[SPEC.md](../../SPEC.md) already supports this — adoption is "voluntary,
+revocable, never inferred" and a partial adoption reports nothing — so nothing
+changes except which shape gets recommended for which case.
+
+`~` is still right where a module applies and a role is genuinely absent. The
+distinction is whether the module's `applies_when` is met, and that is exactly
+the question `applies_when` and `not_for` exist to make a person answer at
+adoption time.
+
+**What this costs.** The run produced no `skip` at all, in either module or
+anywhere else. Combined with this repository's own record — which lost its last
+`skip` in [M10](work/m10.md) — the catalog's most important escape hatch now has
+no live demonstration in any committed output. [M13](work/m13.md) reports that.
+
+### The second repository's intake file is its findings queue, and mapping it elsewhere would have hidden the answer
+
+That repository's process document sends anything out of scope of the work in
+flight to one file. That file is therefore its findings destination, and
+`findings` was mapped to it — which produced three findings on the first run,
+two of which are still standing.
+
+The alternative was to leave `findings` unmapped on the grounds that the file
+holds a different kind of thing from the one `findings-queue` was extracted
+around. That would have reported `skip` for six checks and `skip` for `TR-03`,
+and a `skip` means *I could not tell*. It was tellable. Choosing the mapping that
+produces no findings, over the mapping that matches what the repository's own
+rule says, is the failure [work/m11.md](work/m11.md) names in its Risks section —
+an audit performed to pass — and it would have been invisible in the output,
+because a clean run and a run that looked away are the same document.
+
+The counter-argument is real and is recorded rather than answered: if the mapping
+is wrong, the two standing findings are artifacts of the mapping and not
+information about anything. The objection below is the mechanism that settles
+which, and it carries the counter-argument in its own body.
+
+### An objection was filed rather than a deviation recorded, because a waiver claims a reason that is not settled
+
+Two checks report findings against that repository's queue: it has no evidence
+column and no review-state column. Both were left standing.
+
+[work/m11.md](work/m11.md) permits three disposals — fixed, waived with a reason
+in that repository's own adoption record, or filed as an objection. A waiver was
+available and was not taken. A deviation reports the check as `waived` with its
+reason echoed every run, and the reason on offer is that the obligations are
+wrong about queues of this shape — which is not a deviation's kind of reason. A
+deviation says *this is genuinely local to us*. This claim is that a module
+assumes a queue whose rows persist, and that a queue whose rows are consumed by a
+mandatory triage step serves both obligations' purposes by a mechanism no check
+can see. That is an argument about the module, and [objections.md](../objections.md)
+is where an argument about the module goes.
+
+**No quota produced this.** [A quota for objections manufactures the
+disagreement it counts](#a-quota-for-objections-manufactures-the-disagreement-it-counts)
+removed the requirement that one be filed, and the cost field is what filtered
+this one: complying puts a decision back into a capture step that repository's
+first principle requires to cost nothing, and duplicates a state that already
+lives in the record its triage produces. Had the cost been "we would rather not",
+the answer would have been a deviation and this entry would not exist.
+
+**Its outcome is not this unit's to take.** Three of the four outcomes in
+[objections.md](../objections.md) change a shipped module's version, and all four
+are the owner's. The objection stands undisposed, both checks report `finding`
+every run until it is disposed of, and that is the honest state rather than a
+gap in the record.
+
+### The catalog cannot reach a scope contract unless a repository has units of work
+
+The more valuable half of this unit was never the findings. It is the record
+shapes that repository keeps which this catalog has no role for, and four are
+recorded in [findings.md](findings.md) as `F9` through `F12` — two of them a
+module this catalog is missing, two of them out of scope, each answered in the
+catalog's own vocabulary rather than by describing that repository.
+
+`F9` is the one worth naming here. The audit could reach that repository's
+process document, its rationale and its deferral destination, and could not reach
+its scope contract at all — the document stating what is true and what is in
+scope for the project. The only role that comes near it is `work-units`'
+`unit_index`, which binds the scope contract to a repository having units of
+work. That repository has none, declined the module, and its most load-bearing
+record is invisible to every check in the catalog.
+
+This repository could not have found that by looking at itself.
+[work/README.md](work/README.md) is both its scope contract and its unit index,
+so the coupling has never cost it anything, and a self-walk cannot see a coupling
+it satisfies by coincidence. That is what a second adopter is for, and it is a
+better argument for the whole exercise than the check results are.
+
+**Nothing becomes a module in this phase.** `F9` and `F10` are rows, and closing
+either is a major-version argument in its own right — see
+[work/README.md](work/README.md) "Not in this phase".
+
+### A redacted audit is weaker evidence than an open one, and the release gate is deviated from knowingly
+
+[second-repository-walk.md](second-repository-walk.md) is committed with every
+path, filename and quoted line removed. [triage.md](triage.md) requires every
+documented claim to be verifiable by a reader who does not trust you, and that
+file is not. The conflict between two governing documents is reported here rather
+than resolved silently, which is the rule [triage.md](triage.md) states for
+exactly this case.
+
+The deviation is confined to that one record. Redaction and evidence pull against
+each other and redaction wins, on the same reasoning as
+[Enumerating a private repository's record shapes was itself the leak](#enumerating-a-private-repositorys-record-shapes-was-itself-the-leak):
+a public repository is not where a private one's shape gets published as a side
+effect of a milestone. The objection's body is the sharpest instance —
+[objections.md](../objections.md) requires "what your project does instead,
+concretely, with paths", so a redacted objection is not a filed one, and the body
+lives in that repository's own adoption record where it can carry the paths.
+
+**What the reader gets instead of verifiability**: the walk states what it is
+worth before it states any result, names redaction in its title, and says which
+of its claims are attested rather than checkable. That is not a substitute and is
+not offered as one.
+
+**And a clean map was expected.** That repository imported this catalog's source
+conventions deliberately and on its own record, so re-application inside one
+lineage is what this tests. It is not evidence of generality, no objection would
+have been the uninformative case rather than the reassuring one, and
+[M13](work/m13.md) is forbidden from reporting the one as the other.
+
+### The first objection is declined, and what that costs the channel is not argued away
+
+The objection filed above is **declined.** Both checks now report `waived` in
+that repository with its reason echoed every run, and the deviation block naming
+this entry is written in its adoption record.
+
+**The argument, as it was made, at full strength.** `findings-carry-evidence`
+exists because "a row saying something is broken, written a month ago by someone
+who is no longer sure, cannot be acted on and cannot be dismissed. It sits there
+forever." `findings-have-review-state` exists because "this is what separates
+noticing something from committing to fix it", and because per-item approval is
+"the whole mechanism". Both purposes describe a queue whose rows **persist** and
+are annotated in place, and both are stated as purposes rather than as shapes.
+
+That repository's queue is **consumed.** Every row is removed by a triage step
+that is mandatory per row and resolves each to exactly one of four outcomes, one
+of which is a rejection that still leaves a durable record. So the aged
+unactionable row the first obligation describes cannot form — not because someone
+is diligent, but because the structure gives a row nowhere to age. And the
+separation the second obligation wants is structural rather than columnar:
+nothing in that file is ever work, work begins only when triage produces a
+separate record, and every judging transition on that record is approved
+individually through a review the owner has to sign. Both purposes are served.
+Neither check can see it, because both read for a column.
+
+The cost of complying is real and was named concretely, which is the filter
+[objections.md](../objections.md) applies: two columns on that file turn capture
+from "append a line" into "append a row and decide what goes in three cells",
+against a first principle stating that capture must cost seconds or it does not
+happen, and a recorded decision that capture and triage were split precisely
+because they have opposite requirements. The review-state cell would also
+duplicate a state that already lives in the record triage produces — two places
+to look for one fact, which is the failure that module's own README names when it
+warns against two queues.
+
+**That is a good objection.** It is not a preference, it names a cost, and it
+argues against the `purpose` field rather than around it. It is declined anyway,
+for two reasons.
+
+**One repository is thin evidence for a form.** A `form` is the catalog saying a
+shape is *legitimately common* — configuration from then on, for everyone. What
+is known here is that one repository has a consumed queue, and that repository
+shares a convention lineage with the one these modules were extracted from, which
+is the same limit
+[The second repository is private, and it tests re-application rather than generality](#the-second-repository-is-private-and-it-tests-re-application-rather-than-generality)
+puts on everything else this unit produced. A deviation is what the catalog has
+for legitimately *local*, and one instance is what local looks like.
+
+**And the phase's own scope contract forbids it.**
+[work/README.md](work/README.md) "Specification edits are in scope, and this is
+the list" names three units and the edits each forces —
+[M8](work/m8.md), [M10](work/m10.md), [M12](work/m12.md). A `findings-queue` form
+is on none of them. That section exists because the first version of it listed no
+specification changes while three units were forcing them, and recognising an
+alternative here would be exactly the hidden scope it was written to prevent. The
+right time to add a form is a unit that says it is adding one.
+
+**What this costs, stated plainly.** This is the objection channel's first real
+use, and the answer is no. [objections.md](../objections.md) calls the channel
+"the only way a module here finds out it is wrong", and the first thing it
+returned was a decline. An adopter who files carefully, names a genuine cost, and
+gets nothing back learns that filing is not worth the effort — and the channel
+then fails silently, because a channel nobody uses looks identical to a catalog
+nobody disagrees with. That is not argued away here and it is not offset by the
+deviation: `waived` is visible and honest, and it is still the adopter carrying
+the difference rather than the catalog moving.
+
+**What would change the answer.** A second adopter with a consumed queue. At two
+independent instances the shape stops being local and the argument for a form
+stops resting on one repository's habits, which is the whole test this catalog
+applies to itself. The deviation carries a `review_by` so the question comes back
+whether or not anyone remembers it, and this entry is what makes the second
+answer consistent with the first — or makes the change of mind visible if it is
+not.
+
+---
+
+## 2026-08-04 — M12, F1 and F2 are closed
+
+Both rows were recorded during phase one, neither was produced by a check, and
+neither would have been produced by one: they are observations about the
+catalog's own construction. They are closed here together because they were
+scheduled together, not because they are related.
+
+### The base set argument is normative in SPEC.md, and the README links to it
+
+The what-breaks-without-it argument for `triage-rule`, `decision-log` and
+`findings-queue` lived in two documents at once —
+[README.md](../../README.md) "Why three modules are base" and
+[SPEC.md](../../SPEC.md) "Base and prerequisites" — and had already drifted in
+wording, which is what `F1` recorded. Neither statement was wrong. Nothing kept
+them together, and no check in this catalog can see prose agreeing with prose.
+
+**[SPEC.md](../../SPEC.md#base-and-prerequisites) is the normative home.** The
+three-row table moved there; the README now names the three modules and links.
+
+The choice is not a coin toss between two documents that both explain things.
+
+- SPEC.md declares itself normative in its first line and everything under
+  `modules/` is downstream of it. A document that says that about itself and
+  then defers the definition of `base` to a README is describing a contract it
+  does not hold.
+- The base list is a **contract property**. `base: true` is a manifest field
+  defined in SPEC.md's field reference, and growing the list is a versioning
+  rule defined in SPEC.md's versioning table. The argument for *why three*
+  belongs beside both, because it is the thing a major-version proposal to add a
+  fourth has to defeat.
+- The objection channel argues against stated purposes in normative documents.
+  An objection to the base set aimed at a README is aimed at marketing copy.
+- One of the two cross-links already existed and already pointed this way:
+  [adopting.md](../adopting.md) sends a reader asking about partial adoption to
+  `SPEC.md#base-and-prerequisites`, not to the README.
+
+**What it costs.** The front door no longer carries the argument, so a reader
+deciding whether to adopt takes one hop to find out what the base set is for.
+That is the right trade only because of who edits what: a README is revised for
+tone, length and first impressions by people who are not revising the contract,
+and every one of those revisions was a chance for the two statements to move
+apart again.
+
+**What did not change.** Each module's README still argues its own adoption in
+full, at a length the table in SPEC.md is not trying to reach. That is a
+hierarchy — the catalog-level claim in one place, the module-level argument in
+the module — rather than the duplication `F1` is about.
+
+### The obligation is narrowed to what the check can see, rather than the check widened to prose
+
+`role_referenced` resolves markdown links only. `triage-destination` used to say
+the triage document **names** where out-of-scope findings go, which reads as
+though a sentence would do. `TR-03` has never accepted a sentence. The gap was
+recorded as `F2` at the first release and left open deliberately, because both
+ways of closing it were available and neither had any evidence behind it.
+
+**Taken: the obligation is reworded to say what the check does.** It now reads
+*the document links to where out-of-scope findings go*, its purpose says why a
+link and not a name, and
+[`fixtures/satisfies-prose-destination/`](../../modules/triage-rule/fixtures/satisfies-prose-destination/)
+is a tree where the rule names its destination in prose, the resolving link sits
+two sections away, and `TR-03` reports `ok`. `TR-03` itself is untouched. The
+module's advice that a repository hitting this should record a deviation is
+withdrawn: the remedy is one link.
+
+**Not taken: a new check kind matching a path-shaped string anywhere in the
+target.** That is the option that would have made the obligation's old wording
+true, and it is the more generous reading of what an adopter meant. Its cost, in
+the order that decided it:
+
+- **A major version on the catalog's highest-value check.** A check added is a
+  major bump by a rule this repository argues at length —
+  [a new check never ships in a minor version](#a-new-check-never-ships-in-a-minor-version)
+  — and it would have landed on a base module, in the one area where the catalog
+  claims its checks are worth having.
+- **An addition to a deliberately closed vocabulary.** [SPEC.md](../../SPEC.md)
+  opens the check-kind table with "Closed. Adding a kind is a change to this
+  document, not to a module. That friction ratio is deliberate." An eighth kind
+  is affordable exactly once before the friction stops meaning anything.
+- **False positives on any prose that quotes a path.** Every document in this
+  repository quotes paths; so does every triage rule worth reading. A check that
+  reports a pass because a sentence happens to contain something path-shaped is
+  measuring the presence of a string, which is the cut criterion in
+  [triage.md](triage.md) applied to a behaviour check — and one that passes for
+  the wrong reason is worse than one that fails for the right one, because
+  nobody investigates a pass.
+
+**The evidence that decided it, and it did not exist when `F2` was written.**
+
+- [M11](work/m11.md)'s second repository named its findings destination in
+  fenced code blocks and never linked it. `TR-03` fired. The correct fix was to
+  **add the link**, and it was cheap — one edit to a document that was already
+  clear to its readers and already wrong for anyone arriving later. Being strict
+  about links produced the right outcome on a repository that was not built to
+  demonstrate anything.
+- [M10](work/m10.md)'s `A12` settled that a reference-style link counts as a
+  link, so the strictness being defended here is strictness about *linking*, not
+  about one syntax for it.
+- `A17` had already relaxed the one-violating-tree-per-check rule, which made
+  the third-shape fixture this option needs a smaller specification change than
+  it would have been when `F2` was written.
+
+**Why this is a MINOR and not a MAJOR.** No check was added, removed or changed,
+and no repository that passed `TR-03` starts failing it — the bump rule is what
+a previously clean adopter newly sees, and the answer is nothing. The
+obligation's *shape* in the sense the versioning table means it — its id, its
+roles, `required`, its condition — is unchanged; what moved is a title and a
+purpose, narrowed onto the check that was already there. It is not a PATCH
+either: the module now asks for something narrower than the words it shipped
+with, and it withdraws advice an adopter may have acted on. The one adopter this
+is visible to is one that recorded a deviation on the strength of that advice.
+Their deviation still stands — deviations belong to the repository that records
+them — but the justification this module offered for it is gone, and they should
+add the link.
+
+**On the risk this unit named against itself.** [M12](work/m12.md) warned that
+the cheaper option is also the one with the stronger argument available to it,
+which is the condition under which a decision gets taken on cost and justified
+on principle afterwards. The defence is the ordering — this waited for two units
+that produced real instances of the check's behaviour — and the requirement that
+the cost of the rejected option be stated, which is the section above. If that
+section had been unwritable, the decision would have been convenience.
+
+### A passing fixture tree that `satisfies/` cannot hold is named `satisfies-<suffix>/`
+
+[A check may carry more than one violating fixture tree](#a-check-may-carry-more-than-one-violating-fixture-tree)
+left this open in as many words: a `pins-<CHECK-ID>-<what>/` category was
+proposed and declined on the grounds that settling a convention by whatever an
+implementer happened to call a directory is how an implementation's accidents
+become a specification, and "the better name is a decision for whoever needs the
+third tree". This is that unit.
+
+**The name is `satisfies-<suffix>/`,** and the reason is the property that makes
+`violates-<CHECK-ID>/` a good name: it asserts something about the tree that is
+either true or false. `violates-TR-03` claims `TR-03` fails there.
+`satisfies-prose-destination` claims nothing fails there, which is exactly what
+`expected.yaml` says and exactly what the harness checks. `pins-` would have
+named the author's intent instead, and every fixture tree in the catalog pins
+something.
+
+The shape is needed because `satisfies/` has to satisfy everything at once, and
+a boundary worth pinning here is one where a *correct* repository must not
+produce a finding — the content that pins it contradicts the content already in
+that tree. Without the shape, the only way to test that a check stays quiet when
+it should is to make the canonical satisfying tree carry every such case, and the
+first pair of mutually exclusive cases makes that impossible.
+
+[SPEC.md](../../SPEC.md) admits the shape in the same release, and
+[auditing.md](../auditing.md) says why such a tree is not a spare copy of
+`satisfies/`: a checker can be wrong in a way that produces a finding on a
+correct repository, and that failure has nothing to catch it unless a tree exists
+where the check must report `ok`.
+
+## 2026-08-04 — M9, the conformance criterion is written
+
+*Deferred from before [M10](work/m10.md) so that it could be written from
+questions somebody had actually asked rather than from anticipation — the
+reasoning is [above](#the-conformance-criterion-waits-until-an-implementer-has-asked-for-it).
+The document is [docs/conformance.md](../conformance.md). Every clause in it
+carries the ambiguity record that produced it, in the file, beside the clause.
+These entries are the answers that are not obvious from reading it.*
+
+### Conformance is measured against `expected.yaml`, and reproducing it is not evidence of correctness
+
+Two halves, and the second is the one that keeps this document from being a
+grading scheme.
+
+**Measured against `expected.yaml`.** Not `expected.md`, which is prose that
+nothing verifies and which has already drifted — it is open as `F3` in
+[findings.md](findings.md). [auditing.md](../auditing.md) told an implementer to
+compare against the finding named in the prose file, which was the honest
+instruction before [M8](work/m8.md) made the expectations data and is not one a
+criterion can rest on: a test two readers can run and disagree about is not a
+test. The row-for-row form, and the insistence that the exact state matches
+rather than something near it, comes from
+[A03](https://github.com/DevOfPie/strucgu-check/blob/main/ambiguities/A03-history-deletions-with-no-history.md),
+where the entire disagreement was `ok` against `skip`.
+
+**And it proves less than it looks.** The first checker's mutation harness broke
+it nine ways, one stated rule at a time, and five of the nine produced a clean
+run against the catalog as it then stood. So the true content of a matched suite
+is *the trees that exist did not catch this implementation*, and the document
+says that in those words rather than in a footnote. The trees have since improved
+and none of the nine now goes unnoticed, which changes what a claim is worth and
+not what it says.
+
+The cost of stating it this way is that the strongest sentence available to an
+implementer is weaker than the one they wanted. That is the correct trade for a
+catalog that ships no runner: the alternative is a criterion whose plain reading
+overstates the evidence, and the overstatement would be this repository's rather
+than theirs.
+
+### The register a prospective adopter wants is the register a standards body keeps
+
+`F14` names the gap in as many words: nothing here records which implementations
+reproduce which release, so *has anyone implemented this, and does their run
+still match?* has no home, and it names this document as the natural one.
+
+**It stays homeless, and the request is the reason to be sure.** A list of
+conforming implementations is the artifact every one of these refusals exists to
+prevent, and it does not become something else because the first person to want
+it wanted it for a good reason. Keeping it would mean upstream holding a record
+about someone who uses this, which is the one thing
+[README.md](../../README.md#what-this-is-not) promises structurally rather than
+as good behaviour — and a structural guarantee that is kept until somebody has a
+use for breaking it was never structural.
+
+**What it costs, stated rather than offset.** A prospective adopter has no
+evidence that anyone has implemented this successfully except by reading a claim
+someone else made and re-running it. Anyone may claim conformance falsely and
+this repository will never know, never say so, and have no standing to. Both are
+accepted. The defence is that verification is cheap and local — clone, run,
+compare — so the claim a register would centralise is one every reader can
+already check for themselves, and centralising it buys convenience at the price
+of the guarantee.
+
+For the same reason there is no process to register, submit or announce a
+conforming implementation: no form, no template, no address. The
+[objection channel](../objections.md) is not it, and the distinction is worth
+holding — an objection is a disagreement with an obligation and all four of its
+outcomes change the catalog, where news about an implementation would change
+nothing here except the existence of a list.
+
+### The only implementation in existence does not conform to `decision-log` 0.3.0
+
+[strucgu-check](https://github.com/DevOfPie/strucgu-check) reproduced every row
+of every module at `0.2.0`. `decision-log` then went to `0.3.0`, correcting five
+`DL-03` rows from `ok` to `skip`
+([why](#the-fixtures-were-wrong-about-dl-03-and-the-specification-stays-as-it-is)),
+and that checker still reports `ok` on those five. It conforms to `decision-log`
+0.2.0. It does not conform to `decision-log` 0.3.0. Both are true, and the
+document says so with the module and the version named.
+
+This was the test of whether the criterion could be written honestly. A criterion
+under which the only existing checker conformed by construction would be a
+criterion shaped around a reference implementation, which is the risk
+[m9.md](work/m9.md) names against itself and the reason the unit waited. The
+handling is **stale, not false**: a claim is about the version it names and stays
+true of that version, and a module releasing a check makes the claim older rather
+than wrong. Nobody withdraws anything, because propagation here is pull-only and
+falling behind is the designed behaviour rather than a failure of it.
+
+**What the instance exposed on the way past.** `decision-log` `0.3.0` was a
+correct MINOR — its changelog says a previously clean adopter newly sees nothing,
+and that is true. A conformance claim went stale anyway.
+[SPEC.md](../../SPEC.md#versioning) sizes a bump by what an *adopter* sees, and
+the reader whose claim just moved is an *implementer*. The versioning table has
+no row for that, and the criterion does not need one to work — it names a
+version and the version moved — so the gap is recorded as `F16` rather than
+closed here.
+
+### Two clauses were cut for having no origin, and a third for being an expiry
+
+[m9.md](work/m9.md) makes a clause with no traceable question a clause written on
+anticipation, and cuts it. Recording the cuts costs a paragraph and is worth more
+than the clauses that survived, by the same argument this repository already
+applies to [the six checks it cut](#six-checks-were-cut-for-measuring-presence-rather-than-thought).
+
+- **"A claim names the catalog commit, not only the module version."** Would have
+  guarded against a module's fixtures moving without its version moving. Nobody
+  asked: no ambiguity record raises it, and the one instance in evidence did move
+  the version. It is anticipation about a hazard that is real, which is the most
+  persuasive kind and still anticipation — so the hazard is filed as `F16` and the
+  clause is not written.
+- **"A conforming implementation publishes the readings it took where the
+  specification is silent."** Tempting, because the ambiguity log is the most
+  valuable thing [M10](work/m10.md) produced. But it was produced because M10's
+  brief required it, not because an implementer asked to be required to, and
+  turning one brief's obligation into a condition of conformance is upstream
+  setting homework it cannot mark. It is also the first step of a submission
+  process, which is [deliberately absent](#the-register-a-prospective-adopter-wants-is-the-register-a-standards-body-keeps).
+- **"A claim is re-run each release, or lapses."** This is what `F14` makes one
+  want to write, and it is an expiry on a self-assertion. Upstream cannot see
+  anyone miss it, so the rule would be decoration; making it enforceable would
+  need the register that is refused. **Stale, not false** does the same work
+  without either.
+
+## 2026-08-04 — M13, the phase closes and the version is argued
+
+*The release walk is [self-walk-0.2.0.md](self-walk-0.2.0.md), committed beside
+the walk at `0.1.0` rather than over it. These entries are the four things the
+close decided that reading the walk would not tell you.*
+
+### The two versioning rules measure different readers, and the conflict is reported rather than picked
+
+Two documents in this repository size a version bump, and on this release they
+disagree.
+
+- [SPEC.md](../../SPEC.md#versioning) sizes a bump by **what a previously clean
+  adopter will newly see**. Read against this phase it says MINOR: no check was
+  added, no obligation's shape changed, the base list did not move, no role was
+  renamed. Four of the five modules' own changelogs say "nothing" in the fixed
+  sentence and they are right.
+- [CHANGELOG.md](../../CHANGELOG.md) sizes **this repository's** version, and
+  calls a change breaking when *an adoption record or a checker written against
+  the old contract needs changing*. Read against this phase it says breaking,
+  and not marginally.
+
+[triage.md](triage.md) says a conflict between governing documents is a bug to
+report rather than a choice to make quietly, so this is the report.
+
+**Neither is wrong, and they are not measuring the same thing.** SPEC.md's table
+is adopter-facing and sized for a *module*: it answers "will my repository start
+reporting something new". The CHANGELOG's table is implementer-facing and sized
+for the *contract*: it answers "does the thing I wrote against this still work".
+This phase changed almost nothing an adopter sees and a great deal an
+implementer must re-read:
+
+- the **Roles** paragraph is rewritten — recursion into subdirectories, where
+  the `exclude` list lives and what it matches, and per-file results collapsing
+  to one state for the role (`A07`, `A10`, `A15`)
+- **`effective_from` is exclusive**, and a date is compared against committer
+  date (`A13`)
+- **`path_exists` on a `dir` role** requires a *markdown* file surviving
+  exclusions, not any file (`A02`)
+- a check bound to **more than one role** evaluates over the roles that resolved
+  and skips only when none did (`A01`)
+- `fixtures/` admits **more than one violating tree** per check (`A17`) and a
+  **third tree shape**, `satisfies-<suffix>/` (`M12`)
+
+Every one of those changes what a conformant run outputs. A checker written
+against `0.1.0` is wrong on all five, and this repository has one to point at.
+
+**Which rule governs which version, stated so the next release does not
+re-litigate it.** SPEC.md's table governs a **module's** version, and each
+module's changelog answers it in the fixed sentence. The CHANGELOG's table
+governs **this repository's** version, which is the module contract's version.
+They will disagree again, because a contract change that adds no check is
+exactly the shape that makes them disagree, and the answer is that both are
+published and neither is overruled.
+
+**The owner settled it: the release is `0.2.0` and is declared breaking.** That
+was not this work unit's call — it is the disposition of a reported conflict
+between two governing documents, which belongs to the owner by the same rule
+that produced the report.
+
+### Below 1.0.0, a breaking change collapses into the minor digit
+
+`F7` asked what a MAJOR means while every version here is `0.x`, and predicted
+it would be answered at the worst possible moment: while shipping the change
+that forces it. It was.
+
+**The owner's answer: it collapses into the minor digit.** A breaking change
+below `1.0.0` moves `0.1.0` to `0.2.0`, not to `1.0.0`.
+
+The reason is the one `F7` already contained. `1.0.0` is not a bigger number; it
+is a claim, and the claim is stability. [README.md](../../README.md) says the
+opposite in as many words — the shape will move, pins are cheap, breaking
+changes will happen, the objection channel is the point rather than the
+exception — and this phase supplies no evidence against that. One implementation
+and one second adopter is exactly what `0.x` is for. Shipping `1.0.0` here would
+have made the version number the most optimistic sentence in the repository.
+
+What it costs: a reader who reads `0.1.0 → 0.2.0` as routine gets no warning
+from the digits, and the only thing that tells them the contract moved is the
+changelog entry. That is accepted, because the alternative buys the warning by
+publishing a claim about stability that is false. `F7` closes on this, and only
+`F7` — nothing else in the queue was reviewed.
+
+### The second walk exercises `skip` nowhere, and that is a loss rather than a cleaner summary
+
+The `0.1.0` walk reported `24 ok, 0 findings, 4 skipped`. This one reports
+`27 ok, 1 finding, 0 skipped`. Read as a scoreboard that is three checks better
+and one worse. Read honestly it is the other way round.
+
+Those four `skip`s were the `IN-*` checks over an unmapped `investigations`
+role, and the first walk called them **the point of that walk** — the only
+exercise of the `skip` path and of a conditional obligation anywhere in this
+repository. [M10](work/m10.md) produced an investigation that genuinely outgrew
+a decision entry, the role is
+[mapped for that reason](#the-ambiguity-log-is-the-investigation-that-outgrew-a-decision-entry),
+and the four checks now report `ok`. The mapping is right. The loss is real
+anyway, and the two facts do not cancel.
+
+`skip` is the state this catalog leans on hardest. It is what keeps "I did not
+look" from being reported as "I looked and it was fine", it is named in
+[triage.md](triage.md)'s standing rules, and
+[SPEC.md](../../SPEC.md) and [auditing.md](../auditing.md) between them warn
+four times against folding it into `ok`. It is now demonstrated in no recorded
+output anywhere: not in this repository's walk, and not in the
+[second repository's](second-repository-walk.md), which declined the two modules
+that would have produced skips rather than half-adopting them — the honest
+answer, and the same absence.
+
+**So the walk says so instead of reporting the better-looking number.** Coverage
+survives in the fixture trees, on 23 expected `skip` rows across all five
+modules, which is coverage by construction in trees written by the party that
+wrote the checks. It is not a demonstration that a real repository produces one.
+
+What would fix it is not available and is not worth faking: a repository that
+adopts a module whose conditional obligation is genuinely unmet, audited and
+recorded. Inventing one here would be the same move this repository
+[refused for deviations](#this-repository-records-no-deviation-of-its-own), and
+for the same reason.
+
+### Two data points adjacent to the author are not a track record
+
+[README.md](../../README.md)'s *What 0.x means here* was a disclaimer: the
+catalog came from one repository and one instance cannot tell a general
+convention from one project's habits. This release replaces it with findings,
+which is [m13.md](work/m13.md)'s discharge and is the whole point of the phase.
+
+**The risk in doing that is that findings read as maturity.** They are more
+persuasive than a disclaimer by construction — that is why they replace it — and
+the rewritten section has to carry the same warning while sounding less like
+one.
+
+So the section states both limits **where the results are**, rather than in the
+work records that already admit them:
+
+- [M10](#the-first-checker-is-whippys-and-its-independence-is-partial)'s
+  implementer shares a **model lineage** with phase one's co-author. It was
+  written from the published repository alone under a no-questions rule, which
+  bounds one channel and not the reading.
+- [M11](#the-second-repository-is-private-and-it-tests-re-application-rather-than-generality)'s
+  adopter shares a **convention lineage** with the repository the catalog was
+  extracted from. It tests whether an extraction survives re-application inside
+  that lineage. It does not test generality, and a clean map there was the
+  expected outcome.
+
+That is two data points, both adjacent to the author. It is a great deal more
+than phase one had, and it is not a track record. The generality question still
+needs a repository built by someone who has never read LinkCtrl, and nothing in
+this release moves it.
+
+**The sharpest number in the section is the one that flatters least.** The first
+implementation found eighteen places the specification did not determine what a
+checker should do — in a specification whose author believed it was precise —
+and it resolved six of them at *medium* confidence, meaning the reading it took
+is defensible rather than determined. None was resolved at low confidence, and
+that says less than it looks: low would have meant a guess the implementer
+distrusted, and an implementer who reaches that point files a question instead.
+The section reports the medium count for that reason, rather than the zero.

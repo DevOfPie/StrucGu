@@ -4,6 +4,41 @@ Newest first. Versions follow [semantic versioning](https://semver.org/spec/v2.0
 with bumps defined by what a previously clean adopter will newly see rather than
 by how much source changed. See [SPEC.md](../../SPEC.md).
 
+## 0.3.0 — 2026-08-03
+
+**What a previously clean adopter will newly see: nothing.** No check, no
+obligation, no role and no template changed.
+
+`DL-03`'s expected result is corrected on five fixture trees, from `ok` to
+`skip`. None of those trees is a git repository, so a checker running `DL-03`
+there reads no history and observes nothing — and `skip` is the state for that.
+The old expectation required folding `skip` into `ok`, which
+[SPEC.md](../../SPEC.md) and [auditing.md](../../docs/auditing.md) between them
+name four times as the failure that matters most. The prose was right and the
+fixtures were wrong; the fixtures moved.
+
+This affects an adopter only where the audited root is not a git repository —
+an export, a tarball, a tree that has never committed. `DL-03` reports `skip`
+there instead of `ok`. That is not a new finding, it is a passing result
+correctly downgraded to "I could not tell".
+
+`fixtures/satisfies/decisions.md` gains a second index entry whose anchor
+carries two hyphens, because its heading has an em dash between two spaces and
+runs of spaces are **not** collapsed when slugging. It pins a rule
+[SPEC.md](../../SPEC.md) argues for and no fixture tested: a checker that
+collapses them rejects a correct anchor and reports `DL-06` here.
+
+`DL-04`'s prose said "Any one pattern matching is sufficient", which
+contradicts [SPEC.md](../../SPEC.md) — every listed pattern must match. The
+check carries a single alternation, so nothing behaves differently; the sentence
+generalised wrongly and an implementer carrying it to a multi-pattern check got
+that check wrong.
+
+[SPEC.md](../../SPEC.md) changed in the same release, in ways that change what a
+conformant checker outputs rather than what this module asks for. Those are
+contract changes and are versioned by the repository, not here — see the
+[root changelog](../../CHANGELOG.md).
+
 ## 0.2.0 — 2026-08-03
 
 **What a previously clean adopter will newly see: nothing.** No check, no

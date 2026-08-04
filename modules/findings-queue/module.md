@@ -119,7 +119,9 @@ unrelated reasons. A queue with a `Status` column meaning something else passes.
 
 ### `FQ-04` · `pattern_present` · declaration
 
-**Binds** `findings`. Any one pattern matching is sufficient.
+**Binds** `findings`. One pattern, alternating over the accepted phrasings —
+[SPEC.md](../../SPEC.md) requires every listed pattern to match, and there is
+one.
 
 ```
 not scheduled|nothing here is scheduled|not a commitment|report, not a|per item|individually

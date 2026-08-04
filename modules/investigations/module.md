@@ -11,7 +11,9 @@ Contract terms are defined in [SPEC.md](../../SPEC.md).
 | --- | --- | --- |
 | `investigations` | dir | One record per investigation. |
 
-Module-level exclusions: `_*`, `README.md`, `index.md`.
+`investigations` excludes `_*`, `README.md`, `index.md` — declared on the role,
+per [SPEC.md](../../SPEC.md) "Roles", and matched against each file's basename at
+any depth.
 
 ## Obligations
 
@@ -28,11 +30,14 @@ project that has not is not missing anything.
 **Provenance.** LinkCtrl `docs/adr/0001-partitioning-and-sqlc.md`, and the note
 in `docs/build-notes/decisions.md` that longer investigations live separately.
 
-**Not currently satisfied in this repository.** No investigation here has
-outgrown a decision entry, so the role is deliberately unmapped in
-[strucgu.yaml](../../strucgu.yaml) and every check below reports `skip`. That is
-the conditional path working, and it is the only place in this repository where
-it is exercised.
+**Satisfied in this repository since 0.2.1, and unmapped before that.** No
+investigation here had outgrown a decision entry until the first independent
+checker produced one, so the role was deliberately `~` in
+[strucgu.yaml](../../strucgu.yaml) and every check below reported `skip`. That
+was the conditional path working, and it was the only place in this repository
+where it was exercised — which means this repository now exercises it nowhere.
+The record that ended it is the ambiguity log of the checker written from this
+specification alone.
 
 ### `investigation-states-what-it-tested-against` — the record says what was used, with versions
 
