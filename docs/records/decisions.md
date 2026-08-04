@@ -91,6 +91,7 @@ the file. Append a row when you append an entry.
 | [A phase that changes the contract and does not publish a release is not finished](#a-phase-that-changes-the-contract-and-does-not-publish-a-release-is-not-finished) | Why M20 exists, and why M21 needs it |
 | [LinkCtrl adopting proves nothing about generality, and is worth doing anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway) | What the third adoption is not, and the three things it is |
 | [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
+| [M20 and M21 swapped roles, and two entries above still point the old way](#m20-and-m21-swapped-roles-and-two-entries-above-still-point-the-old-way) | A link that resolves and misdirects, and which two entries to read backwards |
 
 ---
 
@@ -2227,3 +2228,45 @@ answer the guide now has to give is *leave it unmapped, this is known*. That is
 a specification gap being documented as an instruction to adopters. It is the
 right call for a phase that declines to grow the catalog, and it is the
 second-best outcome rather than a good one.
+
+### M20 and M21 swapped roles, and two entries above still point the old way
+
+Found by re-reading the plan against itself after this branch was reopened
+against a different base. Nothing mechanical caught it, and that is the part
+worth keeping.
+
+When readiness moved ahead of the release, the two units exchanged numbers. Two
+entries written before that exchange kept their old pointers:
+
+- [A phase that changes the contract and does not publish a release is not
+  finished](#a-phase-that-changes-the-contract-and-does-not-publish-a-release-is-not-finished)
+  names `M20` as the release unit, and says `M21` needs a released version to
+  pin. Both are inverted now: [M20](work/m20.md) is readiness and
+  [M21](work/m21.md) is the release. The sentence's reasoning is unaffected —
+  an adoption record does need a released version — but the numbers attached to
+  it are the wrong way round.
+- [LinkCtrl adopting proves nothing about generality, and is worth doing
+  anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway)
+  names `M21` as the unit performing the adoption. **There is no adoption unit
+  in this phase at all**, which was the substance of the correction after it.
+  Read every `M21` in that entry as *the work LinkCtrl does later, in its own
+  workflow*, and never as a unit here.
+
+**The links still resolve, which is why every gate passed.** A relative link to
+a file that exists, naming a unit that has since become something else, is
+valid to a link checker and wrong to a reader. This repository checks that
+links resolve and has nothing that checks they still mean what they said — the
+same shape as `F17`, where an index is 98% complete and reads as complete.
+
+**Scope is unaffected and that distinction matters.**
+[work/README.md](work/README.md) is correct throughout, as are all eight unit
+files: the table, every title, and every dependency edge. Only the rationale
+here is stale. A reader who starts from the scope contract — which is what it
+is for — is never misled, and the failure is confined to the file that records
+why rather than the file that records what.
+
+This is appended rather than fixed in place because entries are append-only,
+and because editing two of them would remove lines after `effective_from` — a
+second `DL-03` finding against this repository while `F6`'s disposition is
+still open. The index row for the first entry reads the old way too, and is
+left standing for the same reason.
