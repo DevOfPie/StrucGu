@@ -19,7 +19,7 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M6](m6.md) | Fixtures, and every check observed failing | M3 M4 | done |
 | [M7](m7.md) | StrucGu adopts, and 0.1.0 is tagged | M5 M6 | done |
 | [M8](m8.md) | Fixture expectations become machine-comparable | M6 | done |
-| [M9](m9.md) | Conformance is defined narrowly, and stays self-asserted | M10 | deferred |
+| [M9](m9.md) | Conformance is defined narrowly, and stays self-asserted | M10 | in progress |
 | [M10](m10.md) | The first checker, written from the specification alone | M8 | done |
 | [M11](m11.md) | The second repository adopts, and every finding is disposed of by the rule | M10 | done |
 | [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | done |

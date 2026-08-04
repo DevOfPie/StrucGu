@@ -92,6 +92,49 @@ cannot show what it caught.
   was rejected at a stated cost, in
   [decisions.md](docs/records/decisions.md#the-obligation-is-narrowed-to-what-the-check-can-see-rather-than-the-check-widened-to-prose).
 
+### What "conforms" means is written down, and it is narrower than it sounds
+
+New file: [docs/conformance.md](docs/conformance.md). Until now the fixtures were
+offered as the evidence and as the conformance suite, and nothing said what
+passing them meant — an implementer could match every expectation and still not
+know whether they had a conforming checker or a checker that agreed with a pile
+of examples.
+
+**A checker conforms to a module at a version when it reproduces every row of
+that module's `fixtures/expected.yaml` at that version.** Nothing about the
+modules, the checks or the contract changed to say it; this is a statement about
+what the artifacts already there are worth.
+
+Four things in it are worth knowing before you write the sentence into your own
+readme:
+
+- **Matching every row means the fixtures did not catch you.** It is not evidence
+  of correctness, and that is measured rather than asserted — the first
+  implementation was broken on purpose nine ways and five breakages produced a
+  clean run against the catalog as it then stood.
+- **Partial conformance is the ordinary case.** Per module, per version. A
+  checker covering three modules says that and has said something useful.
+- **A new check makes a prior claim stale, not false.** The claim was about the
+  version it named and stays true of it. The worked example is unflattering and is
+  in the file: the only implementation in existence conforms to `decision-log`
+  `0.2.0` and does not conform to `0.3.0`.
+- **Five things a checker must get right are exercised by no fixture tree** —
+  `waived`, almost everything involving git, refusing to run at all, directories
+  below a `dir` role, and several link syntaxes. A clean run demonstrates none of
+  them.
+
+**Nothing was added on the other side of it.** No badge, no score, no conformance
+level, no list of conforming implementations, and no process to register, submit
+or announce one — there is nowhere to send it. Conformance is self-asserted and
+this repository holds nothing with which to contradict a false claim, which is
+the same structural guarantee it makes about adoption and is accepted with its
+cost stated in
+[decisions.md](docs/records/decisions.md#the-register-a-prospective-adopter-wants-is-the-register-a-standards-body-keeps).
+
+Every clause carries, beside it, the ambiguity the first implementation recorded
+before resolving it. Three candidate clauses had no such origin and were cut;
+what they would have said is on the record.
+
 ### The contract
 
 [SPEC.md](SPEC.md) defines a third schema identifier, `strucgu/expected@1`, and

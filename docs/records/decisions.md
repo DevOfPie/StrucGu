@@ -70,6 +70,10 @@ the file. Append a row when you append an entry.
 | [The base set argument is normative in SPEC.md, and the README links to it](#the-base-set-argument-is-normative-in-specmd-and-the-readme-links-to-it) | Closes `F1` |
 | [The obligation is narrowed to what the check can see, rather than the check widened to prose](#the-obligation-is-narrowed-to-what-the-check-can-see-rather-than-the-check-widened-to-prose) | Closes `F2`, and what the rejected option would have cost |
 | [A passing fixture tree that `satisfies/` cannot hold is named `satisfies-<suffix>/`](#a-passing-fixture-tree-that-satisfies-cannot-hold-is-named-satisfies-suffix) | Answers the naming question A17 left open |
+| [Conformance is measured against `expected.yaml`, and reproducing it is not evidence of correctness](#conformance-is-measured-against-expectedyaml-and-reproducing-it-is-not-evidence-of-correctness) | What the criterion measures, and what it proves |
+| [The register a prospective adopter wants is the register a standards body keeps](#the-register-a-prospective-adopter-wants-is-the-register-a-standards-body-keeps) | Why `F14`'s gap stays open, and what that costs |
+| [The only implementation in existence does not conform to `decision-log` 0.3.0](#the-only-implementation-in-existence-does-not-conform-to-decision-log-030) | Stale rather than false, on a live instance |
+| [Two clauses were cut for having no origin, and a third for being an expiry](#two-clauses-were-cut-for-having-no-origin-and-a-third-for-being-an-expiry) | What M9's clause-origin rule removed |
 
 ---
 
@@ -1509,3 +1513,127 @@ first pair of mutually exclusive cases makes that impossible.
 `satisfies/`: a checker can be wrong in a way that produces a finding on a
 correct repository, and that failure has nothing to catch it unless a tree exists
 where the check must report `ok`.
+
+## 2026-08-04 — M9, the conformance criterion is written
+
+*Deferred from before [M10](work/m10.md) so that it could be written from
+questions somebody had actually asked rather than from anticipation — the
+reasoning is [above](#the-conformance-criterion-waits-until-an-implementer-has-asked-for-it).
+The document is [docs/conformance.md](../conformance.md). Every clause in it
+carries the ambiguity record that produced it, in the file, beside the clause.
+These entries are the answers that are not obvious from reading it.*
+
+### Conformance is measured against `expected.yaml`, and reproducing it is not evidence of correctness
+
+Two halves, and the second is the one that keeps this document from being a
+grading scheme.
+
+**Measured against `expected.yaml`.** Not `expected.md`, which is prose that
+nothing verifies and which has already drifted — it is open as `F3` in
+[findings.md](findings.md). [auditing.md](../auditing.md) told an implementer to
+compare against the finding named in the prose file, which was the honest
+instruction before [M8](work/m8.md) made the expectations data and is not one a
+criterion can rest on: a test two readers can run and disagree about is not a
+test. The row-for-row form, and the insistence that the exact state matches
+rather than something near it, comes from
+[A03](https://github.com/DevOfPie/strucgu-check/blob/main/ambiguities/A03-history-deletions-with-no-history.md),
+where the entire disagreement was `ok` against `skip`.
+
+**And it proves less than it looks.** The first checker's mutation harness broke
+it nine ways, one stated rule at a time, and five of the nine produced a clean
+run against the catalog as it then stood. So the true content of a matched suite
+is *the trees that exist did not catch this implementation*, and the document
+says that in those words rather than in a footnote. The trees have since improved
+and none of the nine now goes unnoticed, which changes what a claim is worth and
+not what it says.
+
+The cost of stating it this way is that the strongest sentence available to an
+implementer is weaker than the one they wanted. That is the correct trade for a
+catalog that ships no runner: the alternative is a criterion whose plain reading
+overstates the evidence, and the overstatement would be this repository's rather
+than theirs.
+
+### The register a prospective adopter wants is the register a standards body keeps
+
+`F14` names the gap in as many words: nothing here records which implementations
+reproduce which release, so *has anyone implemented this, and does their run
+still match?* has no home, and it names this document as the natural one.
+
+**It stays homeless, and the request is the reason to be sure.** A list of
+conforming implementations is the artifact every one of these refusals exists to
+prevent, and it does not become something else because the first person to want
+it wanted it for a good reason. Keeping it would mean upstream holding a record
+about someone who uses this, which is the one thing
+[README.md](../../README.md#what-this-is-not) promises structurally rather than
+as good behaviour — and a structural guarantee that is kept until somebody has a
+use for breaking it was never structural.
+
+**What it costs, stated rather than offset.** A prospective adopter has no
+evidence that anyone has implemented this successfully except by reading a claim
+someone else made and re-running it. Anyone may claim conformance falsely and
+this repository will never know, never say so, and have no standing to. Both are
+accepted. The defence is that verification is cheap and local — clone, run,
+compare — so the claim a register would centralise is one every reader can
+already check for themselves, and centralising it buys convenience at the price
+of the guarantee.
+
+For the same reason there is no process to register, submit or announce a
+conforming implementation: no form, no template, no address. The
+[objection channel](../objections.md) is not it, and the distinction is worth
+holding — an objection is a disagreement with an obligation and all four of its
+outcomes change the catalog, where news about an implementation would change
+nothing here except the existence of a list.
+
+### The only implementation in existence does not conform to `decision-log` 0.3.0
+
+[strucgu-check](https://github.com/DevOfPie/strucgu-check) reproduced every row
+of every module at `0.2.0`. `decision-log` then went to `0.3.0`, correcting five
+`DL-03` rows from `ok` to `skip`
+([why](#the-fixtures-were-wrong-about-dl-03-and-the-specification-stays-as-it-is)),
+and that checker still reports `ok` on those five. It conforms to `decision-log`
+0.2.0. It does not conform to `decision-log` 0.3.0. Both are true, and the
+document says so with the module and the version named.
+
+This was the test of whether the criterion could be written honestly. A criterion
+under which the only existing checker conformed by construction would be a
+criterion shaped around a reference implementation, which is the risk
+[m9.md](work/m9.md) names against itself and the reason the unit waited. The
+handling is **stale, not false**: a claim is about the version it names and stays
+true of that version, and a module releasing a check makes the claim older rather
+than wrong. Nobody withdraws anything, because propagation here is pull-only and
+falling behind is the designed behaviour rather than a failure of it.
+
+**What the instance exposed on the way past.** `decision-log` `0.3.0` was a
+correct MINOR — its changelog says a previously clean adopter newly sees nothing,
+and that is true. A conformance claim went stale anyway.
+[SPEC.md](../../SPEC.md#versioning) sizes a bump by what an *adopter* sees, and
+the reader whose claim just moved is an *implementer*. The versioning table has
+no row for that, and the criterion does not need one to work — it names a
+version and the version moved — so the gap is recorded as `F16` rather than
+closed here.
+
+### Two clauses were cut for having no origin, and a third for being an expiry
+
+[m9.md](work/m9.md) makes a clause with no traceable question a clause written on
+anticipation, and cuts it. Recording the cuts costs a paragraph and is worth more
+than the clauses that survived, by the same argument this repository already
+applies to [the six checks it cut](#six-checks-were-cut-for-measuring-presence-rather-than-thought).
+
+- **"A claim names the catalog commit, not only the module version."** Would have
+  guarded against a module's fixtures moving without its version moving. Nobody
+  asked: no ambiguity record raises it, and the one instance in evidence did move
+  the version. It is anticipation about a hazard that is real, which is the most
+  persuasive kind and still anticipation — so the hazard is filed as `F16` and the
+  clause is not written.
+- **"A conforming implementation publishes the readings it took where the
+  specification is silent."** Tempting, because the ambiguity log is the most
+  valuable thing [M10](work/m10.md) produced. But it was produced because M10's
+  brief required it, not because an implementer asked to be required to, and
+  turning one brief's obligation into a condition of conformance is upstream
+  setting homework it cannot mark. It is also the first step of a submission
+  process, which is [deliberately absent](#the-register-a-prospective-adopter-wants-is-the-register-a-standards-body-keeps).
+- **"A claim is re-run each release, or lapses."** This is what `F14` makes one
+  want to write, and it is an expiry on a self-assertion. Upstream cannot see
+  anyone miss it, so the rule would be decoration; making it enforceable would
+  need the register that is refused. **Stale, not false** does the same work
+  without either.

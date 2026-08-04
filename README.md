@@ -21,9 +21,11 @@ it will be read.
 - **There is no enforcement.** StrucGu never blocks your work, never opens an
   issue on your behalf, and never runs anywhere you did not run it.
 - **There is no certification.** No badge, no score, no conformance level, no
-  list of adopters. StrucGu keeps no records about anyone who uses it — that is
-  a structural guarantee, not a promise of good behaviour. There is nothing to
-  certify against because upstream holds nothing.
+  list of adopters, and no register of implementations. StrucGu keeps no records
+  about anyone who uses it — that is a structural guarantee, not a promise of
+  good behaviour. There is nothing to certify against because upstream holds
+  nothing. What "conforms" does mean, and what it deliberately cannot, is
+  [docs/conformance.md](docs/conformance.md).
 - **There is no tool to install.** StrucGu ships no runner, no binary, no
   action, no dependency. See [Spec, not software](#spec-not-software).
 - **There is no verdict.** A check produces a *finding* — a report, with a
@@ -44,7 +46,9 @@ What it ships instead is a **specification** — each check defined precisely
 enough to implement, plus **fixtures**: tiny repository trees that violate a
 check, and the exact finding a correct implementation must produce on each. You
 write the checker, in whatever your project already uses, and the fixtures tell
-you whether you got it right.
+you whether you got it right. What "right" means is stated —
+[docs/conformance.md](docs/conformance.md) — along with the things a clean run
+does not demonstrate, because the fixtures cannot reach them.
 
 This costs you the checker. It buys three things: nothing new enters your
 dependency manifest, your build, or your CI; a shop that has only PowerShell is
@@ -182,7 +186,7 @@ check nobody has watched fail has not been shown to detect anything.
 | --- | --- |
 | [SPEC.md](SPEC.md) | The module contract. Normative. Everything else is downstream of it. |
 | [modules/](modules/) | The five modules. |
-| [docs/](docs/) | Adopting, auditing, objections. |
+| [docs/](docs/) | Adopting, auditing, [conformance](docs/conformance.md), objections. |
 | [docs/records/](docs/records/) | StrucGu's own records. |
 | [strucgu.yaml](strucgu.yaml) | StrucGu's own adoption record. |
 

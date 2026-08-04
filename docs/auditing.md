@@ -212,3 +212,8 @@ unless one exists where the check must stay quiet.
 This is what makes a specification with no reference implementation workable,
 and it is also the only evidence the checks detect anything at all — a check
 nobody has watched fail has not been shown to detect anything.
+
+**What a clean run entitles you to say** is [conformance.md](conformance.md).
+Read it before you write the sentence: matching every expectation means the
+fixtures did not catch you, which is a narrower claim than it sounds, and five
+things a checker has to get right are exercised by no tree in the catalog.
