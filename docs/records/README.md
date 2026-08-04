@@ -10,10 +10,18 @@ where this page disagrees with one of them, it is wrong.
 ## Why this directory is unusual
 
 These records are working documents **and** the repository's adoption evidence
-at the same time. [strucgu.yaml](../../strucgu.yaml) maps five modules onto four
-of them — `triage_doc`, `decision_log`, `findings`, `unit_index`,
-`unit_template`, `unit_dir`, `investigations` — so the catalog this repository
-publishes is checked against the records this repository keeps while building it.
+at the same time. [strucgu.yaml](../../strucgu.yaml) maps five modules onto eight
+roles across five entries here — `triage_doc` on [triage.md](triage.md),
+`decision_log` and `decision_index` both on [decisions.md](decisions.md),
+`findings` on [findings.md](findings.md), `unit_dir`, `unit_index` and
+`unit_template` on [work/](work/), and `investigations` on
+[investigations/](investigations/) — so the catalog this repository publishes is
+checked against the records this repository keeps while building it.
+
+Two roles on one file is not tidiness. Under `single-log` the decision index is a
+section rather than a separate document, which is why `DL-05` passes here
+whenever `DL-01` does — a documented weakness of that check, covered by a
+judgment entry rather than hidden.
 
 That is worth naming precisely, because it is easy to over-claim. It is
 dogfooding, not evidence. An author writes rules they already satisfy, so a clean

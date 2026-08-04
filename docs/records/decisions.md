@@ -84,6 +84,7 @@ the file. Append a row when you append an entry.
 | [A prompt without costs is a request for permission, not a decision](#a-prompt-without-costs-is-a-request-for-permission-not-a-decision) | What a decision prompt has to contain |
 | [A documentation claim this repository has just falsified fails the commit, not the release walk](#a-documentation-claim-this-repository-has-just-falsified-fails-the-commit-not-the-release-walk) | The new commit gate row, and the finding that argues it |
 | [Eight record files with no index is the failure this catalog is about](#eight-record-files-with-no-index-is-the-failure-this-catalog-is-about) | Why `docs/records/` gets a map, and why it does not close `F9` |
+| [One tracker is watched for silent removal, and it is watched by the check that cannot judge](#one-tracker-is-watched-for-silent-removal-and-it-is-watched-by-the-check-that-cannot-judge) | Corrects the entry above it — `DL-03` sees deletions, and no process rule here is checkable |
 
 ---
 
@@ -1967,3 +1968,46 @@ results are. Somebody reading a working method that produced a specification wil
 read it as the method the specification recommends. It is not: StrucGu specifies
 the shape of records and never their process, and this directory is one
 repository's answer on top of that.
+
+### One tracker is watched for silent removal, and it is watched by the check that cannot judge
+
+Correcting [No row leaves a tracker without saying where it
+went](#no-row-leaves-a-tracker-without-saying-where-it-went), appended the same
+day. That entry closed with *"this is one of the two rules here that the
+catalog itself cannot check"*, named no second rule, and was wrong in both
+directions. The original stands above; this is what it should have said.
+
+**Wrong on the count.** *None* of the rules added with it is checkable here. A
+check reads the shape of a record — that a queue exists, that its rows carry
+evidence, that an index is present. Whether a decision was written down
+*before* it was acted on, whether a prompt carried its costs, whether a gate
+fired at the moment a claim went stale: all are properties of a process rather
+than of a record, and this catalog specifies records. That is not a gap to
+close. A module that could see any of it would be describing how a repository
+works instead of what it keeps, which is the line [SPEC.md](../../SPEC.md)
+refuses to cross.
+
+**Wrong on the substance.** The entry said no obligation anywhere can see a row
+that used to be there. `DL-03` can, and does — it reads history deletions after
+`effective_from`, and `F6` is it firing on this repository, over the redaction
+in `e132646`.
+
+So the accurate statement is narrower and worth more than the one it replaces.
+**Exactly one tracker here is watched for silent removal, and the other three
+are not.** [decisions.md](decisions.md) is watched because the decision log is
+the record a project is most tempted to tidy. [findings.md](findings.md),
+[work/README.md](work/README.md)'s status table and its two scope lists are
+watched by nobody, and the new standing rule is the only thing standing over
+them.
+
+The watched one is watched by a check that **cannot tell a justified redaction
+from an entry edited away** — `decision-log`'s own
+[module.md](../../modules/decision-log/module.md) says so, and `F6` is the live
+instance. Which is the honest shape of the whole arrangement: one tracker gets
+a check that reports for a look rather than as a defect, three get a sentence
+in a process document, and the sentence is load-bearing precisely because
+nothing mechanical stands behind it.
+
+`F10` remains the wider version of this — no record anywhere carries an expiry
+that forces disposal — and closing it is still a major-version argument rather
+than a rule in [triage.md](triage.md).
