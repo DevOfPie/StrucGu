@@ -92,6 +92,7 @@ the file. Append a row when you append an entry.
 | [LinkCtrl adopting proves nothing about generality, and is worth doing anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway) | What the third adoption is not, and the three things it is |
 | [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
 | [M20 and M21 swapped roles, and two entries above still point the old way](#m20-and-m21-swapped-roles-and-two-entries-above-still-point-the-old-way) | A link that resolves and misdirects, and which two entries to read backwards |
+| [The queue gained a row during this branch's own review, and it is not scheduled](#the-queue-gained-a-row-during-this-branchs-own-review-and-it-is-not-scheduled) | `F20` moves the counts to seventeen open and eight unscheduled; the nine are unchanged |
 
 ---
 
@@ -2270,3 +2271,26 @@ and because editing two of them would remove lines after `effective_from` — a
 second `DL-03` finding against this repository while `F6`'s disposition is
 still open. The index row for the first entry reads the old way too, and is
 left standing for the same reason.
+
+### The queue gained a row during this branch's own review, and it is not scheduled
+
+[What the phase does to the queue, stated because approval is per
+row](#what-the-phase-does-to-the-queue-stated-because-approval-is-per-row)
+counted sixteen open findings and named the seven the plan leaves alone. `F20`
+was filed after it, by the revalidation of this branch, so the count in that
+entry is now one short in both halves: **seventeen open, eight unscheduled.**
+The nine the plan schedules are unchanged, and merging still approves those
+nine and no others.
+
+`F20` is unscheduled and may be unfixable, which is the more useful half of it.
+Its catalog side is out of scope on principle — whether prose describes its
+link's target correctly is content rather than structure. Its own-repository
+side is a gate that reads stronger than it is, and no mechanical strengthening
+is available: a checker can tell that a link resolves and that it lands on a
+role, and cannot tell that the sentence around it still means what it said.
+Scheduling work against it would be scheduling an answer nobody has.
+
+That it was found at all is the argument for the row existing. The instance was
+caught by a person re-reading a plan against itself, after every gate here had
+passed over it, and a gap recorded only in a rationale entry is a gap nothing
+tracks.
