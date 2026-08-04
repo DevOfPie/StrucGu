@@ -119,6 +119,7 @@ release touched.
 | `modules/*/CHANGELOG.md` | What a previously clean adopter will newly see, stated even when the answer is "nothing" |
 | [decisions.md](decisions.md) | Append-only. Never edit an entry; a later entry corrects an earlier one |
 | [triage.md](triage.md) | This file. Rules learned this release |
+| [records/README.md](README.md) | The map of this directory. A record file added this release appears in it; one removed does not linger |
 
 Minimize means: delete what is no longer true, merge what is duplicated, and cut
 what restates something the reader already read. It does not mean shortening

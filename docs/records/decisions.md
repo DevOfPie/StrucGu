@@ -83,6 +83,7 @@ the file. Append a row when you append an entry.
 | [A decision reached in conversation is written down before it is acted on](#a-decision-reached-in-conversation-is-written-down-before-it-is-acted-on) | Ordering, not volume |
 | [A prompt without costs is a request for permission, not a decision](#a-prompt-without-costs-is-a-request-for-permission-not-a-decision) | What a decision prompt has to contain |
 | [A documentation claim this repository has just falsified fails the commit, not the release walk](#a-documentation-claim-this-repository-has-just-falsified-fails-the-commit-not-the-release-walk) | The new commit gate row, and the finding that argues it |
+| [Eight record files with no index is the failure this catalog is about](#eight-record-files-with-no-index-is-the-failure-this-catalog-is-about) | Why `docs/records/` gets a map, and why it does not close `F9` |
 
 ---
 
@@ -1938,3 +1939,31 @@ make claims to outsiders — [SPEC.md](../../SPEC.md), [README.md](../../README.
 and the affected module READMEs. It is not a documentation pass in miniature: the
 release pass still exists and still reads everything. This one catches the case
 where the person who made the claim false is standing right there.
+
+### Eight record files with no index is the failure this catalog is about
+
+`docs/records/` had eight files and no map. Every one of them is well documented
+from the inside — [triage.md](triage.md) states its own precedence,
+[findings.md](findings.md) explains what a row is for — and there was no answer
+to *what is this directory, and which file do I read first*.
+
+That is uncomfortable in a repository whose subject is records of work, and `F9`
+is the sharpened version of it: the second adopter's audit could reach that
+repository's process document, its rationale and its deferral destination, and
+could not reach its scope contract at all, because no role names it. This
+repository hid the gap from itself — [work/README.md](work/README.md) is both its
+scope contract and its unit index, so the coupling has never cost it anything.
+
+**The new file is not a module and does not close `F9`.** A sixth module, or
+splitting `unit_index` in two, is a major-version argument and stays out of
+scope. What the map does is smaller and worth doing anyway: it says what the
+directory is, which file wins on what, and — the part no individual file could
+state — that these records are simultaneously working documents and this
+repository's own adoption evidence, so a change to one of them can move a check
+result rather than being documentation wording.
+
+It also carries the disclaimer where the method is, rather than only where the
+results are. Somebody reading a working method that produced a specification will
+read it as the method the specification recommends. It is not: StrucGu specifies
+the shape of records and never their process, and this directory is one
+repository's answer on top of that.
