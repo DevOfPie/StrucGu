@@ -658,10 +658,45 @@ release, through a channel nobody would think to close. Exact pins exist for the
 same reason, and a checker that accepts a floating version hands the same power
 back.
 
-Every `CHANGELOG.md` entry states, in a fixed sentence, what a previously clean
-adopter will newly see. For a first release that sentence is "nothing", **written
-out rather than omitted** — an omitted sentence is indistinguishable from a
-forgotten one.
+Every `CHANGELOG.md` entry states two fixed sentences: **what a previously clean
+adopter will newly see**, and **what an implementer must re-run**. For a first
+release the first is "nothing", and both are **written out rather than omitted** —
+an omitted sentence is indistinguishable from a forgotten one.
+
+**The version number is sized for the adopter, and only for the adopter.** An
+adopter and an implementer are not the same reader, and a release can move one
+while leaving the other still. `decision-log` `0.3.0` corrected five fixture
+expectation rows, changed no check, no obligation and no role, truthfully
+reported that an adopter newly sees nothing — and invalidated every row of the
+only conformance claim that existed.
+
+There is no digit left to carry the second reader. A version string has three
+digits and the table above has three rows for that reason; a fourth level would
+have to either share a digit that already means something else, and so signal
+nothing new, or extend every version in the catalog with a field that exists for
+one audience. The sentence carries it instead, because a changelog entry can hold
+prose and a version number cannot.
+
+The implementer sentence names what somebody whose checker matched the previous
+version must re-run to find out whether it still matches: this module's fixtures,
+the whole conformance harness, or nothing. **"Nothing" is a real answer** and is
+written out for the same reason the adopter's is.
+
+**Entries published before 2026-08-04 carry only the adopter sentence, and are
+not backfilled.** An implementer consequence written after the fact is a
+reconstruction of what somebody would have had to do rather than a record of it,
+and a specification is a poor place to guess. Each module gains the second
+sentence at its next release.
+
+That makes three statements measuring three readers, and they are deliberately
+not collapsed into one. The table above sizes a **module** by what an adopter
+newly sees. The sentence beside it tells an **implementer** what to re-run. The
+repository's own [CHANGELOG.md](CHANGELOG.md) sizes **the catalog** by whether a
+checker written against the old contract needs changing. Any two of them can
+disagree about the same release and both be right, and the answer is to report
+the disagreement rather than to pick one — which is what was
+[decided](docs/records/decisions.md#the-two-versioning-rules-measure-different-readers-and-the-conflict-is-reported-rather-than-picked)
+when the first two disagreed.
 
 Propagation is pull-only. No bot, no pull request, no notification. The mechanism
 is the pin: a checker notices the module it read is newer than the version

@@ -25,7 +25,7 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | done |
 | [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | done |
 | [M14](m14.md) | Two records are corrected before the phase reads them | — | done |
-| [M15](m15.md) | A bump sized by what an implementer must re-do | — | planned |
+| [M15](m15.md) | A bump sized by what an implementer must re-do | — | done |
 | [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | planned |
 | [M17](m17.md) | The expectation file learns to say what it currently cannot | M15, M16 (ordering) | planned |
 | [M18](m18.md) | The implementation is pulled up, and the new trees are tested against a wrong checker | M16 M17 | planned |
