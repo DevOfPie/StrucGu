@@ -78,6 +78,13 @@ the file. Append a row when you append an entry.
 | [Below 1.0.0, a breaking change collapses into the minor digit](#below-100-a-breaking-change-collapses-into-the-minor-digit) | Closes `F7`, and sizes this release |
 | [The second walk exercises `skip` nowhere, and that is a loss rather than a cleaner summary](#the-second-walk-exercises-skip-nowhere-and-that-is-a-loss-rather-than-a-cleaner-summary) | What mapping `investigations` cost the self-walk |
 | [Two data points adjacent to the author are not a track record](#two-data-points-adjacent-to-the-author-are-not-a-track-record) | What the rewritten 0.x section may and may not claim |
+| [A shipped unit whose claim is false is reopened, not succeeded](#a-shipped-unit-whose-claim-is-false-is-reopened-not-succeeded) | The fourth status word, and why a successor is the worse record |
+| [No row leaves a tracker without saying where it went](#no-row-leaves-a-tracker-without-saying-where-it-went) | Extends findings.md's own rule to the other trackers |
+| [A decision reached in conversation is written down before it is acted on](#a-decision-reached-in-conversation-is-written-down-before-it-is-acted-on) | Ordering, not volume |
+| [A prompt without costs is a request for permission, not a decision](#a-prompt-without-costs-is-a-request-for-permission-not-a-decision) | What a decision prompt has to contain |
+| [A documentation claim this repository has just falsified fails the commit, not the release walk](#a-documentation-claim-this-repository-has-just-falsified-fails-the-commit-not-the-release-walk) | The new commit gate row, and the finding that argues it |
+| [Eight record files with no index is the failure this catalog is about](#eight-record-files-with-no-index-is-the-failure-this-catalog-is-about) | Why `docs/records/` gets a map, and why it does not close `F9` |
+| [One tracker is watched for silent removal, and it is watched by the check that cannot judge](#one-tracker-is-watched-for-silent-removal-and-it-is-watched-by-the-check-that-cannot-judge) | Corrects the entry above it — `DL-03` sees deletions, and no process rule here is checkable |
 
 ---
 
@@ -1798,3 +1805,209 @@ is defensible rather than determined. None was resolved at low confidence, and
 that says less than it looks: low would have meant a guess the implementer
 distrusted, and an implementer who reaches that point files a question instead.
 The section reports the medium count for that reason, rather than the zero.
+
+---
+
+## 2026-08-04 — the process contract catches up with the one it was extracted from
+
+[triage.md](triage.md) was written once, on 2026-07-31, as an adaptation of the
+operating contract of the repository this catalog was extracted from. That
+contract kept moving; this one did not. Four rules were added or hardened there
+across the following two days, and one existed hours before the adaptation was
+written and was not carried across. None of them is about links or modules, so
+nothing here noticed.
+
+The gap is worth naming rather than quietly closing. **A process document that is
+forked and then frozen looks maintained** — it is short, internally consistent,
+and every rule in it is true. What it stops being is *current*, and the only
+signal is that the file has one commit against a repository with sixty.
+
+The entries below take four of those rules. The ones deliberately not taken are
+named in each entry: this repository ships no code, runs no loop of its own, and
+has no capture queue, so several of the rules on the other side guard machinery
+that does not exist here.
+
+### A shipped unit whose claim is false is reopened, not succeeded
+
+The status table had three words — `planned`, `deferred`, `done` — and no way to
+say that a `done` row is asserting something untrue. There are three such rows
+today. `F3` says `triage-rule`'s expectations state a count matching no reading
+of its own fixtures; `F14` says five expectation rows are no longer reproduced by
+the only implementation; `F17` says the decision index is one row short of its
+entries and has been since M13 shipped.
+
+Each of those is a shipped unit's claim being false. Under the vocabulary as it
+stood, correcting one meant a new unit — which leaves the old `done` row in place,
+still asserting what was found to be wrong, and splits one piece of work across
+two numbers. **A successor is a worse record than a reopening**, and the whole
+point of the status table is to be a record.
+
+So `reopened` is the fourth word, and the rule that produces it is in
+[triage.md](triage.md). Two details are this repository's rather than inherited:
+
+- **The finding comes first.** A reopening is scheduling, and scheduling is the
+  owner's — the same rule that makes an unreviewed queue row a report rather than
+  a commitment. Nothing reopens because an actor noticed something.
+- **The status word is not where the reopening survives.** It returns to `done`,
+  so a table read a month later shows no trace. The unit's own file carries what
+  was false and what closed it, which is [findings.md](findings.md)'s rule about
+  moving rows rather than deleting them, applied to the other tracker.
+
+The second detail is the one the source contract does not have, and it is not an
+improvement so much as a different exposure: over there a reopening is legible in
+a milestone's history because the loop that ran it writes an entry either way.
+Here nothing writes anything unless a rule says to.
+
+### No row leaves a tracker without saying where it went
+
+[findings.md](findings.md) already has this rule for itself — rows move to
+*Closed*, never out — and the reasoning is stated there: a queue that empties by
+deletion cannot show what it caught. Nothing extended it to the other trackers.
+
+The exposed one is [work/README.md](work/README.md). Its *Not in this phase* list
+and its list of permitted specification edits are both there to stop scope
+arriving by drift, and both could be shortened by anyone who decided a line no
+longer applied. The second list exists **because that already happened once**: the
+first version of that section named no specification changes while three units
+forced them. A list that can be quietly shortened has the same failure mode as a
+list that was never written.
+
+So removal has two forms and no third: re-homed, with the row saying where it
+went, or logged in this file with what was dropped and why. Deciding an item no
+longer matters is a decision, and it is the kind that returns a year later as a
+fresh idea with its reasoning gone.
+
+This is one of the two rules here that the catalog itself cannot check.
+`findings-queue` can see that a queue exists, has evidence and has a review
+state; no obligation anywhere can see a row that used to be there. That is not an
+argument for adding one — it is the shape of thing `F10` already names, and
+closing it is a major-version argument rather than a rule in this file.
+
+### A decision reached in conversation is written down before it is acted on
+
+This repository publishes a module whose whole subject is the record of why
+choices were made, and had no rule saying when to write one.
+
+It has been getting away with it. The four scope questions this phase needed were
+put to the owner on 2026-08-02, answered in conversation, and written into
+[work/README.md](work/README.md) and this file before anything was built —
+correctly, and because the actor happened to do it, not because anything required
+it. The failure mode is not dramatic: the answer gets acted on, the reasoning
+evaporates, and the next session re-derives a slightly different conclusion from
+a tree that already reflects the first one.
+
+The rule is ordering, not volume. The entry goes in **before** the change it
+authorizes lands. Written afterwards it is a description of the tree, which is
+what the tree already is.
+
+### A prompt without costs is a request for permission, not a decision
+
+*Stop and ask* said when to ask and nothing about what an ask contains, so the
+shape was the asking actor's habit. The failure is specific and it runs one way:
+the actor that raises the prompt is usually the actor that will do the work, and
+an unconstrained recommendation drifts toward whatever is cheapest to build. It
+does not read as bias, because the cheap option is genuinely defensible and the
+expensive one is genuinely expensive; what goes missing is that the trade was
+never stated.
+
+So a prompt carries options with what each buys *and* costs, a marked
+recommendation that states its own con, and the default — what happens if the
+answer is *you decide*. Naming the default is the cheapest part and does the most
+work: without it, skipping a question requires re-deriving the whole choice, so
+questions get answered by attrition rather than judgment.
+
+If nothing can be recommended, saying so is the answer. Omitting the
+recommendation silently is not.
+
+### A documentation claim this repository has just falsified fails the commit, not the release walk
+
+The commit gate checked links, roles, prose-and-manifest agreement, fixtures,
+vocabulary, neutrality and scope — everything about a module's internal shape,
+and nothing about whether the documents describing the catalog were still true.
+Truth was the release documentation pass's job, which is to say it was checked
+once per release.
+
+`F15` is what that costs. `M8` made `expected.yaml` a required file in every
+module directory; [docs/auditing.md](../auditing.md) describes a `fixtures/`
+directory without it and sends the implementer to the prose file instead. The
+document written for the one audience that most needs the mechanical answer has
+been wrong since M8 shipped, through a release and a documentation pass, because
+nothing at the moment of the change asked.
+
+The new gate row is narrow on purpose. It fires only when the unit changed what
+an adopter or a reader would observe, and it asks about the three surfaces that
+make claims to outsiders — [SPEC.md](../../SPEC.md), [README.md](../../README.md),
+and the affected module READMEs. It is not a documentation pass in miniature: the
+release pass still exists and still reads everything. This one catches the case
+where the person who made the claim false is standing right there.
+
+### Eight record files with no index is the failure this catalog is about
+
+`docs/records/` had eight files and no map. Every one of them is well documented
+from the inside — [triage.md](triage.md) states its own precedence,
+[findings.md](findings.md) explains what a row is for — and there was no answer
+to *what is this directory, and which file do I read first*.
+
+That is uncomfortable in a repository whose subject is records of work, and `F9`
+is the sharpened version of it: the second adopter's audit could reach that
+repository's process document, its rationale and its deferral destination, and
+could not reach its scope contract at all, because no role names it. This
+repository hid the gap from itself — [work/README.md](work/README.md) is both its
+scope contract and its unit index, so the coupling has never cost it anything.
+
+**The new file is not a module and does not close `F9`.** A sixth module, or
+splitting `unit_index` in two, is a major-version argument and stays out of
+scope. What the map does is smaller and worth doing anyway: it says what the
+directory is, which file wins on what, and — the part no individual file could
+state — that these records are simultaneously working documents and this
+repository's own adoption evidence, so a change to one of them can move a check
+result rather than being documentation wording.
+
+It also carries the disclaimer where the method is, rather than only where the
+results are. Somebody reading a working method that produced a specification will
+read it as the method the specification recommends. It is not: StrucGu specifies
+the shape of records and never their process, and this directory is one
+repository's answer on top of that.
+
+### One tracker is watched for silent removal, and it is watched by the check that cannot judge
+
+Correcting [No row leaves a tracker without saying where it
+went](#no-row-leaves-a-tracker-without-saying-where-it-went), appended the same
+day. That entry closed with *"this is one of the two rules here that the
+catalog itself cannot check"*, named no second rule, and was wrong in both
+directions. The original stands above; this is what it should have said.
+
+**Wrong on the count.** *None* of the rules added with it is checkable here. A
+check reads the shape of a record — that a queue exists, that its rows carry
+evidence, that an index is present. Whether a decision was written down
+*before* it was acted on, whether a prompt carried its costs, whether a gate
+fired at the moment a claim went stale: all are properties of a process rather
+than of a record, and this catalog specifies records. That is not a gap to
+close. A module that could see any of it would be describing how a repository
+works instead of what it keeps, which is the line [SPEC.md](../../SPEC.md)
+refuses to cross.
+
+**Wrong on the substance.** The entry said no obligation anywhere can see a row
+that used to be there. `DL-03` can, and does — it reads history deletions after
+`effective_from`, and `F6` is it firing on this repository, over the redaction
+in `e132646`.
+
+So the accurate statement is narrower and worth more than the one it replaces.
+**Exactly one tracker here is watched for silent removal, and the other three
+are not.** [decisions.md](decisions.md) is watched because the decision log is
+the record a project is most tempted to tidy. [findings.md](findings.md),
+[work/README.md](work/README.md)'s status table and its two scope lists are
+watched by nobody, and the new standing rule is the only thing standing over
+them.
+
+The watched one is watched by a check that **cannot tell a justified redaction
+from an entry edited away** — `decision-log`'s own
+[module.md](../../modules/decision-log/module.md) says so, and `F6` is the live
+instance. Which is the honest shape of the whole arrangement: one tracker gets
+a check that reports for a look rather than as a defect, three get a sentence
+in a process document, and the sentence is load-bearing precisely because
+nothing mechanical stands behind it.
+
+`F10` remains the wider version of this — no record anywhere carries an expiry
+that forces disposal — and closing it is still a major-version argument rather
+than a rule in [triage.md](triage.md).

@@ -34,6 +34,11 @@ else is a second home for status. `planned` means agreed and not begun;
 `deferred` means agreed to happen later than its number suggests. Neither has
 appeared in this table before, and neither means `done`.
 
+`reopened` joins that vocabulary: a shipped unit whose claim was found false and
+is being corrected in place rather than succeeded, per
+[triage.md](../triage.md). It returns to `done` when the correction lands, and
+the unit's own file — not this table — is where the reopening survives.
+
 M10's edge to M8 is hard: an implementer with nothing mechanical to compare
 against produces a reading of the spec rather than a test of it. M9's edge to M10
 is the deferral, not a dependency of substance — and M13's edge to M9 exists

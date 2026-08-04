@@ -45,6 +45,22 @@ commitment.
 A defect that makes the *current* work unit's claim false is in spec, whatever
 it looks like. Judge by the claim, not by the file.
 
+### A shipped unit's claim turns out to be false
+
+It **reopens that unit** — status back to `reopened`, the correction written into
+the unit's own file — rather than arriving as a successor. A successor leaves a
+`done` row asserting something untrue, which is the one outcome worth spending a
+reopening to avoid, and it scatters one piece of work across two numbers.
+
+The defect still gets a [findings.md](findings.md) row first. Reopening is
+scheduling, and scheduling is the owner's.
+
+A reopened unit returns to `done` when the correction lands, so the status word
+is not where the reopening survives. The unit's own file carries what was false,
+what closed it, and the finding it came from. A status table that can round-trip
+without leaving a mark records only the present — which is the failure
+[findings.md](findings.md) moves rows rather than deleting them to avoid.
+
 ### A check is written
 
 Write the violating fixture first, or at the same time. A check nobody has
@@ -74,6 +90,7 @@ All must hold. Failure means the commit does not happen.
 | Fixtures | Every check has a violating fixture and a satisfying one, and `expected.md` names the finding |
 | Vocabulary | No banned word. See [Standing rules](#standing-rules) |
 | Neutrality | Nothing under `modules/` names a language, package manager, build tool, or file extension |
+| Docs | **If the unit changed what an adopter or a reader would observe**, [SPEC.md](../../SPEC.md), [README.md](../../README.md) and the affected `modules/*/README.md` say so now. A claim any of them makes that this unit has just made false is a failing gate, not work for the release documentation pass |
 | Scope | **One work unit per commit, maximum.** Never bundle two. Splitting one across several is fine |
 
 Commit messages are long prose explaining *why*, not what. The diff shows what.
@@ -102,6 +119,7 @@ release touched.
 | `modules/*/CHANGELOG.md` | What a previously clean adopter will newly see, stated even when the answer is "nothing" |
 | [decisions.md](decisions.md) | Append-only. Never edit an entry; a later entry corrects an earlier one |
 | [triage.md](triage.md) | This file. Rules learned this release |
+| [records/README.md](README.md) | The map of this directory. A record file added this release appears in it; one removed does not linger |
 
 Minimize means: delete what is no longer true, merge what is duplicated, and cut
 what restates something the reader already read. It does not mean shortening
@@ -140,6 +158,37 @@ preserve bytes.
 **Restore by counter-edit**, never `git checkout` — checkout has twice destroyed
 uncommitted work in the repository this was extracted from.
 
+**Nothing leaves a tracker silently.** A row removed from any tracked list —
+[work/README.md](work/README.md)'s status table, its *Not in this phase* list and
+its list of permitted specification edits, [findings.md](findings.md), the module
+table in [README.md](../../README.md) — leaves only one of two ways:
+
+1. **Re-homed.** It appears in another tracker, and the row it left says which.
+   Moving is the normal case: a finding becomes a work unit, a question becomes a
+   decision.
+2. **Logged.** Its removal is an entry in [decisions.md](decisions.md) naming
+   what was dropped and why.
+
+Deciding an item no longer matters *is a decision*, and it is the one kind a
+project loses without noticing: nobody writes down what they stopped caring
+about, so it returns later as a fresh idea with its reasoning gone. A tracker
+that can be quietly emptied tracks nothing.
+
+**A decision made in conversation is written down before it is acted on.**
+Answers given in prose evaporate — the reasoning is gone by the next session, and
+the conclusion gets re-derived differently. The answer goes to
+[decisions.md](decisions.md) before the change it authorizes lands, not after,
+and most of all when an actor is deciding on the owner's behalf because waiting
+would stall the work.
+
 **Stop and ask** for: destructive operations, scope changes, growing the base
 set, anything the owner would reasonably want to decide. Proceed without asking
 for reversible work that follows from the current work unit.
+
+**Every decision prompt carries options, costs, and a recommendation.** Each
+option says what it buys *and* what it costs. The recommended one leads, marked,
+and states its own con — a recommendation from the actor that will also do the
+work drifts toward whatever is cheapest to build, and naming that cost is what
+holds it honest. Name the default too: what happens if the answer is "you
+decide", so nobody has to re-derive the choice in order to skip it. If nothing
+can be recommended, say why.
