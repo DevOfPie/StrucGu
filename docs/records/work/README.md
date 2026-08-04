@@ -204,18 +204,37 @@ what LinkCtrl transitions onto.
 ### Decisions this phase needs
 
 Each is a scope question, which [triage.md](../triage.md) requires stopping and
-asking about rather than deciding inside a unit. They are listed unanswered.
+asking about rather than deciding inside a unit. **The first three were answered
+on 2026-08-04**, on the prompt that stopped the loop at [M15](m15.md); the
+reasoning is in
+[decisions.md](../decisions.md#2026-08-04--the-owner-answers-the-three-decisions-phase-three-was-stopped-on)
+and the answers are restated here because they change what the units say. Two are
+still open, and neither blocks a unit that is ready to start.
 
 1. **Where the cut rule lives.** `M16` extends *a check no tree can violate is
    cut* to normative prose. In [triage.md](../triage.md) it is a process rule this
    repository holds itself to; in [SPEC.md](../../../SPEC.md) it is a claim about
    what the specification is. They are different promises.
+   **Answered:** the rule in [triage.md](../triage.md), the list of statements
+   surviving with no tree in [SPEC.md](../../../SPEC.md) —
+   [why](../decisions.md#the-cut-rule-is-this-repositorys-practice-the-list-it-produces-is-the-catalogs).
+   That entry also settles a conflict between this list and [M16](m16.md)'s first
+   bullet, which claimed the decision for the unit.
 2. **What shape `expected.yaml` grows.** `M17` needs either a third section or a
    per-tree expectation outside the five audit states. Both are MAJOR for every
    module.
+   **Answered:** a third top-level section keyed by tree, and the schema
+   identifier moves to `strucgu/expected@2` —
+   [why](../decisions.md#expectedyaml-grows-a-third-section-and-the-schema-identifier-goes-to-2).
+   `F8`'s channel is not settled by it: [M17](m17.md) diagnoses before it pins.
 3. **How `F16` is answered** — a fourth row in the versioning table sized by what
    an implementer must re-do, or an explicit statement that implementers re-run on
    every bump and version numbers do not carry that signal.
+   **Answered, and by neither option:** the versioning table does not change, and
+   every module `CHANGELOG.md` entry gains a second fixed sentence naming what an
+   implementer must re-run —
+   [why](../decisions.md#the-implementers-signal-goes-in-the-changelog-not-in-the-version-number).
+   [M15](m15.md)'s first bullet is amended in consequence.
 4. **Whether `F3` and `F15` reopen [M8](m8.md).** `M19` proposes to decide this on
    the record; if the owner would rather set it in advance, it is a scope answer
    and belongs here.
