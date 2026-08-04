@@ -85,6 +85,14 @@ the file. Append a row when you append an entry.
 | [A documentation claim this repository has just falsified fails the commit, not the release walk](#a-documentation-claim-this-repository-has-just-falsified-fails-the-commit-not-the-release-walk) | The new commit gate row, and the finding that argues it |
 | [Eight record files with no index is the failure this catalog is about](#eight-record-files-with-no-index-is-the-failure-this-catalog-is-about) | Why `docs/records/` gets a map, and why it does not close `F9` |
 | [One tracker is watched for silent removal, and it is watched by the check that cannot judge](#one-tracker-is-watched-for-silent-removal-and-it-is-watched-by-the-check-that-cannot-judge) | Corrects the entry above it — `DL-03` sees deletions, and no process rule here is checkable |
+| [Phase three measures before it grows, and the housekeeping goes first](#phase-three-measures-before-it-grows-and-the-housekeeping-goes-first) | Why measurement beat growth and evidence, and the one hard ordering constraint |
+| [What the phase does to the queue, stated because approval is per row](#what-the-phase-does-to-the-queue-stated-because-approval-is-per-row) | Which nine findings the plan schedules, and why the other seven stay open |
+| [The cheap corrections go last, because the phase moves the records they correct](#the-cheap-corrections-go-last-because-the-phase-moves-the-records-they-correct) | Corrects the ordering above it — three of five corrections would be done twice |
+| [A phase that changes the contract and does not publish a release is not finished](#a-phase-that-changes-the-contract-and-does-not-publish-a-release-is-not-finished) | Why M20 exists, and why M21 needs it |
+| [LinkCtrl adopting proves nothing about generality, and is worth doing anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway) | What the third adoption is not, and the three things it is |
+| [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
+| [M20 and M21 swapped roles, and two entries above still point the old way](#m20-and-m21-swapped-roles-and-two-entries-above-still-point-the-old-way) | A link that resolves and misdirects, and which two entries to read backwards |
+| [The queue gained a row during this branch's own review, and it is not scheduled](#the-queue-gained-a-row-during-this-branchs-own-review-and-it-is-not-scheduled) | `F20` moves the counts to seventeen open and eight unscheduled; the nine are unchanged |
 
 ---
 
@@ -2011,3 +2019,278 @@ nothing mechanical stands behind it.
 `F10` remains the wider version of this — no record anywhere carries an expiry
 that forces disposal — and closing it is still a major-version argument rather
 than a rule in [triage.md](triage.md).
+
+## 2026-08-04 — phase three is scoped
+
+### Phase three measures before it grows, and the housekeeping goes first
+
+Phase two ended with a catalog that had been implemented once, adopted once,
+and walked twice, and with sixteen open findings none of which had been
+reviewed. Three things could have been the spine of the next phase and only one
+of them can be done from inside this repository.
+
+**Growth** — `F9` and `F10`, the two largest findings the second adopter produced
+— would answer the loudest external input this project has received. **Evidence**
+— an adopter or implementer who has never read the repository this catalog was
+extracted from — would answer the only question that actually matters for a `0.x`
+version claiming nothing about generality. **Measurement** — closing the gap
+between what the specification asserts and what any tree tests — answers neither,
+and is the one this phase takes.
+
+The argument for taking it first is that the other two are worth less until it
+is done. A sixth module added to a catalog that cannot test the five it has
+grows the untested surface. An outside implementer handed a specification with
+a dozen untested normative claims finds them the way the first one did —
+eighteen at a time, as ambiguities — and the phase after this one would be
+spent on the same work with a stranger's patience being spent instead of ours.
+
+**The housekeeping units go first at the owner's direction, and the ordering
+turned out to be load-bearing rather than a preference.** `F19` is this
+repository's scope contract describing a phase that has ended; a phase plan
+written on top of it inherits the error, which is what nearly happened here.
+
+**One ordering constraint inside the phase is hard.** [M16](work/m16.md) settles
+how a version is sized for a change that moves what a conformant run must output
+while an adopter sees nothing. [M17](work/m17.md) and [M18](work/m18.md) are the
+largest such change this repository has ever made. Deciding the rule after making
+the change means deciding it while standing on the instance, which is the failure
+[work/m9.md](work/m9.md) named against itself and the reason the conformance
+criterion was deferred until there was something to test it on.
+
+### What the phase does to the queue, stated because approval is per row
+
+[triage.md](triage.md) makes an unreviewed finding a report rather than a
+commitment, and sixteen of them were unreviewed when this was written. This
+plan schedules work that closes **nine**: `F3`, `F5`, `F8`, `F14`, `F15`,
+`F16`, `F17`, `F18` and `F19`. Approving the plan is approving those nine rows
+and nothing else.
+
+**Seven stay open, and none of them stays open by accident.**
+
+- `F9` and `F10` are the growth argument above. They are the two this phase
+  most visibly declines, and declining them makes three refusals in a row
+  against outside input — after the first objection was declined at `0.2.0`.
+  That cost is real, it accrues to a channel whose entire value is that filing
+  is worth doing, and it is recorded here rather than offset.
+- `F11` and `F12` are already answered: both are catalog gaps ruled out of
+  scope on principle, with the reasoning in their rows.
+- `F13` — a judgment entry reading for a field no obligation requires — is
+  small and would be a reasonable addition to [M15](work/m15.md). It is left
+  out because its two fixes are a new obligation or a reworded entry, and the
+  first is the growth argument in miniature.
+- `F6` is not a unit at all. It is a disposition the owner takes: record this
+  repository's first deviation, or accept a `DL-03` finding on every run
+  forever. Both are legitimate and neither is work.
+- `F4` is the closest call. The specification does not say what state a check
+  reports while its two halves disagree, which is the same family as `F5` and
+  `F8` and would sit naturally in [M18](work/m18.md). It is left out because
+  its answer changes `WU-04`'s expected result from `finding` to `skip` — an
+  expectation change rather than a wording fix — and this phase already has two
+  units rewriting expectations. If `M18` reaches it anyway, it is in scope for
+  that unit and this entry is where the permission is.
+
+## 2026-08-04 — phase three is reordered, and gains a release and an adoption
+
+### The cheap corrections go last, because the phase moves the records they correct
+
+Correcting [Phase three measures before it grows, and the housekeeping goes
+first](#phase-three-measures-before-it-grows-and-the-housekeeping-goes-first),
+appended the same day. That entry recorded the owner's direction that the
+housekeeping run first, and the plan was written that way. Asked afterwards to
+order the phase for efficiency, the answer changed, and this is why.
+
+**Three of the five corrections are about records this phase is going to
+move.** [M16](work/m16.md) adds fixture trees to modules whose prose counts
+their judgment lines — that is `F3`. [M17](work/m17.md) changes the schema that
+the implementer's guide describes — that is `F15`. `M17` bumps every module
+past the version this repository's own adoption record pins — that is `F18`.
+Fixing them first fixes them twice, and the second fix is the one that
+survives.
+
+The other two do not move. `F17` is a missing index row and `F19` is this
+repository's scope contract describing a phase that has ended, and nothing
+later in the phase touches either. Those go first, and `F19` goes first for a
+reason beyond cost: every unit reads the file it is wrong in.
+
+So the corrections split across [M14](work/m14.md) and [M19](work/m19.md)
+rather than sitting in one unit at one end of the phase. **The owner's
+instruction is not overruled so much as split by it** — the housekeeping that
+can be done once is still first, and the housekeeping that would be done twice
+is not.
+
+One thing the earlier entry got right and is worth keeping: the ordering
+constraint on [M15](work/m15.md) is hard, and it survives the reorder
+unchanged.
+
+### A phase that changes the contract and does not publish a release is not finished
+
+The plan as first written had no release unit, which is a gap rather than a
+choice. Phase two ended with [M13](work/m13.md) doing the walk, the changelog,
+the `0.x` section and the documentation pass; this phase changes the contract
+more than that one did and had nothing scheduled to say so. [M20](work/m20.md)
+is that unit.
+
+It also became load-bearing for a second reason. An adoption record pins a
+version, so [M21](work/m21.md) needs a released one to pin — adopting an
+unreleased tree would produce a record that names a version nobody else can
+fetch.
+
+### LinkCtrl adopting proves nothing about generality, and is worth doing anyway
+
+The owner asked that LinkCtrl start using this catalog once the phase
+completes. [M21](work/m21.md) is that unit, and the first thing it has to
+establish is what the result is not.
+
+**LinkCtrl is the repository these conventions were extracted from.** A clean
+map there is guaranteed by construction: the rules were written by reading that
+tree. [README.md](../../README.md) currently says two data points, both
+adjacent to the author; this is a third and it is the most adjacent one
+available. The generality question — a repository built by somebody who has
+never read LinkCtrl — is untouched by it, and the risk is not that the walk
+fails but that it succeeds and gets read as maturity.
+
+Three things make it worth the phase's last unit regardless.
+
+**It is verifiable.** [M11](work/m11.md)'s second repository is private, its
+walk is redacted, and a reader cannot check it — a knowing deviation from this
+repository's own release gate, named at the gate. LinkCtrl is public. This is
+the first adoption record here that an outsider can reproduce line for line,
+and it repairs that deviation rather than arguing it again.
+
+**It makes `F9` an observation instead of an argument.** `F9` says no role
+reaches a repository's scope contract unless that repository also has units of
+work, and admits this repository hides the gap from itself because one file
+plays both parts. LinkCtrl separates them: its scope contract is one file and
+its unit index is another. The coupling stops being hypothetical against a
+public tree.
+
+**LinkCtrl has moved since the extraction.** It keeps record types this catalog
+has never seen — a tracker for changes to its own process, a file of questions
+with no answer yet, a measurement of what its always-read documents cost. None
+has a role. That the catalog cannot reach the records of the one repository it
+came from is worth knowing, and the unmapped list is `M21`'s primary output. An
+empty one would mean the walk did not look.
+
+**Nothing ships to make this repeatable**, for LinkCtrl or anyone. No action,
+no template, no bot, no CI integration. That refusal is unchanged by the
+adopter being familiar, and an adopter wanting a scheduled audit builds it from
+a checker themselves.
+
+The prerequisite is outside this repository and is named rather than assumed:
+the adoption record is a commit in LinkCtrl, placed through LinkCtrl's own
+process and around its own unattended build loop. This phase cannot schedule
+that. The owner places it; `M21` waits.
+
+### The phase ends ready rather than adopted, and the readiness ships before the tag
+
+Correcting [LinkCtrl adopting proves nothing about generality, and is worth
+doing
+anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway),
+appended the same day. That entry scoped a unit in which **this** repository
+performed LinkCtrl's adoption. That is not what was asked for and not where the
+work belongs: LinkCtrl transitions in its own workflow, once this phase lands.
+What this phase owes is that the path is walkable when it does.
+
+Everything the earlier entry says about *evidence* stands unchanged and is
+worth re-reading — a clean map against the repository these conventions were
+extracted from is guaranteed by construction, and it is the most adjacent data
+point available rather than a third independent one. What changes is who does
+it, when, and what this phase can therefore claim.
+
+**The phase's adoption count does not move.** [M20](work/m20.md) writes no
+adoption record anywhere, so [README.md](../../README.md) still says two, both
+adjacent to the author. The third arrives later and in somebody else's tree,
+and the record it writes then carries the caveat. A phase that made itself
+adoptable and then reported an adoption would be counting its own preparation.
+
+**Readiness ships before the tag, and that ordering is the substance.** A guide
+defect found after the release is a defect the next adopter reads. So the
+readiness unit precedes the release unit rather than following it, and any fix
+it produces ships *in* the release. The two swapped places for that reason and
+for no other.
+
+**What readiness means here is narrower than the word.** LinkCtrl's tree asks
+three questions this repository has never had to answer, because its own
+adoption was the easy case: what an adopter maps when its process is more than
+one document, what it does with a record no role can reach, and how it chooses
+`effective_from` against history that predates the decision to adopt. Each is
+answered by *shape* rather than by filename — a guide that names LinkCtrl's
+files has documented one adoption instead of the path.
+
+**The honest claim is not that the path is ready.** It is that every question
+anyone could find has an answer. Readiness is unfalsifiable until somebody
+adopts, and the test is LinkCtrl's transition, which happens outside this phase
+and is expected to produce findings rather than to confirm anything.
+
+`F9` is where this gets uncomfortable and the discomfort is recorded rather
+than resolved. LinkCtrl's scope contract is reachable by no role, this
+repository cannot see that in itself because one file plays both parts, and the
+answer the guide now has to give is *leave it unmapped, this is known*. That is
+a specification gap being documented as an instruction to adopters. It is the
+right call for a phase that declines to grow the catalog, and it is the
+second-best outcome rather than a good one.
+
+### M20 and M21 swapped roles, and two entries above still point the old way
+
+Found by re-reading the plan against itself after this branch was reopened
+against a different base. Nothing mechanical caught it, and that is the part
+worth keeping.
+
+When readiness moved ahead of the release, the two units exchanged numbers. Two
+entries written before that exchange kept their old pointers:
+
+- [A phase that changes the contract and does not publish a release is not
+  finished](#a-phase-that-changes-the-contract-and-does-not-publish-a-release-is-not-finished)
+  names `M20` as the release unit, and says `M21` needs a released version to
+  pin. Both are inverted now: [M20](work/m20.md) is readiness and
+  [M21](work/m21.md) is the release. The sentence's reasoning is unaffected —
+  an adoption record does need a released version — but the numbers attached to
+  it are the wrong way round.
+- [LinkCtrl adopting proves nothing about generality, and is worth doing
+  anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway)
+  names `M21` as the unit performing the adoption. **There is no adoption unit
+  in this phase at all**, which was the substance of the correction after it.
+  Read every `M21` in that entry as *the work LinkCtrl does later, in its own
+  workflow*, and never as a unit here.
+
+**The links still resolve, which is why every gate passed.** A relative link to
+a file that exists, naming a unit that has since become something else, is
+valid to a link checker and wrong to a reader. This repository checks that
+links resolve and has nothing that checks they still mean what they said — the
+same shape as `F17`, where an index is 98% complete and reads as complete.
+
+**Scope is unaffected and that distinction matters.**
+[work/README.md](work/README.md) is correct throughout, as are all eight unit
+files: the table, every title, and every dependency edge. Only the rationale
+here is stale. A reader who starts from the scope contract — which is what it
+is for — is never misled, and the failure is confined to the file that records
+why rather than the file that records what.
+
+This is appended rather than fixed in place because entries are append-only,
+and because editing two of them would remove lines after `effective_from` — a
+second `DL-03` finding against this repository while `F6`'s disposition is
+still open. The index row for the first entry reads the old way too, and is
+left standing for the same reason.
+
+### The queue gained a row during this branch's own review, and it is not scheduled
+
+[What the phase does to the queue, stated because approval is per
+row](#what-the-phase-does-to-the-queue-stated-because-approval-is-per-row)
+counted sixteen open findings and named the seven the plan leaves alone. `F20`
+was filed after it, by the revalidation of this branch, so the count in that
+entry is now one short in both halves: **seventeen open, eight unscheduled.**
+The nine the plan schedules are unchanged, and merging still approves those
+nine and no others.
+
+`F20` is unscheduled and may be unfixable, which is the more useful half of it.
+Its catalog side is out of scope on principle — whether prose describes its
+link's target correctly is content rather than structure. Its own-repository
+side is a gate that reads stronger than it is, and no mechanical strengthening
+is available: a checker can tell that a link resolves and that it lands on a
+role, and cannot tell that the sentence around it still means what it said.
+Scheduling work against it would be scheduling an answer nobody has.
+
+That it was found at all is the argument for the row existing. The instance was
+caught by a person re-reading a plan against itself, after every gate here had
+passed over it, and a gap recorded only in a rationale entry is a gap nothing
+tracks.
