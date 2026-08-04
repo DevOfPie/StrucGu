@@ -26,7 +26,7 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | done |
 | [M14](m14.md) | Two records are corrected before the phase reads them | — | done |
 | [M15](m15.md) | A bump sized by what an implementer must re-do | — | done |
-| [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | planned |
+| [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | in progress |
 | [M17](m17.md) | The expectation file learns to say what it currently cannot | M15, M16 (ordering) | planned |
 | [M18](m18.md) | The implementation is pulled up, and the new trees are tested against a wrong checker | M16 M17 | planned |
 | [M19](m19.md) | Three records are corrected once the expectations have settled | M16 M17 M18 | planned |
@@ -47,6 +47,13 @@ than its number suggests. Neither means `done`.
 is being corrected in place rather than succeeded, per
 [triage.md](../triage.md). It returns to `done` when the correction lands, and
 the unit's own file — not this table — is where the reopening survives.
+
+`in progress` joins it too: begun, landing across more than one commit, and not
+yet satisfying its own *Done means*. A unit large enough to split across commits
+— which [triage.md](../triage.md) permits — otherwise sits at `planned` while
+commits against it are being pushed, and `planned` means *agreed and not begun*.
+Argued in
+[decisions.md](../decisions.md#a-unit-that-lands-across-several-commits-needs-a-status-word-for-the-middle).
 
 M10's edge to M8 is hard: an implementer with nothing mechanical to compare
 against produces a reading of the spec rather than a test of it. M9's edge to M10

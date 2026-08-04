@@ -553,6 +553,31 @@ no runner refused.
 do not, that is a defect to report and not a precedence order to apply — the
 same rule `module.md` and `module.yaml` already carry.
 
+### What no fixture pins
+
+Every statement this document makes about what a checker does is either pinned by
+a fixture tree or listed here, with why no tree reaches it. **This list is the
+more useful half.** A statement no tree reaches is one two implementations can
+disagree about while reproducing every row, and reproducing every row is what a
+conformance claim means.
+
+It is expected to be non-empty and it is expected to shrink. A statement that
+belongs on it permanently is a statement worth re-reading for whether it should
+exist at all.
+
+| Statement | Why no tree reaches it |
+| --- | --- |
+| `waived` is an accepted deviation, echoed every run | No fixture tree carries a `deviations` block, so one of the five states is exercised nowhere in the catalog. The first `waived` anywhere came from a second repository. |
+| `path_exists` additionally requires a **tracked** path where the audited root is a git repository | Exactly one tree becomes a repository, and only by running a setup block by hand. A checker can ignore trackedness entirely and reproduce every row. |
+| `history_deletions` reads the repository rooted at the audited root, never by walking up | Same reason. A checker that walks up finds this repository's history and still matches every fixture, because no tree is nested inside one. |
+| `effective_from` is exclusive, and compared by committer date | Same reason, and it needs two commits whose committer and author dates differ to be visible at all. |
+| A check bound to a `dir` role applies to every markdown file **below** it | No fixture tree has a subdirectory, so whether a checker descends is unpinned in both directions. |
+| A `dir` role's `exclude` list is matched against each file's **basename, at any depth** | Two modules declare an `exclude` list and no tree has a second level for a basename to be matched at. |
+| `links_resolve` on a link whose target is a directory | Decided here and tested by nothing. |
+| `links_resolve` on an anchor against a non-markdown file | Same. |
+| The `-1` suffix GitHub adds to a duplicate heading's slug | Same. |
+| The conditions under which an audit **cannot start** | `expected.yaml`'s values are the five audit states and none of them means *the run did not happen*, so six specified conditions have no tree. Open as `F5` in [findings.md](docs/records/findings.md). |
+
 ---
 
 ## Remediation

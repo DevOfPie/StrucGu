@@ -99,6 +99,7 @@ the file. Append a row when you append an entry.
 | [The cut rule is this repository's practice; the list it produces is the catalog's](#the-cut-rule-is-this-repositorys-practice-the-list-it-produces-is-the-catalogs) | Answers where M16's rule lives, and settles a plan conflict |
 | [`expected.yaml` grows a third section, and the schema identifier goes to 2](#expectedyaml-grows-a-third-section-and-the-schema-identifier-goes-to-2) | Answers `F5`'s shape; leaves `F8` to M17 |
 | [Three recommendations offered and three taken, and the streak is the thing to watch](#three-recommendations-offered-and-three-taken-and-the-streak-is-the-thing-to-watch) | Counted for the same reason the refusals were |
+| [A unit that lands across several commits needs a status word for the middle](#a-unit-that-lands-across-several-commits-needs-a-status-word-for-the-middle) | `in progress` joins the status vocabulary, inside M16 |
 
 ---
 
@@ -2483,3 +2484,38 @@ as a pattern worth watching, and a run of accepted self-recommendations is the
 same shape from the other side. Neither is evidence of anything on its own. Both
 are the kind of thing a project stops being able to see once it has stopped
 counting.
+
+---
+
+## 2026-08-04 — M16, every stated behaviour gets a tree or is cut
+
+### A unit that lands across several commits needs a status word for the middle
+
+[triage.md](triage.md) permits one work unit to be split across several commits
+and forbids bundling two into one. [M16](work/m16.md) is the first unit to use
+that permission at length: it adds an unbounded number of fixture trees, and its
+own risks section says the count is unknown until the work starts.
+
+The status vocabulary had no word for that state. `planned` means *agreed and not
+begun*, and a row reading `planned` while commits against it are being pushed is
+false in the file this repository calls its scope contract — the same class of
+untrue record `F19` was, closed one unit ago. `done` is worse.
+
+**`in progress` joins the vocabulary**: begun, landing across more than one
+commit, not yet satisfying its own *Done means*.
+
+Taken inside the unit rather than put to the owner, because
+[triage.md](triage.md) reserves the prompt for scope changes and decisions the
+owner would reasonably want, and this changes no scope, no unit and no
+obligation — it adds a word to a table so the table can be true while the work
+is happening. It is also reversible in one edit. Recorded here and not only in
+the diff, because a status vocabulary that grows quietly is how a tracker stops
+meaning anything, which is the argument
+[no row leaves a tracker without saying where it went](#no-row-leaves-a-tracker-without-saying-where-it-went)
+already makes from the other direction.
+
+The cost is that the table now has five words and a reader has to learn one more.
+The alternative was holding a large unit's work uncommitted until it was whole,
+which trades a stale status for the risk of losing the work, and this repository
+already keeps `.current-task.md` untracked precisely so that an interruption
+costs effort and not knowledge.
