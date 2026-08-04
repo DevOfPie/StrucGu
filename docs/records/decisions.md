@@ -85,6 +85,8 @@ the file. Append a row when you append an entry.
 | [A documentation claim this repository has just falsified fails the commit, not the release walk](#a-documentation-claim-this-repository-has-just-falsified-fails-the-commit-not-the-release-walk) | The new commit gate row, and the finding that argues it |
 | [Eight record files with no index is the failure this catalog is about](#eight-record-files-with-no-index-is-the-failure-this-catalog-is-about) | Why `docs/records/` gets a map, and why it does not close `F9` |
 | [One tracker is watched for silent removal, and it is watched by the check that cannot judge](#one-tracker-is-watched-for-silent-removal-and-it-is-watched-by-the-check-that-cannot-judge) | Corrects the entry above it — `DL-03` sees deletions, and no process rule here is checkable |
+| [Phase three measures before it grows, and the housekeeping goes first](#phase-three-measures-before-it-grows-and-the-housekeeping-goes-first) | Why measurement beat growth and evidence, and the one hard ordering constraint |
+| [What the phase does to the queue, stated because approval is per row](#what-the-phase-does-to-the-queue-stated-because-approval-is-per-row) | Which nine findings the plan schedules, and why the other seven stay open |
 
 ---
 
@@ -2011,3 +2013,72 @@ nothing mechanical stands behind it.
 `F10` remains the wider version of this — no record anywhere carries an expiry
 that forces disposal — and closing it is still a major-version argument rather
 than a rule in [triage.md](triage.md).
+
+## 2026-08-04 — phase three is scoped
+
+### Phase three measures before it grows, and the housekeeping goes first
+
+Phase two ended with a catalog that had been implemented once, adopted once,
+and walked twice, and with sixteen open findings none of which had been
+reviewed. Three things could have been the spine of the next phase and only one
+of them can be done from inside this repository.
+
+**Growth** — `F9` and `F10`, the two largest findings the second adopter produced
+— would answer the loudest external input this project has received. **Evidence**
+— an adopter or implementer who has never read the repository this catalog was
+extracted from — would answer the only question that actually matters for a `0.x`
+version claiming nothing about generality. **Measurement** — closing the gap
+between what the specification asserts and what any tree tests — answers neither,
+and is the one this phase takes.
+
+The argument for taking it first is that the other two are worth less until it
+is done. A sixth module added to a catalog that cannot test the five it has
+grows the untested surface. An outside implementer handed a specification with
+a dozen untested normative claims finds them the way the first one did —
+eighteen at a time, as ambiguities — and the phase after this one would be
+spent on the same work with a stranger's patience being spent instead of ours.
+
+**The housekeeping units go first at the owner's direction, and the ordering
+turned out to be load-bearing rather than a preference.** `F19` is this
+repository's scope contract describing a phase that has ended; a phase plan
+written on top of it inherits the error, which is what nearly happened here.
+
+**One ordering constraint inside the phase is hard.** [M16](work/m16.md) settles
+how a version is sized for a change that moves what a conformant run must output
+while an adopter sees nothing. [M17](work/m17.md) and [M18](work/m18.md) are the
+largest such change this repository has ever made. Deciding the rule after making
+the change means deciding it while standing on the instance, which is the failure
+[work/m9.md](work/m9.md) named against itself and the reason the conformance
+criterion was deferred until there was something to test it on.
+
+### What the phase does to the queue, stated because approval is per row
+
+[triage.md](triage.md) makes an unreviewed finding a report rather than a
+commitment, and sixteen of them were unreviewed when this was written. This
+plan schedules work that closes **nine**: `F3`, `F5`, `F8`, `F14`, `F15`,
+`F16`, `F17`, `F18` and `F19`. Approving the plan is approving those nine rows
+and nothing else.
+
+**Seven stay open, and none of them stays open by accident.**
+
+- `F9` and `F10` are the growth argument above. They are the two this phase
+  most visibly declines, and declining them makes three refusals in a row
+  against outside input — after the first objection was declined at `0.2.0`.
+  That cost is real, it accrues to a channel whose entire value is that filing
+  is worth doing, and it is recorded here rather than offset.
+- `F11` and `F12` are already answered: both are catalog gaps ruled out of
+  scope on principle, with the reasoning in their rows.
+- `F13` — a judgment entry reading for a field no obligation requires — is
+  small and would be a reasonable addition to [M15](work/m15.md). It is left
+  out because its two fixes are a new obligation or a reworded entry, and the
+  first is the growth argument in miniature.
+- `F6` is not a unit at all. It is a disposition the owner takes: record this
+  repository's first deviation, or accept a `DL-03` finding on every run
+  forever. Both are legitimate and neither is work.
+- `F4` is the closest call. The specification does not say what state a check
+  reports while its two halves disagree, which is the same family as `F5` and
+  `F8` and would sit naturally in [M18](work/m18.md). It is left out because
+  its answer changes `WU-04`'s expected result from `finding` to `skip` — an
+  expectation change rather than a wording fix — and this phase already has two
+  units rewriting expectations. If `M18` reaches it anyway, it is in scope for
+  that unit and this entry is where the permission is.
