@@ -79,6 +79,10 @@ the file. Append a row when you append an entry.
 | [The second walk exercises `skip` nowhere, and that is a loss rather than a cleaner summary](#the-second-walk-exercises-skip-nowhere-and-that-is-a-loss-rather-than-a-cleaner-summary) | What mapping `investigations` cost the self-walk |
 | [Two data points adjacent to the author are not a track record](#two-data-points-adjacent-to-the-author-are-not-a-track-record) | What the rewritten 0.x section may and may not claim |
 | [A shipped unit whose claim is false is reopened, not succeeded](#a-shipped-unit-whose-claim-is-false-is-reopened-not-succeeded) | The fourth status word, and why a successor is the worse record |
+| [No row leaves a tracker without saying where it went](#no-row-leaves-a-tracker-without-saying-where-it-went) | Extends findings.md's own rule to the other trackers |
+| [A decision reached in conversation is written down before it is acted on](#a-decision-reached-in-conversation-is-written-down-before-it-is-acted-on) | Ordering, not volume |
+| [A prompt without costs is a request for permission, not a decision](#a-prompt-without-costs-is-a-request-for-permission-not-a-decision) | What a decision prompt has to contain |
+| [A documentation claim this repository has just falsified fails the commit, not the release walk](#a-documentation-claim-this-repository-has-just-falsified-fails-the-commit-not-the-release-walk) | The new commit gate row, and the finding that argues it |
 
 ---
 
@@ -1851,3 +1855,86 @@ The second detail is the one the source contract does not have, and it is not an
 improvement so much as a different exposure: over there a reopening is legible in
 a milestone's history because the loop that ran it writes an entry either way.
 Here nothing writes anything unless a rule says to.
+
+### No row leaves a tracker without saying where it went
+
+[findings.md](findings.md) already has this rule for itself — rows move to
+*Closed*, never out — and the reasoning is stated there: a queue that empties by
+deletion cannot show what it caught. Nothing extended it to the other trackers.
+
+The exposed one is [work/README.md](work/README.md). Its *Not in this phase* list
+and its list of permitted specification edits are both there to stop scope
+arriving by drift, and both could be shortened by anyone who decided a line no
+longer applied. The second list exists **because that already happened once**: the
+first version of that section named no specification changes while three units
+forced them. A list that can be quietly shortened has the same failure mode as a
+list that was never written.
+
+So removal has two forms and no third: re-homed, with the row saying where it
+went, or logged in this file with what was dropped and why. Deciding an item no
+longer matters is a decision, and it is the kind that returns a year later as a
+fresh idea with its reasoning gone.
+
+This is one of the two rules here that the catalog itself cannot check.
+`findings-queue` can see that a queue exists, has evidence and has a review
+state; no obligation anywhere can see a row that used to be there. That is not an
+argument for adding one — it is the shape of thing `F10` already names, and
+closing it is a major-version argument rather than a rule in this file.
+
+### A decision reached in conversation is written down before it is acted on
+
+This repository publishes a module whose whole subject is the record of why
+choices were made, and had no rule saying when to write one.
+
+It has been getting away with it. The four scope questions this phase needed were
+put to the owner on 2026-08-02, answered in conversation, and written into
+[work/README.md](work/README.md) and this file before anything was built —
+correctly, and because the actor happened to do it, not because anything required
+it. The failure mode is not dramatic: the answer gets acted on, the reasoning
+evaporates, and the next session re-derives a slightly different conclusion from
+a tree that already reflects the first one.
+
+The rule is ordering, not volume. The entry goes in **before** the change it
+authorizes lands. Written afterwards it is a description of the tree, which is
+what the tree already is.
+
+### A prompt without costs is a request for permission, not a decision
+
+*Stop and ask* said when to ask and nothing about what an ask contains, so the
+shape was the asking actor's habit. The failure is specific and it runs one way:
+the actor that raises the prompt is usually the actor that will do the work, and
+an unconstrained recommendation drifts toward whatever is cheapest to build. It
+does not read as bias, because the cheap option is genuinely defensible and the
+expensive one is genuinely expensive; what goes missing is that the trade was
+never stated.
+
+So a prompt carries options with what each buys *and* costs, a marked
+recommendation that states its own con, and the default — what happens if the
+answer is *you decide*. Naming the default is the cheapest part and does the most
+work: without it, skipping a question requires re-deriving the whole choice, so
+questions get answered by attrition rather than judgment.
+
+If nothing can be recommended, saying so is the answer. Omitting the
+recommendation silently is not.
+
+### A documentation claim this repository has just falsified fails the commit, not the release walk
+
+The commit gate checked links, roles, prose-and-manifest agreement, fixtures,
+vocabulary, neutrality and scope — everything about a module's internal shape,
+and nothing about whether the documents describing the catalog were still true.
+Truth was the release documentation pass's job, which is to say it was checked
+once per release.
+
+`F15` is what that costs. `M8` made `expected.yaml` a required file in every
+module directory; [docs/auditing.md](../auditing.md) describes a `fixtures/`
+directory without it and sends the implementer to the prose file instead. The
+document written for the one audience that most needs the mechanical answer has
+been wrong since M8 shipped, through a release and a documentation pass, because
+nothing at the moment of the change asked.
+
+The new gate row is narrow on purpose. It fires only when the unit changed what
+an adopter or a reader would observe, and it asks about the three surfaces that
+make claims to outsiders — [SPEC.md](../../SPEC.md), [README.md](../../README.md),
+and the affected module READMEs. It is not a documentation pass in miniature: the
+release pass still exists and still reads everything. This one catches the case
+where the person who made the claim false is standing right there.
