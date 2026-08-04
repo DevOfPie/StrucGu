@@ -24,12 +24,14 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M11](m11.md) | The second repository adopts, and every finding is disposed of by the rule | M10 | done |
 | [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | done |
 | [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | done |
-| [M14](m14.md) | The adoption record says what was reviewed | — | planned |
-| [M15](m15.md) | Four records stop asserting what is no longer true | M14 (ordering) | planned |
-| [M16](m16.md) | A bump sized by what an implementer must re-do | — | planned |
-| [M17](m17.md) | Every stated behaviour has a tree, or the statement is cut | M16 | planned |
-| [M18](m18.md) | The expectation file learns to say what it currently cannot | M16, M17 (ordering) | planned |
-| [M19](m19.md) | The implementation is pulled up, and the new trees are tested against a wrong checker | M17 M18 | planned |
+| [M14](m14.md) | Two records are corrected before the phase reads them | — | planned |
+| [M15](m15.md) | A bump sized by what an implementer must re-do | — | planned |
+| [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | planned |
+| [M17](m17.md) | The expectation file learns to say what it currently cannot | M15, M16 (ordering) | planned |
+| [M18](m18.md) | The implementation is pulled up, and the new trees are tested against a wrong checker | M16 M17 | planned |
+| [M19](m19.md) | Three records are corrected once the expectations have settled | M16 M17 M18 | planned |
+| [M20](m20.md) | The release is walked, and what moved is stated for an implementer | M16 M17 M18 M19 | planned |
+| [M21](m21.md) | LinkCtrl adopts, and the walk says what a source repository cannot prove | M20 | planned |
 
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
@@ -107,21 +109,57 @@ Anything beyond these is out of scope and belongs in
 
 ## Phase 3 — the measurements this catalog cannot currently take
 
-Everything above this heading describes phase two. `M14` to `M19` are phase
-three, and the phase has a shape rather than a theme: **two units make the record
-true, and four make the catalog able to see things it currently asserts without
-testing.**
+Everything above this heading describes phase two. `M14` to `M21` are phase
+three: **four units make the catalog able to see things it currently asserts
+without testing, three make the record true around them, and one hands the result
+back to the repository it was extracted from.**
 
-The order is deliberate and the housekeeping is genuinely first. `M14` and `M15`
-close five findings that cost nothing to argue about, and one of them — `F19` —
-is this file describing a phase that has ended. A phase plan written on top of a
-scope contract that is out of date inherits the error.
+### The order, and why it is not the obvious one
 
-Then the measurement units, and `M16` leads them for a reason that is a hard
-constraint rather than a preference. `M17` and `M18` rewrite expectation rows in
-bulk; that is exactly the change class `F16` says the versioning table cannot
-size. Shipping them first means deciding the rule while standing on the largest
-instance of it.
+The obvious order is the cheap corrections first. It is wrong, and the reason is
+rework rather than taste. Five records are open as findings for asserting things
+that are no longer true, and **three of the five are about records the measurement
+units are going to move**: `M16` adds trees to modules whose prose counts them,
+`M17` changes the schema the implementer's guide describes, and `M17` bumps every
+module past the version this repository's own adoption record pins. Fixing those
+three first means fixing them twice, and the second fix is the one that counts.
+
+So the corrections split. [M14](m14.md) takes the two that nothing later touches
+and goes first, because one of them is this file describing a phase that has
+ended and every unit reads this file. [M19](m19.md) takes the other three and
+goes late, after the churn it would otherwise be caught in.
+
+One constraint inside the phase is hard rather than preferred. [M15](m15.md)
+settles how a version is sized for a change that moves what a conformant run must
+output while an adopter sees nothing; [M16](m16.md) and [M17](m17.md) are the
+largest such change this repository has made. Deciding the rule afterwards means
+deciding it while standing on the instance.
+
+The phase then ends the way phase two did — a release walk in [M20](m20.md), with
+the tag the owner's — and then does one thing phase two did not.
+
+### LinkCtrl adopts, and that is worth less than it looks
+
+[M21](m21.md) is the phase's last unit and it exists because the catalog should be
+usable by the repository it came from. Three things about it are stated here
+rather than left to the unit, because they are scope rather than execution:
+
+- **It produces no evidence of generality.** LinkCtrl is the extraction source. A
+  clean map there is guaranteed by construction, and this is the most adjacent
+  data point available rather than a third independent one.
+- **It is the first adoption record here an outsider can verify.** LinkCtrl is
+  public, so unlike [M11](m11.md)'s redacted walk it can quote every path and
+  every line. That repairs a knowing deviation from this repository's release
+  gate.
+- **Its primary output is the unmapped list, not the check results.** LinkCtrl now
+  keeps record types this catalog has never seen, and its scope contract is a
+  separate file from its unit index — which turns `F9` from an argument into an
+  observation about a public tree. Those become findings; none is fixed in this
+  phase.
+
+It also has a prerequisite this repository does not control: the adoption record
+is a commit in LinkCtrl, placed through LinkCtrl's own planning process and around
+its own build loop. The owner places it; `M21` waits.
 
 ### What this phase does not settle, and why it is not an oversight
 
@@ -136,14 +174,19 @@ instance of it.
   [README.md](../../../README.md) states that the question needs a repository
   built by somebody who has never read the repository this was extracted from, and
   nothing here answers it. Two data points, both adjacent to the author, is what
-  this phase begins and ends with. Nothing in `M14`–`M19` moves that number, and
-  `M19` says so about itself.
+  this phase begins and ends with. `M21` adds a third data point and it is the
+  most adjacent one there is, so the number that matters does not move — and
+  `M21` says so about itself rather than leaving it to be inferred.
 - **No adversarial pre-release review is scheduled.** The 0.2.0 release was walked
   by hand and the plan was reviewed adversarially once; extending that to the
   release — independent readers on separate dimensions, each finding put to
   something that tries to refute it — is a change to how this repository works
   rather than to what it specifies. It belongs to the process contract, not to a
-  unit here.
+  unit here. [M20](m20.md) is a walk, not a review.
+- **Nothing is built for an adopter to re-run an audit on a schedule**, including
+  for LinkCtrl. No action, template, bot or CI integration ships from here. An
+  adopter that wants one builds it from a checker, which is a consumer's choice
+  and outside what this repository publishes.
 - **No check is added on suspicion, and nothing runs in a consumer's CI.** Both
   carry over from phase two unchanged.
 
@@ -152,34 +195,40 @@ instance of it.
 Each is a scope question, which [triage.md](../triage.md) requires stopping and
 asking about rather than deciding inside a unit. They are listed unanswered.
 
-1. **Where the cut rule lives.** `M17` extends *a check no tree can violate is
+1. **Where the cut rule lives.** `M16` extends *a check no tree can violate is
    cut* to normative prose. In [triage.md](../triage.md) it is a process rule this
    repository holds itself to; in [SPEC.md](../../../SPEC.md) it is a claim about
    what the specification is. They are different promises.
-2. **What shape `expected.yaml` grows.** `M18` needs either a third section or a
+2. **What shape `expected.yaml` grows.** `M17` needs either a third section or a
    per-tree expectation outside the five audit states. Both are MAJOR for every
    module.
 3. **How `F16` is answered** — a fourth row in the versioning table sized by what
    an implementer must re-do, or an explicit statement that implementers re-run on
    every bump and version numbers do not carry that signal.
-4. **Whether `F3` and `F15` reopen [M8](m8.md).** `M15` proposes to decide this on
+4. **Whether `F3` and `F15` reopen [M8](m8.md).** `M19` proposes to decide this on
    the record; if the owner would rather set it in advance, it is a scope answer
    and belongs here.
+5. **When LinkCtrl's adoption record is placed**, and by whom. It is a commit in
+   another repository with its own process and its own running build loop, so the
+   scheduling is not this phase's to do — only its waiting is.
 
 ### Specification edits are in scope, and this is the list
 
 Named for the reason phase two named them: a phase that lists no specification
 changes while its units force them is how hidden scope arrives.
 
-- [M16](m16.md) — [SPEC.md](../../../SPEC.md) *Versioning*, and whatever
+- [M15](m15.md) — [SPEC.md](../../../SPEC.md) *Versioning*, and whatever
   [conformance.md](../../conformance.md)'s clause 5 needs to stay consistent
   with it.
-- [M17](m17.md) — the *Fixture expectations* and *Matching rules* sections, to the
+- [M16](m16.md) — the *Fixture expectations* and *Matching rules* sections, to the
   extent that pinning a behaviour requires stating what a tree pins; plus the
   statement of which normative claims survive with no tree. An unbounded number of
   fixture trees, which is the honest number for the same reason `M10`'s was.
-- [M18](m18.md) — `expected.yaml`'s schema and its identifier, and the audit-output
+- [M17](m17.md) — `expected.yaml`'s schema and its identifier, and the audit-output
   vocabulary if the refusal case is expressed as a state rather than a section.
+- [M21](m21.md) — none expected. If adopting the extraction source forces a
+  specification edit, that is a finding about the catalog rather than a licence to
+  make one here.
 
 Anything beyond these is out of scope and belongs in
 [findings.md](../findings.md).
