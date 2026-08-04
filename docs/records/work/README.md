@@ -30,8 +30,8 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M17](m17.md) | The expectation file learns to say what it currently cannot | M15, M16 (ordering) | planned |
 | [M18](m18.md) | The implementation is pulled up, and the new trees are tested against a wrong checker | M16 M17 | planned |
 | [M19](m19.md) | Three records are corrected once the expectations have settled | M16 M17 M18 | planned |
-| [M20](m20.md) | The release is walked, and what moved is stated for an implementer | M16 M17 M18 M19 | planned |
-| [M21](m21.md) | LinkCtrl adopts, and the walk says what a source repository cannot prove | M20 | planned |
+| [M20](m20.md) | The adoption path is ready for a repository this one does not control | M16 M17 M18 M19 | planned |
+| [M21](m21.md) | The release is walked, and what moved is stated for an implementer | M20 | planned |
 
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
@@ -111,8 +111,8 @@ Anything beyond these is out of scope and belongs in
 
 Everything above this heading describes phase two. `M14` to `M21` are phase
 three: **four units make the catalog able to see things it currently asserts
-without testing, three make the record true around them, and one hands the result
-back to the repository it was extracted from.**
+without testing, two make the record true around them, one makes the adoption
+path walkable by somebody who cannot ask, and one publishes the result.**
 
 ### The order, and why it is not the obvious one
 
@@ -135,31 +135,41 @@ output while an adopter sees nothing; [M16](m16.md) and [M17](m17.md) are the
 largest such change this repository has made. Deciding the rule afterwards means
 deciding it while standing on the instance.
 
-The phase then ends the way phase two did — a release walk in [M20](m20.md), with
-the tag the owner's — and then does one thing phase two did not.
+### The phase ends ready, not adopted
 
-### LinkCtrl adopts, and that is worth less than it looks
+**LinkCtrl transitions in its own workflow, once this phase lands.** That is the
+adopter's work in the adopter's process, and nothing here schedules it, performs
+it, or commits to it. What this phase owes is that the path is walkable when
+nobody is available to be asked.
 
-[M21](m21.md) is the phase's last unit and it exists because the catalog should be
-usable by the repository it came from. Three things about it are stated here
-rather than left to the unit, because they are scope rather than execution:
+[M20](m20.md) is that unit and it comes **before** the release rather than after,
+which is the whole point: a guide defect found after the tag is a defect the next
+adopter reads. It walks [adopting.md](../../adopting.md) literally against
+LinkCtrl's public tree and answers, in terms of shape rather than filenames, the
+three questions that tree asks and this repository has never had to:
 
-- **It produces no evidence of generality.** LinkCtrl is the extraction source. A
-  clean map there is guaranteed by construction, and this is the most adjacent
-  data point available rather than a third independent one.
-- **It is the first adoption record here an outsider can verify.** LinkCtrl is
-  public, so unlike [M11](m11.md)'s redacted walk it can quote every path and
-  every line. That repairs a knowing deviation from this repository's release
-  gate.
-- **Its primary output is the unmapped list, not the check results.** LinkCtrl now
-  keeps record types this catalog has never seen, and its scope contract is a
-  separate file from its unit index — which turns `F9` from an argument into an
-  observation about a public tree. Those become findings; none is fixed in this
-  phase.
+- **More than one process document.** `triage_doc` is one role; LinkCtrl's process
+  is three files with a stated precedence. The guide says what to map and what the
+  others' invisibility costs.
+- **A record no role can reach.** LinkCtrl's scope contract is a separate file from
+  its unit index, which this repository conflates — so `F9` stops being an argument
+  and becomes an instruction the guide has to give. It does not close `F9`.
+- **Choosing `effective_from` against real history.** This repository's own case
+  was free: its first commit was the date and there was nothing to exclude.
 
-It also has a prerequisite this repository does not control: the adoption record
-is a commit in LinkCtrl, placed through LinkCtrl's own planning process and around
-its own build loop. The owner places it; `M21` waits.
+Its other output is the list of record types LinkCtrl keeps that no role reaches.
+Those become findings. None is fixed here, because growing the catalog is out of
+scope for this phase.
+
+**No adoption happens in this phase, so the count of adoptions does not move.**
+[README.md](../../../README.md) says two, both adjacent to the author. When
+LinkCtrl transitions it will be a third and the most adjacent one there is, and
+the record it writes then has to say so — a clean map against the repository these
+conventions were extracted from is guaranteed by construction and is not evidence
+of anything.
+
+[M21](m21.md) then walks the release, and the tag is the owner's. That release is
+what LinkCtrl transitions onto.
 
 ### What this phase does not settle, and why it is not an oversight
 
@@ -174,15 +184,15 @@ its own build loop. The owner places it; `M21` waits.
   [README.md](../../../README.md) states that the question needs a repository
   built by somebody who has never read the repository this was extracted from, and
   nothing here answers it. Two data points, both adjacent to the author, is what
-  this phase begins and ends with. `M21` adds a third data point and it is the
-  most adjacent one there is, so the number that matters does not move — and
-  `M21` says so about itself rather than leaving it to be inferred.
+  this phase begins and ends with. No adoption happens in it: [M20](m20.md)
+  makes the path walkable and stops there, and says so about itself rather than
+  leaving readiness to read as uptake.
 - **No adversarial pre-release review is scheduled.** The 0.2.0 release was walked
   by hand and the plan was reviewed adversarially once; extending that to the
   release — independent readers on separate dimensions, each finding put to
   something that tries to refute it — is a change to how this repository works
   rather than to what it specifies. It belongs to the process contract, not to a
-  unit here. [M20](m20.md) is a walk, not a review.
+  unit here. [M21](m21.md) is a walk, not a review.
 - **Nothing is built for an adopter to re-run an audit on a schedule**, including
   for LinkCtrl. No action, template, bot or CI integration ships from here. An
   adopter that wants one builds it from a checker, which is a consumer's choice
@@ -208,9 +218,10 @@ asking about rather than deciding inside a unit. They are listed unanswered.
 4. **Whether `F3` and `F15` reopen [M8](m8.md).** `M19` proposes to decide this on
    the record; if the owner would rather set it in advance, it is a scope answer
    and belongs here.
-5. **When LinkCtrl's adoption record is placed**, and by whom. It is a commit in
-   another repository with its own process and its own running build loop, so the
-   scheduling is not this phase's to do — only its waiting is.
+5. **Whether [adopting.md](../../adopting.md) carries a worked role mapping**, or
+   only the rules for producing one. An example is the fastest thing to read and
+   the easiest thing to copy without thinking, and this phase's example would be
+   the one repository whose shape proves least.
 
 ### Specification edits are in scope, and this is the list
 
@@ -226,7 +237,7 @@ changes while its units force them is how hidden scope arrives.
   fixture trees, which is the honest number for the same reason `M10`'s was.
 - [M17](m17.md) — `expected.yaml`'s schema and its identifier, and the audit-output
   vocabulary if the refusal case is expressed as a state rather than a section.
-- [M21](m21.md) — none expected. If adopting the extraction source forces a
+- [M20](m20.md) — none expected. If making the adoption path walkable forces a
   specification edit, that is a finding about the catalog rather than a licence to
   make one here.
 

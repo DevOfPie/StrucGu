@@ -90,6 +90,7 @@ the file. Append a row when you append an entry.
 | [The cheap corrections go last, because the phase moves the records they correct](#the-cheap-corrections-go-last-because-the-phase-moves-the-records-they-correct) | Corrects the ordering above it — three of five corrections would be done twice |
 | [A phase that changes the contract and does not publish a release is not finished](#a-phase-that-changes-the-contract-and-does-not-publish-a-release-is-not-finished) | Why M20 exists, and why M21 needs it |
 | [LinkCtrl adopting proves nothing about generality, and is worth doing anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway) | What the third adoption is not, and the three things it is |
+| [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
 
 ---
 
@@ -2177,3 +2178,52 @@ The prerequisite is outside this repository and is named rather than assumed:
 the adoption record is a commit in LinkCtrl, placed through LinkCtrl's own
 process and around its own unattended build loop. This phase cannot schedule
 that. The owner places it; `M21` waits.
+
+### The phase ends ready rather than adopted, and the readiness ships before the tag
+
+Correcting [LinkCtrl adopting proves nothing about generality, and is worth
+doing
+anyway](#linkctrl-adopting-proves-nothing-about-generality-and-is-worth-doing-anyway),
+appended the same day. That entry scoped a unit in which **this** repository
+performed LinkCtrl's adoption. That is not what was asked for and not where the
+work belongs: LinkCtrl transitions in its own workflow, once this phase lands.
+What this phase owes is that the path is walkable when it does.
+
+Everything the earlier entry says about *evidence* stands unchanged and is
+worth re-reading — a clean map against the repository these conventions were
+extracted from is guaranteed by construction, and it is the most adjacent data
+point available rather than a third independent one. What changes is who does
+it, when, and what this phase can therefore claim.
+
+**The phase's adoption count does not move.** [M20](work/m20.md) writes no
+adoption record anywhere, so [README.md](../../README.md) still says two, both
+adjacent to the author. The third arrives later and in somebody else's tree,
+and the record it writes then carries the caveat. A phase that made itself
+adoptable and then reported an adoption would be counting its own preparation.
+
+**Readiness ships before the tag, and that ordering is the substance.** A guide
+defect found after the release is a defect the next adopter reads. So the
+readiness unit precedes the release unit rather than following it, and any fix
+it produces ships *in* the release. The two swapped places for that reason and
+for no other.
+
+**What readiness means here is narrower than the word.** LinkCtrl's tree asks
+three questions this repository has never had to answer, because its own
+adoption was the easy case: what an adopter maps when its process is more than
+one document, what it does with a record no role can reach, and how it chooses
+`effective_from` against history that predates the decision to adopt. Each is
+answered by *shape* rather than by filename — a guide that names LinkCtrl's
+files has documented one adoption instead of the path.
+
+**The honest claim is not that the path is ready.** It is that every question
+anyone could find has an answer. Readiness is unfalsifiable until somebody
+adopts, and the test is LinkCtrl's transition, which happens outside this phase
+and is expected to produce findings rather than to confirm anything.
+
+`F9` is where this gets uncomfortable and the discomfort is recorded rather
+than resolved. LinkCtrl's scope contract is reachable by no role, this
+repository cannot see that in itself because one file plays both parts, and the
+answer the guide now has to give is *leave it unmapped, this is known*. That is
+a specification gap being documented as an instruction to adopters. It is the
+right call for a phase that declines to grow the catalog, and it is the
+second-best outcome rather than a good one.
