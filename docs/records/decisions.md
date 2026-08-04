@@ -55,6 +55,7 @@ the file. Append a row when you append an entry.
 | [Judgment expectations are recorded once per module, not once per tree](#judgment-expectations-are-recorded-once-per-module-not-once-per-tree) | The shape of `expected.yaml`, and its schema identifier |
 | [The modules bump to 0.2.0 and no adoption record moves with them](#the-modules-bump-to-020-and-no-adoption-record-moves-with-them) | Why a pin left behind is deliberate |
 | [The first checker is DevOfPie/strucgu-check, and it is public](#the-first-checker-is-devofpiestrucgu-check-and-it-is-public) | Names M10's repository before M10 starts |
+| [The orchestrator that landed M8 is disqualified from implementing M10](#the-orchestrator-that-landed-m8-is-disqualified-from-implementing-m10) | Why M10 opens in a fresh session |
 | [The fixtures were wrong about `DL-03`, and the specification stays as it is](#the-fixtures-were-wrong-about-dl-03-and-the-specification-stays-as-it-is) | Corrects five fixture expectations M6 shipped |
 | [A check may carry more than one violating fixture tree](#a-check-may-carry-more-than-one-violating-fixture-tree) | The `fixtures/` shape rule, relaxed |
 | [A transcription defect is repaired; the rule it exposed is left open](#a-transcription-defect-is-repaired-the-rule-it-exposed-is-left-open) | `WU-04`, and what a check reports while its halves disagree |
@@ -93,6 +94,12 @@ the file. Append a row when you append an entry.
 | [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
 | [M20 and M21 swapped roles, and two entries above still point the old way](#m20-and-m21-swapped-roles-and-two-entries-above-still-point-the-old-way) | A link that resolves and misdirects, and which two entries to read backwards |
 | [The queue gained a row during this branch's own review, and it is not scheduled](#the-queue-gained-a-row-during-this-branchs-own-review-and-it-is-not-scheduled) | `F20` moves the counts to seventeen open and eight unscheduled; the nine are unchanged |
+| [A phase plan whose phase has ended is put in the past tense, not cut](#a-phase-plan-whose-phase-has-ended-is-put-in-the-past-tense-not-cut) | How `F19` closed, and the rule the next phase inherits |
+| [The implementer's signal goes in the changelog, not in the version number](#the-implementers-signal-goes-in-the-changelog-not-in-the-version-number) | Answers `F16`, and amends M15's first bullet |
+| [The cut rule is this repository's practice; the list it produces is the catalog's](#the-cut-rule-is-this-repositorys-practice-the-list-it-produces-is-the-catalogs) | Answers where M16's rule lives, and settles a plan conflict |
+| [`expected.yaml` grows a third section, and the schema identifier goes to 2](#expectedyaml-grows-a-third-section-and-the-schema-identifier-goes-to-2) | Answers `F5`'s shape; leaves `F8` to M17 |
+| [Three recommendations offered and three taken, and the streak is the thing to watch](#three-recommendations-offered-and-three-taken-and-the-streak-is-the-thing-to-watch) | Counted for the same reason the refusals were |
+| [A unit that lands across several commits needs a status word for the middle](#a-unit-that-lands-across-several-commits-needs-a-status-word-for-the-middle) | `in progress` joins the status vocabulary, inside M16 |
 
 ---
 
@@ -2294,3 +2301,221 @@ That it was found at all is the argument for the row existing. The instance was
 caught by a person re-reading a plan against itself, after every gate here had
 passed over it, and a gap recorded only in a rationale entry is a gap nothing
 tracks.
+
+---
+
+## 2026-08-04 — M14, two records are corrected before the phase reads them
+
+### A phase plan whose phase has ended is put in the past tense, not cut
+
+`F19` found [work/README.md](work/README.md)'s opening paragraph asserting that
+M8–M13 were scoped and unstarted, and that `planned` and `deferred` were words
+its table had never used. Both were true when written and neither survived the
+phase closing. [m14.md](work/m14.md) allowed either fix — past tense, or a cut
+with the cut recorded — and left the choice to the unit, so the choice is
+recorded here rather than left in the diff.
+
+**Past tense.** Cutting would have removed two things that are still load
+bearing. The first is the reason a phase is scoped in that file rather than in a
+plan document: a phase described anywhere else is a second home for status, and
+that argument governs phase three exactly as it governed phase two — M14 to M21
+are in the same table for the same reason. The second is the definitions of
+`planned` and `deferred`. `planned` is in use by eight rows right now, and the
+`reopened` paragraph immediately below says that word *joins that vocabulary*,
+which is a sentence with nothing to join if the vocabulary is deleted.
+
+What the cut would have bought is a shorter file, and what it would have cost is
+a reader arriving at the scope contract with no statement of why scope lives
+there. That trade is bad in this instance and it is worth naming as a rule,
+because the same paragraph will be stale again the day phase three closes:
+**a plan's claims about its own phase are put in the past tense when the phase
+ends; its rules are left in the present tense, because they are not about that
+phase.** The test is whether the sentence describes a state or a practice.
+
+This is a correction to a record and not a reopening of any unit. No unit's
+*Done means* asserted the paragraph — it belongs to the phase-two plan, which is
+scope rather than a definition of done — and [triage.md](triage.md) reopens a
+unit whose own claim is false. A new rule gets applied too widely before it gets
+applied well, and the first place to hold that line is the first correction after
+the rule ships.
+
+---
+
+## 2026-08-04 — the owner answers the three decisions phase three was stopped on
+
+*Prompted by the loop stopping at [M15](work/m15.md): three of the five
+questions [work/README.md](work/README.md) lists as decisions this phase needs
+were unanswered, and every unit from M15 to M21 sat behind one of them. The
+options, their costs and the recommendations were put to the owner on
+[PR #7](https://github.com/DevOfPie/StrucGu/pull/7). All three answers are the
+recommended option, which is worth naming rather than passing over — see the
+last entry in this section.*
+
+### The implementer's signal goes in the changelog, not in the version number
+
+`F16` observed that [SPEC.md](../../SPEC.md#versioning) sizes a bump by what a
+previously clean **adopter** newly sees, and that `decision-log` `0.3.0` reported
+"nothing" under that rule while invalidating every row of the only conformance
+claim in existence. One scalar, two readers.
+
+**The versioning table does not change. Every module `CHANGELOG.md` entry gains a
+second fixed sentence: what an implementer must re-run.** The adopter sentence is
+already required there and already fixed in form; this puts the second reader's
+signal in the channel that can carry per-release prose, rather than in a digit
+that cannot carry it.
+
+The argument against the alternatives is arithmetic before it is taste. A version
+string here has three digits and the table has three rows because of that, so a
+fourth row sized by implementer re-work has nowhere to live: it either collapses
+into an existing digit and signals nothing new, or it adds a field to every
+version in the repository. The other option — declaring that implementers re-run
+on every bump and version numbers carry no such signal — is true and was
+available, and it was declined because it makes a typo's PATCH indistinguishable
+from a release that moved a conformance boundary, which is the distinction `F16`
+was asking for.
+
+**What this costs, stated because it was the recommendation of the party that
+would also build it.** It is the cheapest of the three to build. Two mandatory
+sentences per changelog entry is boilerplate, and boilerplate is the class of
+writing that gets filled in falsely — the failure mode is an entry whose
+implementer sentence says "nothing" because nobody checked, which is exactly the
+failure `F16` caught in the adopter sentence's neighbour. And it does not answer
+what `F16` literally asked, which was about the table. The row closes on a
+different answer to a better question, and that is recorded rather than smoothed
+over.
+
+**[M15](work/m15.md)'s first bullet is amended**, because it enumerated only the
+two options that were declined.
+
+- **As it stood:** "[SPEC.md](../../SPEC.md#versioning) answers, for a change that
+  moves what a conformant run must output while an adopter sees nothing, which
+  bump it takes and why. Either a row sized by what an **implementer** must re-do,
+  or an explicit statement that an implementer re-runs on every bump and version
+  numbers do not carry that signal. Both are answers; silence is not."
+- **As amended:** the same first sentence, with the enumeration replaced by the
+  answer taken — the versioning section states that a bump is sized for the
+  adopter and that the implementer's signal is carried by a second required
+  changelog sentence, and says why a version number cannot carry both.
+- **The fact that forced it:** the owner selected an option the bullet did not
+  list. A bullet that enumerates two answers is asserting that those are the
+  answers, which is what makes this an amendment to an assertion rather than a
+  correction of a fact, and why it is recorded here instead of edited quietly.
+
+### The cut rule is this repository's practice; the list it produces is the catalog's
+
+[M16](work/m16.md) extends *a check no tree can violate is cut* to normative
+prose. **The rule lives in [triage.md](triage.md). The list of statements that
+survive with no tree lives in [SPEC.md](../../SPEC.md)**, which M16's *Done
+means* already required.
+
+The split follows the line this repository already draws everywhere else: what a
+reader of the catalog needs is the artifact — which normative claims are pinned
+and which are not — and the discipline that produced it is one project's answer
+rather than the catalog's. Putting the rule in `SPEC.md` would have made it a
+claim about what the specification *is*, raising the bar on every future edit
+permanently, arguably adding an obligation and so a MAJOR, and — worst — stating a
+promise with nothing behind it, since no check can read it.
+
+**The objection to what was chosen has no answer and is recorded rather than
+resolved.** A list in the specification with no rule stated beside it reads as an
+inventory rather than a commitment, and an editor who later adds untested
+normative prose breaks nothing visible. The defence is that the same is true of
+every process rule in [triage.md](triage.md) and the file exists anyway; the
+honest version is that this trades a visible weakness for a smaller one.
+
+**A conflict in the plan is settled by this, and it was reported rather than
+picked when it was found.** [work/README.md](work/README.md)'s *Decisions this
+phase needs* listed this as a scope question for the owner. [M16](work/m16.md)'s
+first bullet said it was "a decision this unit takes and argues, not one it
+assumes". Under [triage.md](triage.md) that is a bug in the plan and not a choice
+for whoever meets it, so it was named on PR #7 and left alone.
+
+- **As it stood:** "**The rule is written down and applied in the same unit.** A
+  normative statement about what a checker does is either pinned by a tree or cut,
+  and a statement that can be pinned by no tree says so where it is made. Where
+  the rule lives — [triage.md](triage.md) as process, or [SPEC.md](../../SPEC.md)
+  as contract — is a decision this unit takes and argues, not one it assumes."
+- **As amended:** the first two sentences stand. The third is replaced by the
+  answer: the rule is written in [triage.md](triage.md) and the list of survivors
+  in [SPEC.md](../../SPEC.md), decided by the owner and recorded here.
+- **The fact that forced it:** [work/README.md](work/README.md) is the scope
+  contract and wins on *what*, and [triage.md](triage.md)'s *Stop and ask* covers
+  anything the owner would reasonably want to decide. A unit file cannot grant
+  itself a decision the scope contract reserves — but that the two disagreed at
+  all is the finding, and it is one the plan's own adversarial review missed.
+
+### `expected.yaml` grows a third section, and the schema identifier goes to 2
+
+`F5`: six conditions are specified under which an audit refuses to start, and none
+can be pinned, because `expected.yaml` has two sections and a value vocabulary
+[closed at the five audit states](../../SPEC.md#audit-output).
+
+**A third top-level section, keyed by tree, carrying whole-run expectations. The
+schema identifier becomes `strucgu/expected@2`.** The five-state vocabulary stays
+closed and untouched, because a refusal is not a check reporting a state — it is
+the run not happening, and expressing it as a per-check value would assert
+something false about every check in the tree. The rejected option was a sixth
+state, `refused`, and it was rejected on that ground and on the specification's
+own rule that a sixth value cannot enter through a fixture directory.
+
+It costs a MAJOR for every module, a third section every implementer must parse,
+and the deletion of one sentence of [SPEC.md](../../SPEC.md#fixture-expectations)
+— *"Two sections, and nothing else in the file"*. The version consequence is
+[M17](work/m17.md)'s to state at the change.
+
+**`F8` is deliberately not answered here.** [M17](work/m17.md) orders diagnosis
+before schema, and that ordering is the point: whether the annotation is wrong in
+the implementation, in the specification, or in the cross-module `read:` rule
+changes what channel is wanted, and *annotations stay unpinnable* remains a
+legitimate close. Answering `F5`'s shape is what M17 needed to start.
+
+### Three recommendations offered and three taken, and the streak is the thing to watch
+
+All three answers above are the option the actor that would build them
+recommended. Each recommendation carried its own cost, including the cost of who
+was making it — the `F16` answer says in as many words that it is the cheapest of
+the three to build — and that is what
+[a prompt without costs is a request for permission, not a decision](#a-prompt-without-costs-is-a-request-for-permission-not-a-decision)
+asks for.
+
+It is still recorded, because the same log already notes
+[three refusals in a row against outside input](#the-first-objection-is-declined-and-what-that-costs-the-channel-is-not-argued-away)
+as a pattern worth watching, and a run of accepted self-recommendations is the
+same shape from the other side. Neither is evidence of anything on its own. Both
+are the kind of thing a project stops being able to see once it has stopped
+counting.
+
+---
+
+## 2026-08-04 — M16, every stated behaviour gets a tree or is cut
+
+### A unit that lands across several commits needs a status word for the middle
+
+[triage.md](triage.md) permits one work unit to be split across several commits
+and forbids bundling two into one. [M16](work/m16.md) is the first unit to use
+that permission at length: it adds an unbounded number of fixture trees, and its
+own risks section says the count is unknown until the work starts.
+
+The status vocabulary had no word for that state. `planned` means *agreed and not
+begun*, and a row reading `planned` while commits against it are being pushed is
+false in the file this repository calls its scope contract — the same class of
+untrue record `F19` was, closed one unit ago. `done` is worse.
+
+**`in progress` joins the vocabulary**: begun, landing across more than one
+commit, not yet satisfying its own *Done means*.
+
+Taken inside the unit rather than put to the owner, because
+[triage.md](triage.md) reserves the prompt for scope changes and decisions the
+owner would reasonably want, and this changes no scope, no unit and no
+obligation — it adds a word to a table so the table can be true while the work
+is happening. It is also reversible in one edit. Recorded here and not only in
+the diff, because a status vocabulary that grows quietly is how a tracker stops
+meaning anything, which is the argument
+[no row leaves a tracker without saying where it went](#no-row-leaves-a-tracker-without-saying-where-it-went)
+already makes from the other direction.
+
+The cost is that the table now has five words and a reader has to learn one more.
+The alternative was holding a large unit's work uncommitted until it was whole,
+which trades a stale status for the risk of losing the work, and this repository
+already keeps `.current-task.md` untracked precisely so that an interruption
+costs effort and not knowledge.

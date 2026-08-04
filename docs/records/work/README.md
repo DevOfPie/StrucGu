@@ -24,9 +24,9 @@ building** — that is what this split is for. Nothing here restates another fil
 | [M11](m11.md) | The second repository adopts, and every finding is disposed of by the rule | M10 | done |
 | [M12](m12.md) | F1 and F2 are closed, F2 by use rather than by review | M10 M11 (F2 only) | done |
 | [M13](m13.md) | The catalog says what a year of one repository could not | M9 M10 M11 M12 | done |
-| [M14](m14.md) | Two records are corrected before the phase reads them | — | planned |
-| [M15](m15.md) | A bump sized by what an implementer must re-do | — | planned |
-| [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | planned |
+| [M14](m14.md) | Two records are corrected before the phase reads them | — | done |
+| [M15](m15.md) | A bump sized by what an implementer must re-do | — | done |
+| [M16](m16.md) | Every stated behaviour has a tree, or the statement is cut | M15 | in progress |
 | [M17](m17.md) | The expectation file learns to say what it currently cannot | M15, M16 (ordering) | planned |
 | [M18](m18.md) | The implementation is pulled up, and the new trees are tested against a wrong checker | M16 M17 | planned |
 | [M19](m19.md) | Three records are corrected once the expectations have settled | M16 M17 M18 | planned |
@@ -36,16 +36,24 @@ building** — that is what this split is for. Nothing here restates another fil
 M5 and M6 may be swapped. M1–M4 must not be reordered — each one's *Done means*
 is the next one's input.
 
-M8–M13 are **scoped and unstarted.** They are written here rather than in a plan
-document because this file is where scope lives, and a phase described anywhere
-else is a second home for status. `planned` means agreed and not begun;
-`deferred` means agreed to happen later than its number suggests. Neither has
-appeared in this table before, and neither means `done`.
+M8–M13 were **scoped and unstarted** when this paragraph was written. That phase
+has since closed and all six are `done`. A phase is scoped here rather than in a
+plan document because this file is where scope lives, and a phase described
+anywhere else is a second home for status — which is why M14–M21 are here too.
+`planned` means agreed and not begun; `deferred` means agreed to happen later
+than its number suggests. Neither means `done`.
 
 `reopened` joins that vocabulary: a shipped unit whose claim was found false and
 is being corrected in place rather than succeeded, per
 [triage.md](../triage.md). It returns to `done` when the correction lands, and
 the unit's own file — not this table — is where the reopening survives.
+
+`in progress` joins it too: begun, landing across more than one commit, and not
+yet satisfying its own *Done means*. A unit large enough to split across commits
+— which [triage.md](../triage.md) permits — otherwise sits at `planned` while
+commits against it are being pushed, and `planned` means *agreed and not begun*.
+Argued in
+[decisions.md](../decisions.md#a-unit-that-lands-across-several-commits-needs-a-status-word-for-the-middle).
 
 M10's edge to M8 is hard: an implementer with nothing mechanical to compare
 against produces a reading of the spec rather than a test of it. M9's edge to M10
@@ -203,18 +211,37 @@ what LinkCtrl transitions onto.
 ### Decisions this phase needs
 
 Each is a scope question, which [triage.md](../triage.md) requires stopping and
-asking about rather than deciding inside a unit. They are listed unanswered.
+asking about rather than deciding inside a unit. **The first three were answered
+on 2026-08-04**, on the prompt that stopped the loop at [M15](m15.md); the
+reasoning is in
+[decisions.md](../decisions.md#2026-08-04--the-owner-answers-the-three-decisions-phase-three-was-stopped-on)
+and the answers are restated here because they change what the units say. Two are
+still open, and neither blocks a unit that is ready to start.
 
 1. **Where the cut rule lives.** `M16` extends *a check no tree can violate is
    cut* to normative prose. In [triage.md](../triage.md) it is a process rule this
    repository holds itself to; in [SPEC.md](../../../SPEC.md) it is a claim about
    what the specification is. They are different promises.
+   **Answered:** the rule in [triage.md](../triage.md), the list of statements
+   surviving with no tree in [SPEC.md](../../../SPEC.md) —
+   [why](../decisions.md#the-cut-rule-is-this-repositorys-practice-the-list-it-produces-is-the-catalogs).
+   That entry also settles a conflict between this list and [M16](m16.md)'s first
+   bullet, which claimed the decision for the unit.
 2. **What shape `expected.yaml` grows.** `M17` needs either a third section or a
    per-tree expectation outside the five audit states. Both are MAJOR for every
    module.
+   **Answered:** a third top-level section keyed by tree, and the schema
+   identifier moves to `strucgu/expected@2` —
+   [why](../decisions.md#expectedyaml-grows-a-third-section-and-the-schema-identifier-goes-to-2).
+   `F8`'s channel is not settled by it: [M17](m17.md) diagnoses before it pins.
 3. **How `F16` is answered** — a fourth row in the versioning table sized by what
    an implementer must re-do, or an explicit statement that implementers re-run on
    every bump and version numbers do not carry that signal.
+   **Answered, and by neither option:** the versioning table does not change, and
+   every module `CHANGELOG.md` entry gains a second fixed sentence naming what an
+   implementer must re-run —
+   [why](../decisions.md#the-implementers-signal-goes-in-the-changelog-not-in-the-version-number).
+   [M15](m15.md)'s first bullet is amended in consequence.
 4. **Whether `F3` and `F15` reopen [M8](m8.md).** `M19` proposes to decide this on
    the record; if the owner would rather set it in advance, it is a scope answer
    and belongs here.

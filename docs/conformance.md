@@ -215,6 +215,17 @@ adopter newly sees nothing, and that is true. A conformance claim went stale
 anyway. [SPEC.md](../SPEC.md#versioning) sizes a bump by what an **adopter** sees,
 and an adopter and an implementer are not the same reader.
 
+**That is now answered, and this clause is unchanged by the answer.** Every
+`CHANGELOG.md` entry from 2026-08-04 carries a second fixed sentence naming what
+an implementer must re-run, so the signal exists — but it exists beside the
+version number rather than inside it, and the version number still sizes for the
+adopter alone. A claim naming a version stays true of that version, a later
+release can still make it stale, and an implementer now reads that from a
+sentence instead of inferring it from a digit that was never carrying it.
+Entries published before that date carry only the adopter sentence and are not
+backfilled, so `F14`'s instance — the one worked example above — remains
+something a reader works out from this clause rather than from a changelog.
+
 **Origin.**
 [A08](https://github.com/DevOfPie/strucgu-check/blob/main/ambiguities/A08-pinned-version-does-not-match-the-module.md)
 again — the pin *"documents intent and reports drift; it does not constrain what

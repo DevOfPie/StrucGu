@@ -70,6 +70,23 @@ If no tree can violate the check, the check is measuring nothing — cut it, and
 record what was cut in [decisions.md](decisions.md). That list is worth more
 than the checks that survived.
 
+### A normative statement about what a checker does is written
+
+```
+a tree can pin it    → write the tree, in the same unit
+no tree can pin it   → say so where the statement is made, and add it to
+                       SPEC.md "What no fixture pins"
+neither              → cut the statement
+```
+
+The check rule above, one level up. Prose is where an untested claim survives
+longest, because nothing re-reads it and no run reports on it.
+
+**The list belongs to [SPEC.md](../../SPEC.md), not here.** An adopter needs the
+artifact — which claims are pinned and which are not; the practice that produces
+it is this repository's own. Argued in
+[decisions.md](decisions.md#the-cut-rule-is-this-repositorys-practice-the-list-it-produces-is-the-catalogs).
+
 ### A check could be satisfied by authoring text
 
 Ask which kind it is. A **declaration** check — the record states its own
