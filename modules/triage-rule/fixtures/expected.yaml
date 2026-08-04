@@ -56,6 +56,28 @@ checks:
     TR-04: ok
     TR-05: finding
 
+  # The one tree in the catalog where a check reports `waived`. TR-02 fails on
+  # the same triage.md that violates-TR-02/ carries; here the adoption record
+  # accepts the deviation, so a checker echoes the reason and reports `waived`.
+  # Folding it into `ok` hides an accepted deviation from every run; folding it
+  # into `finding` ignores the record. Its review_by is 2099-12-31, which is
+  # what makes this row true rather than dated — see expected.md.
+  waives-TR-02:
+    TR-01: ok
+    TR-02: waived
+    TR-03: ok
+    TR-04: ok
+    TR-05: ok
+
+  # The same deviation with its review_by passed. Detection reasserts itself
+  # and nobody enforced anything: the check reports a finding again.
+  violates-TR-02-expired-deviation:
+    TR-01: ok
+    TR-02: finding
+    TR-03: ok
+    TR-04: ok
+    TR-05: ok
+
   # A tree in the third shape: every check passes, and it is not `satisfies/`
   # because the content it needs contradicts that tree's. The rule sentence
   # names the destination in prose only — "write one row in the findings queue"

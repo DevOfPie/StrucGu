@@ -4,6 +4,38 @@ Newest first. Versions follow [semantic versioning](https://semver.org/spec/v2.0
 with bumps defined by what a previously clean adopter will newly see rather than
 by how much source changed. See [SPEC.md](../../SPEC.md).
 
+## 0.5.0 — 2026-08-04
+
+**What a previously clean adopter will newly see: nothing.** No check, no
+obligation, no role and no template changed. Both additions are inside
+`fixtures/`, which is read by someone writing a checker and never by an adopted
+repository.
+
+**What an implementer must re-run: this module's fixtures.** Two trees are new
+and one of them is a tree shape that did not exist before, so a harness that
+enumerates directories will find something it has no expectation for until it
+re-reads `expected.yaml`.
+
+`fixtures/waives-TR-02/` is the first tree anywhere in the catalog where a check
+reports `waived`. One of the five audit states was demonstrated by nothing, and
+an implementation could fold `waived` into `ok` or into `finding` and reproduce
+every row of every module. It carries the same failing `triage.md` as
+`violates-TR-02/` and an adoption record that accepts the deviation.
+
+`fixtures/violates-TR-02-expired-deviation/` is the same deviation past its
+`review_by`. [SPEC.md](../../SPEC.md) says detection reasserts itself past the
+expiry, and nothing tested it: a checker that reads `deviations` and ignores
+`review_by` is the cheapest implementation of the field, turns every expiry into
+a permanent waiver, and until now matched every fixture.
+
+The `waived` tree's expectation is true until `2099-12-31` and `expected.md`
+says so. A deviation must carry an expiry, so no tree pinning `waived` can be
+time-independent; the pair splits the problem rather than hiding it.
+
+[SPEC.md](../../SPEC.md) gained the `waives-<CHECK-ID>/` name in the same
+release, and the tree kind is optional — one anywhere in the catalog is what the
+state needs.
+
 ## 0.4.0 — 2026-08-04
 
 **What a previously clean adopter will newly see: nothing.** No check was added,

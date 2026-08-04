@@ -1,0 +1,23 @@
+schema: strucgu/adoption@1
+modules:
+  triage-rule:
+    version: "0.4.0"
+    adopted: 2026-08-04
+    roles:
+      triage_doc: triage.md
+  findings-queue:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      findings: findings.md
+
+deviations:
+  - check: TR-02
+    title: The in-spec boundary is stated in the contributing guide, not here
+    accepted: 2026-07-31
+    by: maintainer@example.org
+    reason: >
+      Identical in every respect to the deviation in waives-TR-02/, except that
+      its review_by has passed. Nothing was renewed and nothing was withdrawn.
+    scope: triage.md
+    review_by: 2026-08-01

@@ -1,0 +1,25 @@
+schema: strucgu/adoption@1
+modules:
+  triage-rule:
+    version: "0.4.0"
+    adopted: 2026-08-04
+    roles:
+      triage_doc: triage.md
+  findings-queue:
+    version: "0.1.0"
+    adopted: 2026-07-31
+    roles:
+      findings: findings.md
+
+deviations:
+  - check: TR-02
+    title: The in-spec boundary is stated in the contributing guide, not here
+    accepted: 2026-08-04
+    by: maintainer@example.org
+    reason: >
+      This project states what is in scope for the work in flight in its
+      contributing guide, which is the document a contributor is sent to first.
+      Repeating the boundary in the triage document is how the two come to
+      disagree.
+    scope: triage.md
+    review_by: 2099-12-31

@@ -115,3 +115,50 @@ as it was and the obligation was narrowed to match it.
 This tree pins its adoption record at `0.4.0` where the others pin `0.1.0`,
 because a pin is a dated claim about what was reviewed and this tree was
 reviewed against the obligation as `0.4.0` words it.
+
+## `waives-TR-02/`
+
+**The only tree in the catalog where a check reports `waived`.** It carries the
+same `triage.md` as [`violates-TR-02/`](violates-TR-02/) — the boundary between
+in spec and out of spec is not stated — and the same failure. What differs is the
+adoption record, which accepts the deviation with a reason, a scope, an accepting
+party and an expiry.
+
+| Check | |
+| --- | --- |
+| `TR-02` | `waived` |
+| `TR-01` `TR-03` `TR-04` `TR-05` | `ok` |
+
+Two foldings are both wrong and both tempting. Folding `waived` into `ok` hides an
+accepted deviation from every run after the one that accepted it, which is the
+thing the state exists to prevent — the reason is echoed every time, not
+suppressed once. Folding it into `finding` ignores a record the adopter wrote by
+hand and makes the deviation channel pointless.
+
+**This tree's expectation is dated, and that is a property of the fixture rather
+than of any checker.** A deviation must carry a `review_by`, and past it the
+check reports a finding again. So a tree pinning `waived` is true only until its
+expiry, and the choice is between a realistic date that makes this row wrong on a
+known future morning and a distant one that models a deviation nobody will ever
+review. This tree takes `2099-12-31` and says so here rather than letting a
+reader discover it. Read the pair below as the whole statement: the expiry is
+tested, it is just tested somewhere the clock cannot reach.
+
+## `violates-TR-02-expired-deviation/`
+
+The same deviation, with `review_by: 2026-08-01` and nothing renewed.
+
+| Check | |
+| --- | --- |
+| `TR-02` | `finding` |
+| `TR-01` `TR-03` `TR-04` `TR-05` | `ok` |
+
+**Detection reasserts itself without anyone enforcing anything.** That sentence is
+in [SPEC.md](../../../SPEC.md#deviations) and until this tree existed nothing
+tested it: a checker that reads `deviations` and never looks at `review_by`
+reports `waived` here and reproduces every other row in the catalog. It is the
+cheapest possible implementation of the field and it silently converts every
+expiry into a permanent waiver.
+
+The two trees are one statement in two halves and neither is much use alone.
+
