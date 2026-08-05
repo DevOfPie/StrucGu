@@ -93,6 +93,9 @@ the file. Append a row when you append an entry.
 | [The phase ends ready rather than adopted, and the readiness ships before the tag](#the-phase-ends-ready-rather-than-adopted-and-the-readiness-ships-before-the-tag) | Corrects the entry above it — LinkCtrl transitions in its own workflow, and M20 precedes M21 |
 | [M20 and M21 swapped roles, and two entries above still point the old way](#m20-and-m21-swapped-roles-and-two-entries-above-still-point-the-old-way) | A link that resolves and misdirects, and which two entries to read backwards |
 | [The queue gained a row during this branch's own review, and it is not scheduled](#the-queue-gained-a-row-during-this-branchs-own-review-and-it-is-not-scheduled) | `F20` moves the counts to seventeen open and eight unscheduled; the nine are unchanged |
+| [The loop that drives work is a record no role reaches](#the-loop-that-drives-work-is-a-record-no-role-reaches) | `F21`. What the checkable version of the ask is, once *structure, not content* and *there is no runner* have taken their halves of it |
+| [It is a sixth module rather than one hosted somewhere else](#it-is-a-sixth-module-rather-than-one-hosted-somewhere-else) | Recommendation, not decision. Why *external module* is a bigger specification change than the module, and why `optional` is the category |
+| [Phase three does not take it, and the reason is the unit that sizes its own bump](#phase-three-does-not-take-it-and-the-reason-is-the-unit-that-sizes-its-own-bump) | Owner-decided 2026-08-05. `F21` and `F22` move the counts to nineteen open and ten unscheduled; the nine the plan schedules are unchanged |
 
 ---
 
@@ -2294,3 +2297,88 @@ That it was found at all is the argument for the row existing. The instance was
 caught by a person re-reading a plan against itself, after every gate here had
 passed over it, and a gap recorded only in a rationale entry is a gap nothing
 tracks.
+
+---
+
+## 2026-08-05 — a catalog gap is filed, and deliberately not scheduled
+
+### The loop that drives work is a record no role reaches
+
+The owner raised it on 2026-08-05, in the middle of changing LinkCtrl's own
+process contract, and stated the purpose plainly: *a structure agents can follow
+to find the loop needed without having to guide each project to create it
+again.* Filed as `F21`.
+
+The gap is real and is narrower than it first reads. `work-units` names
+`unit_dir`, `unit_template` and `unit_index`, and all three describe the
+**records** of work — what a unit claims, what shape the claim has, where the
+shared rules live. None of them names what *drives* the work: what enters it,
+what order the steps run in, who holds which step, what stops it.
+`triage-rule`'s `triage_doc` is the nearest role and is a different document —
+it states the in-spec boundary, not the sequence.
+
+LinkCtrl has kept that record separately for as long as this catalog has
+existed, which is why the omission was invisible during extraction: the
+extraction read `workflow.md` and the milestone records, and `phase-loop.md` was
+simply not one of the files anybody mapped.
+
+### It is a sixth module rather than one hosted somewhere else
+
+**This is a recommendation and not a decision.** The owner raised both shapes —
+an external module, or an optional module in this catalog — and asked for a
+recommendation rather than giving an answer.
+
+External is the worse path, and the reason is that this catalog has no such
+concept to reach for. [SPEC.md](../../SPEC.md) defines a module as *a directory
+under `modules/`*: identity is positional, there is no namespace on a module
+`id`, and [the adoption record](../../SPEC.md#the-adoption-record) has no field
+saying where a module came from. A checker reading `strucgu.yaml` resolves ids
+against this repository and has nothing else to resolve them against. Supporting
+an external module therefore means specifying module identity and resolution
+first — a larger and more consequential specification change than the module
+itself, made to host one module.
+
+Optional is the right category, and it already exists: `work-units` and
+`investigations` are optional, and
+[the base list is closed at three](#three-modules-are-base-and-the-list-is-closed-at-three).
+A sixth module would declare `requires: [work-units]`, because a loop over units
+of work presupposes units of work, and that is an existing edge shape rather than
+a new mechanism.
+
+What survives the catalog's own rules is smaller than the ask. Specifying the
+loop's steps, or the command that enters it, is
+[content rather than structure](#modules-define-structure-and-use-not-content),
+and specifying anything that runs collides with
+[there is no runner](#there-is-no-runner-and-that-is-the-largest-single-decision-here).
+What is left is a declaration check with a behaviour check under it: a repository
+states, in a discoverable place, what drives work over its units and how that is
+stopped — and the loop record it names actually says both. That is checkable, it
+is what an arriving agent needs, and it is strictly less than "specify the work
+loop".
+
+### Phase three does not take it, and the reason is the unit that sizes its own bump
+
+Owner-decided, 2026-08-05, on a recommendation to file rather than amend.
+
+[work/README.md](work/README.md)'s phase-three scope says *the catalog does not
+grow*, and names `F9` and `F10` as legitimate findings held open because a sixth
+module or a new obligation is a major-version argument to take deliberately
+rather than inside a phase about measurement. `F21` is the same class as `F9` —
+`F9`'s own row already says closing it is "either a sixth module or splitting
+`unit_index` in two, and both are major-version arguments". Admitting `F21` while
+holding those two would leave the exclusion standing over the findings it was
+written for and not over the one that arrived while somebody was looking.
+
+There is a harder reason than consistency. [M15](work/m15.md) is the unit that
+settles how a version is sized for a change that moves what a conformant run must
+output, and it is `planned`. A new check on a shipped module is **major** by
+`work-units`' own inherited rule. Taking `F21` into this phase means sizing that
+bump with the rule the phase exists to write, which is
+[the same rework argument](#the-cheap-corrections-go-last-because-the-phase-moves-the-records-they-correct)
+that already put `M14` before `M19`.
+
+`F21` and `F22` are both filed unreviewed and unscheduled. The counts in
+[the entry that named them](#the-queue-gained-a-row-during-this-branchs-own-review-and-it-is-not-scheduled)
+are now two short in both halves: **nineteen open, ten unscheduled.** The nine
+the plan schedules are unchanged, and merging still approves those nine and no
+others.
